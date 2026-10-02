@@ -3,8 +3,32 @@ title = "Markdown, Git and pull request workflow"
 weight = 10
 +++
 
-**Introduced in:** [Session 1]({{% relref "/01-virtualization-containerization" %}})
+## Goal
 
-Note: This technique is needed from session 1 on, because the first homework already has to be documented.
+This technique is needed from the first homework on.
 
 _Content to follow._
+
+## Basics
+
+_Content to follow._
+
+## Step by step
+
+_Content to follow._
+
+## Template
+
+_Content to follow._
+
+## Example
+
+_Content to follow._
+
+## Common mistakes
+
+_Content to follow._
+
+## Use in the course
+
+Mainly used in: [Session 1]({{% relref "/01-virtualization-containerization" %}})
