@@ -1,4 +1,4 @@
 theme = 'hugo-theme-relearn'
-baseURL = 'https://example.org/'
+baseURL = ' https://glandl.github.io/coursebook-schulrelevante-infrastruktur/'
 locale = 'en-us'
 title = 'My New Hugo Project'
