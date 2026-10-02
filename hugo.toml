@@ -1,4 +1,45 @@
+baseURL = 'https://glandl.github.io/coursebook-schulrelevante-infrastruktur/'
 theme = 'hugo-theme-relearn'
-baseURL = ' https://glandl.github.io/coursebook-schulrelevante-infrastruktur/'
-locale = 'en-us'
-title = 'My New Hugo Project'
+
+defaultContentLanguage = 'de'
+defaultContentLanguageInSubdir = true
+
+[outputs]
+  home = ['html', 'rss', 'print']
+  section = ['html', 'rss', 'print']
+  page = ['html', 'print']
+
+[params]
+  author.name = 'Gerald Landl'
+  editURL = ''
+  [[params.themeVariant]]
+    identifier = 'auto'
+    name = 'Auto'
+    auto = ['learn', 'neon']
+  [[params.themeVariant]]
+    identifier = 'learn'
+    name = 'Light'
+  [[params.themeVariant]]
+    identifier = 'neon'
+    name = 'Dark'
+
+[languages]
+  [languages.de]
+    title = 'Schulrelevante Infrastruktur'
+    weight = 1
+    locale = 'de-AT'
+    label = 'Deutsch'
+    contentDir = 'content/de'
+    [languages.de.params]
+      landingPageName = '<i class="fa-fw fas fa-home"></i> Start'
+      linkTitle = 'Schulrelevante Infrastruktur'
+
+  [languages.en]
+    title = 'School-related IT Infrastructure'
+    weight = 2
+    locale = 'en'
+    label = 'English'
+    contentDir = 'content/en'
+    [languages.en.params]
+      landingPageName = '<i class="fa-fw fas fa-home"></i> Home'
+      linkTitle = 'School-related IT Infrastructure'

@@ -10,15 +10,17 @@ Legend: [ ] open, [x] done. See `01-decisions.md` for the reasoning.
 - [ ] Which free exercise and homework scenarios per chapter (Claude proposes, author decides)
 
 ## Phase 1: Skeleton (next, before 05.10)
-- [ ] `hugo.toml`: title, languages de (default) and en, `baseURL` placeholder, Relearn settings (Mermaid, search, print)
-- [ ] Content tree `content/de` and `content/en` with six chapter folders, same structure
-- [ ] Archetype for chapters and for pages (learning goals, theory, lab, exercise, documentation task, self-check, security box, sources)
-- [ ] Homepage, "About" (author credit, licence, machine-translation note), rubric page, glossary DE<->EN
-- [ ] GitHub Actions workflow for Pages deployment
+- [x] `hugo.toml`: title, languages de (default) and en, `baseURL` placeholder, Relearn settings (Mermaid, search, print)
+- [x] Content tree `content/de` and `content/en` with six chapter folders, same structure
+- [x] Archetype for chapters and for pages (learning goals, theory, lab, exercise, documentation task, self-check, security box, sources)
+- [x] Homepage, "About" (author credit, licence, machine-translation note), rubric page, glossary DE<->EN
+- [x] GitHub Actions workflow publishing to the `gh-pages` branch (untested until first push)
 - [ ] README with local build instructions
+- [x] Separate `00-documentation` reference chapter with six technique pages, linked from the sessions
+- [ ] Replace placeholder `baseURL` / check glossary and rubric weighting
 
 ## Phase 2: Chapter 1 in German (due 05.10)
-Outline: why virtualisation in schools, hypervisor types and VM vs. container, lab 1 (Linux VM, snapshots, clones), container basics, lab 2 (Docker Compose with Moodle or Nextcloud), VM vs. container decision guide, documentation basics (Markdown/Git/PR), self-check, homework (about 2 h), security box.
+Outline: why virtualisation in schools, hypervisor types and VM vs. container, lab 1 (Linux VM, snapshots, clones), container basics, lab 2 (Docker Compose with Moodle or Nextcloud), VM vs. container decision guide, content of `00-documentation/markdown-git` (Markdown/Git/PR), which is needed in session 1, self-check, homework (about 2 h), security box.
 - [ ] Draft, verify commands in the devcontainer where possible, flag the rest "ungeprüft"
 - [ ] Author review
 

@@ -46,8 +46,9 @@ Homework pages are marked "Homework - graded" and link the portfolio template fo
 - Required: one documentation task per session plus the homework. Other tasks are optional practice.
 - **Homework:** sessions 1-5 only, one task each, about 2 h (max 3 h), school scenario built on the lab. Due the day before the next session and discussed there. Session 6 has no homework. Submitted by pull request, with written feedback in the PR.
 
-## Documentation techniques (competency 6), one per chapter
-1. Markdown, Git and PR workflow, folder and screenshot conventions
+## Documentation techniques (competency 6)
+A separate reference chapter `00-documentation` (shown first in the menu) with one page per technique. Each session introduces one technique, and its "documentation task" page and chapter index link to the matching page there.
+1. Markdown, Git and PR workflow, folder and screenshot conventions (needed in session 1)
 2. Network diagrams and IP plans
 3. VLAN and permission matrices
 4. Runbooks
