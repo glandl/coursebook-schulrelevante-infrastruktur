@@ -1,0 +1,59 @@
+# Sandbox dev container for the timemanager project — see sandbox.md for the decisions behind this file.
+#
+# Used via VS Code's Dev Containers extension, not run standalone in production.
+# Project source is bind-mounted at runtime (only this repo's folder — see sandbox.md
+# "Mount scope"), so this image intentionally does NOT COPY application source or run
+# `npm install` for it — that happens against the live mounted source via a
+# devcontainer.json postCreateCommand, since baking it in here would just be
+# overwritten by the mount anyway.
+#
+# Base image note: the app's own dockerfiles (dockerfile.be/dockerfile.fe/dockerfile.combined)
+# use node:lts-alpine for lean production runtimes. This is a dev-only image instead, so it
+# uses the official Debian-based devcontainers base: better native-module/build compatibility,
+# a pre-configured non-root user, and first-class support for the Dev Containers extension.
+FROM mcr.microsoft.com/devcontainers/javascript-node:24-trixie
+
+# --- Common tooling (would move to a shared base image once more projects are onboarded — see
+#     sandbox.md "Base image strategy") ---
+
+# Install GitHub CLI
+RUN curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg \
+  | dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg \
+  && echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" \
+  | tee /etc/apt/sources.list.d/github-cli.list > /dev/null \
+  && apt-get update && apt-get install -y gh \
+  && rm -rf /var/lib/apt/lists/*
+
+# Claude Code + Codex CLIs, intentionally unpinned per sandbox.md "Version pinning":
+# always installs latest at build time; rebuild with `docker build --no-cache` to refresh.
+RUN npm install -g @anthropic-ai/claude-code @openai/codex
+
+# --- Project-specific layer (this project's own runtime/tooling needs) ---
+
+# Quasar CLI, needed for frontend dev commands (npx quasar dev/build), matching the
+# global install already done in timemanager-quasar/dockerfile.fe.
+# RUN npm install -g @quasar/cli
+
+# Hugo extended, pinned to match .github/workflows/deploy.yml. Relearn 9.1.x requires
+# Hugo >= 0.165.0, so the Debian-packaged hugo is not an option — install the release .deb.
+ARG HUGO_VERSION=0.167.0
+RUN arch="$(dpkg --print-architecture)" \
+  && curl -fsSL -o /tmp/hugo.deb \
+     "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-${arch}.deb" \
+  && dpkg -i /tmp/hugo.deb \
+  && rm -f /tmp/hugo.deb \
+  && hugo version
+
+
+# No Docker CLI, no Docker socket — deliberately absent per sandbox.md
+# "Docker access from inside the sandbox": None.
+
+# The javascript-node base image already creates and defaults to a non-root `node`
+# user; kept explicit here per sandbox.md "Runtime user".
+USER node
+
+WORKDIR /workspaces/classroom-github-kanban
+
+# Keeps the container alive for the Dev Containers extension to attach to;
+# no sshd, no exposed port, per sandbox.md "Connection/editing".
+CMD ["sleep", "infinity"]

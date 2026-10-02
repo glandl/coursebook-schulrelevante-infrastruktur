@@ -1,0 +1,41 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/docker-existing-dockerfile
+{
+	"name": "coursebook-schulrelevante-infrastruktur",
+	"build": {
+		// Sets the run context to one level up instead of the .devcontainer folder.
+		"context": "..",
+		// Update the 'dockerFile' property if you aren't using the standard 'Dockerfile' filename.
+		"dockerfile": "../dockerfile.sandbox"
+	},
+
+	// Join the db-grademanager compose stack's network so this container can
+	// resolve/reach the "grademanager-mongodb" service by name. Default network name
+	// for `docker-compose up` run from db-grademanager/ (no COMPOSE_PROJECT_NAME
+	// override present) is "<directory-name>_<network-name>".
+	"runArgs": [
+		"--env-file", "${localWorkspaceFolder}/.devcontainer/.env"
+	],
+
+	"mounts": [
+    	"source=claude-code-config,target=/home/node/.claude,type=volume",
+    	"source=codex-config,target=/home/node/.codex,type=volume"
+	]
+	// Features to add to the dev container. More info: https://containers.dev/features.
+	// "features": {},
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
+
+	// Uncomment the next line to run commands after the container is created.
+	// "postCreateCommand": "cat /etc/os-release",
+
+	// Configure tool-specific properties.
+	// "customizations": {},
+
+	// Uncomment to connect as an existing user other than the container default. More info: https://aka.ms/dev-containers-non-root.
+	// "remoteUser": "devcontainer"
+
+
+
+}
