@@ -10,7 +10,9 @@ Status: agreed with the author. Change a decision here first, then adapt the wor
 - **Tone:** technical and practical, with a school-context lens (admin perspective, communication with staff, parents, school board).
 - **Jurisdiction:** Austria, GDPR as EU base, short notes where Germany/Switzerland differ. Ministry is called **BMB** (Bundesministerium für Bildung), not BMBWF.
 
-## Schedule (6 sessions, 08:45-13:00, about 4h15 each)
+## Schedule (6 sessions, 08:45-13:00)
+**Time budget (corrected 2026-10-03):** 08:45-13:00 is 4 h 15 min on the clock, but the plannable teaching time is only **about 4 hours at most** because breaks are needed. Plan with two 15-minute breaks, so **about 3 h 45 min net**. Every session timetable must add up to 255 minutes including the breaks, with the breaks listed explicitly. Do not plan "4 h 15 min of content". Optional exercises are not scheduled, they are done at home or in the next session.
+
 | # | Date | Chapter |
 |---|------|---------|
 | 1 | 05.10.2026 | Virtualisierung & Containerisierung |

@@ -10,15 +10,18 @@ Schulen betreiben wenige Server für viele Aufgaben: Lernplattform, Dateiablage,
 
 In dieser Einheit lernst du, wie Virtualisierung und Containerisierung funktionieren, wann man welche Technik einsetzt und wie du in einem Laptop-Labor eine Linux-VM und einen Docker-Dienst aufbaust. Alles läuft auf deinem Laptop mit freier Software.
 
-**Ablauf der Einheit (ca. 4 h 15 min):**
+**Ablauf der Einheit (08:45–13:00, netto ca. 3 h 45 min ohne Pausen):**
 
-| Zeit | Inhalt |
-|---|---|
-| 30 min | Einstieg, Hardware-Umfrage, Lernziele |
-| 60 min | Theorie: Hypervisor, VM, Container |
-| 75 min | Lab Teil 1: Linux-VM, Snapshots, Klone |
-| 15 min | Pause |
-| 60 min | Lab Teil 2: Docker und Docker Compose |
-| 30 min | Übung und Start der Dokumentationsaufgabe, Ausblick Hausaufgabe |
+| Uhrzeit | Dauer | Inhalt |
+|---|---|---|
+| 08:45–09:15 | 30 min | Einstieg, Hardware-Umfrage, Lernziele |
+| 09:15–10:00 | 45 min | Theorie: Hypervisor, VM, Container |
+| 10:00–10:15 | 15 min | Pause |
+| 10:15–11:30 | 75 min | Lab Teil 0 und 1: Vorbereitung, Linux-VM, Snapshots, Klone |
+| 11:30–11:45 | 15 min | Pause |
+| 11:45–12:45 | 60 min | Lab Teil 2 und 3: Docker und Docker Compose |
+| 12:45–13:00 | 15 min | Start der Dokumentationsaufgabe, Ausblick Hausaufgabe |
+
+Die [Übung]({{% relref "exercise" %}}) ist freiwillig und wird bei Bedarf zu Hause oder in der nächsten Einheit vertieft.
 
 {{% pages display="tree" levels="1" %}}

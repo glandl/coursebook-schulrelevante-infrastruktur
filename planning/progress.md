@@ -33,7 +33,7 @@ Legend for status:
 
 | Page | Status | Notes |
 |---|---|---|
-| Intro (`_index`) | Draft | Session timetable is an estimate |
+| Intro (`_index`) | Draft | Timetable fits 08:45-13:00 with two breaks (lab parts 0-3 = 135 min, to verify in practice) |
 | Learning goals | Draft | Mapping to competency list is a placeholder |
 | Theory | Draft | One page; plan says "several short pages", split if too long |
 | Lab | Draft, untested | Marked "ungeprüft"; Nextcloud tag `31-apache` to be checked; Apple Silicon/UTM path untested |
@@ -48,6 +48,8 @@ Legend for status:
 - Self-check pages removed (all chapters, DE and EN).
 - Wording: "Lehrenden-Teams" instead of "Lehrende im Nebenamt".
 - README still has no local build instructions.
+
+- Time budget: 255 min on the clock, about 3 h 45 min net with two breaks (see `01-decisions.md`). An earlier timetable summed to 270 min and was corrected.
 
 ## Open before the 05.10.2026 session
 

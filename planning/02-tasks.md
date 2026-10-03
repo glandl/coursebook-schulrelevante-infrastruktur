@@ -42,6 +42,11 @@ One chapter per about two weeks, each ready a few days before its session. Each 
 - [ ] Ch. 5 Client- & MDM (07.12)
 - [ ] Ch. 6 IT-Sicherheit & Datenschutz plus capstone (14.12)
 
+## Rules for every chapter (learned from chapter 1)
+- [ ] Session timetable in the chapter `_index.md` sums to 255 min (08:45-13:00) including two 15-min breaks, net about 3 h 45 min
+- [ ] Check lab durations against the timetable before writing the lab (chapter 1: lab parts 0-3 = 135 min)
+- [ ] Keep DE and EN in sync after every change (same files, same numbers, e.g. IP plan prefixes)
+
 ## Later
 - [ ] Competency list in the book, mapped to the learning goals
 - [ ] Link check for all `sources.md` pages
