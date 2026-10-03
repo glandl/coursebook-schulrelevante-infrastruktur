@@ -31,7 +31,7 @@ Dieser Abschnitt gibt eine technische Orientierung. Rechtliche Fragen (z. B. Rec
 - **Standort der Daten:** Bei Cloud-Diensten prüfen, wo die Daten liegen und ob ein Auftragsverarbeitungsvertrag (AVV) besteht. Bei Selbstbetrieb liegt die Verantwortung für technische Maßnahmen (TOM) bei der Schule.
 - **Trennung:** Schul- und Testumgebung nicht vermischen. **Keine echten Schülerdaten in Übungsumgebungen**, im Unterricht Testdaten verwenden.
 - **Verarbeitungsverzeichnis:** Neue Dienste (Wiki, Lernplattform, Tickets) sind neue Verarbeitungstätigkeiten und gehören ins Verzeichnis (siehe [Verarbeitungsverzeichnis und ADRs]({{% relref "/00-documentation/processing-register-adr" %}})).
-- **Verantwortung:** Die Schule bleibt auch bei Betrieb durch Dritte oder Lehrende im Nebenamt verantwortlich. Klare Zuständigkeiten und Vertretung festlegen.
+- **Verantwortung:** Die Schule bleibt auch bei Betrieb durch Dritte oder mehrere Lehrende verantwortlich. Klare Zuständigkeiten und Vertretung festlegen.
 
 ## Checkliste für einen neuen Dienst
 

@@ -30,7 +30,7 @@ Pro Diagramm: **eine Ebene, eine Aussage**.
 
 ### Diagramme als Text
 
-Diagramme als Bilddatei aus einem Zeichenprogramm sind schwer zu versionieren. Mit **Mermaid** schreibst du das Diagramm als Text in die Markdown-Datei. GitHub und dieses Skript stellen es direkt dar, und Git zeigt Änderungen zeilenweise. Für sehr große oder physische Pläne (Grundriss, Patchfeld) sind Zeichenprogramme wie diagrams.net sinnvoll. Speichere dann die **Quelldatei** (`.drawio`) zusätzlich zum Export (PNG/SVG).
+Diagramme als Bilddatei aus einem Zeichenprogramm sind schwer zu versionieren. Mit **Mermaid** (Einführung: [Diagramme mit Mermaid]({{% relref "markdown-git" %}}#diagramme-mit-mermaid)) schreibst du das Diagramm als Text in die Markdown-Datei. GitHub und dieses Skript stellen es direkt dar, und Git zeigt Änderungen zeilenweise. Für sehr große oder physische Pläne (Grundriss, Patchfeld) sind Zeichenprogramme wie diagrams.net sinnvoll. Speichere dann die **Quelldatei** (`.drawio`) zusätzlich zum Export (PNG/SVG).
 
 ### IP-Plan
 

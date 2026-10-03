@@ -6,6 +6,7 @@ Status: agreed with the author. Change a decision here first, then adapt the wor
 - **Title:** DE "Schulrelevante Infrastruktur" / EN "School-related IT Infrastructure"
 - **Author:** Gerald Landl (only author, no institution named). Licence CC BY-SA 4.0.
 - **Audience:** Lehramt Informatik und digitale Grundbildung, Linz (Austria). Basic networking knowledge, no assumed Linux knowledge.
+- **Wording:** write "Lehrenden-Teams" for the people running school IT, not "Lehrende im Nebenamt".
 - **Tone:** technical and practical, with a school-context lens (admin perspective, communication with staff, parents, school board).
 - **Jurisdiction:** Austria, GDPR as EU base, short notes where Germany/Switzerland differ. Ministry is called **BMB** (Bundesministerium für Bildung), not BMBWF.
 
@@ -28,14 +29,14 @@ Each earlier chapter ends with a short "Security and data protection" box.
 - Credit note: the English version is machine-translated and reviewed by the author.
 
 ## Chapter pattern (enforced by archetypes)
+Self-check pages were dropped on 2026-10-03 (no content planned).
 1. Learning goals (mapped to the competency list)
 2. Theory, in several short pages
 3. Guided lab with expected results (chapter 6: capstone case study instead)
 4. Free exercise or school scenario
 5. Documentation task (becomes a portfolio entry)
-6. Self-check questions, solutions in collapsible blocks
-7. "Security and data protection" box
-8. Further reading and sources ("Quellen", primary sources only)
+6. "Security and data protection" box
+7. Further reading and sources ("Quellen", primary sources only)
 
 Homework pages are marked "Homework - graded" and link the portfolio template folder.
 
@@ -48,7 +49,7 @@ Homework pages are marked "Homework - graded" and link the portfolio template fo
 
 ## Documentation techniques (competency 6)
 A separate reference chapter `00-documentation` (shown first in the menu) with one page per technique. It is a continuous script in session order, each page with the same sections (goal, basics, step by step, template, example, common mistakes, use in the course). The session chapters contain no technique content: their "documentation task" page only links to the matching page and states what to document in that session.
-1. Markdown, Git and PR workflow, folder and screenshot conventions (needed in session 1)
+1. Markdown, Mermaid diagrams, Git and PR workflow, folder and screenshot conventions (needed in session 1)
 2. Network diagrams and IP plans
 3. VLAN and permission matrices
 4. Runbooks
@@ -69,6 +70,6 @@ A separate reference chapter `00-documentation` (shown first in the menu) with o
 - Legal chapter: "keine Rechtsberatung" note, cite legal texts directly.
 
 ## Tech assumptions
-- Hugo + Relearn theme (submodule). Mermaid for diagrams, built-in search, print/PDF export. Quizzes are collapsible blocks.
-- GitHub Actions deploys to GitHub Pages. `baseURL` is a placeholder until the GitHub account or organisation is known.
+- Hugo + Relearn theme (submodule). Mermaid for diagrams (explained in `00-documentation/markdown-git`), built-in search, print/PDF export.
+- GitHub Actions deploys to GitHub Pages. `baseURL` points to the GitHub Pages site of the author's account.
 - Public book repo, private portfolio repos in the Classroom organisation.

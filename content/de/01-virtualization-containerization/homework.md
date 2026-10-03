@@ -15,7 +15,7 @@ Das *Gymnasium Musterstadt* (800 Schüler, 70 Lehrende) betreibt bisher nur eine
 1. ein **Wiki für das Kollegium** (interne Absprachen, Vertretungsregelungen, Anleitungen),
 2. einen **Ticket-Dienst**, über den Lehrende Störungen (Beamer, WLAN, Drucker) melden. Hier fallen auch Namen und Räume an.
 
-Die IT wird von **zwei Lehrenden im Nebenamt** betreut. Es gibt einen kleinen Server (8 Kerne, 32 GB RAM, 1 TB SSD) und keinen Cloud-Vertrag. Die Schulleitung fragt dich nach einer Empfehlung.
+Die IT wird von einem **Lehrenden-Team** (zwei Personen) betreut. Es gibt einen kleinen Server (8 Kerne, 32 GB RAM, 1 TB SSD) und keinen Cloud-Vertrag. Die Schulleitung fragt dich nach einer Empfehlung.
 
 ## Aufgabe
 

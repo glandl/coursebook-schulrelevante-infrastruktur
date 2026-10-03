@@ -29,6 +29,131 @@ Markdown ist reiner Text mit einfacher Auszeichnung. Es ist in jedem Editor les-
 | Bild | `![Alternativtext](assets/bild.png)` | eingebettetes Bild |
 | Tabelle | `\| A \| B \|` mit Trennzeile `\|---\|---\|` | Tabelle |
 | Aufgabenliste | `- [ ] offen`, `- [x] erledigt` | Checkliste |
+| Diagramm | Codeblock mit Sprache `mermaid` | gerendertes Diagramm, siehe [Diagramme mit Mermaid](#diagramme-mit-mermaid) |
+
+Die vollständige Übersicht aller Markdown-Elemente findest du im [Markdown Cheat Sheet](https://www.markdownguide.org/cheat-sheet/) des Markdown Guide.
+
+### Diagramme mit Mermaid
+
+**Mermaid** beschreibt Diagramme als Text. Du schreibst einen Codeblock mit der Sprache `mermaid`, und die Darstellung entsteht beim Anzeigen. Das ist ideal für die Dokumentation: Das Diagramm liegt in derselben Datei wie der Text, Git zeigt Änderungen zeilenweise, und es gibt keine Bilddateien, die veralten oder verloren gehen.
+
+**Wo wird es dargestellt?** In GitHub (Markdown-Dateien, Issues, Pull Requests), in diesem Skript und in der Vorschau von Visual Studio Code (mit der Erweiterung *Markdown Preview Mermaid Support*). Ein einfacher Texteditor zeigt nur den Quelltext.
+
+#### Aufbau
+
+Die erste Zeile legt den Diagrammtyp fest, danach folgen Knoten und Verbindungen:
+
+````markdown
+```mermaid
+flowchart LR
+    A[Laptop] --> B[Switch]
+    B --> C[Router]
+    C --> D((Internet))
+```
+````
+
+Ergebnis:
+
+```mermaid
+flowchart LR
+    A[Laptop] --> B[Switch]
+    B --> C[Router]
+    C --> D((Internet))
+```
+
+#### Die wichtigsten Diagrammtypen
+
+| Typ | Beginn | Einsatz im Kurs |
+|---|---|---|
+| Flussdiagramm | `flowchart TB` (von oben nach unten) oder `flowchart LR` (links nach rechts) | Netzpläne, Architekturen, Entscheidungsbäume |
+| Sequenzdiagramm | `sequenceDiagram` | Abläufe zwischen Systemen (z. B. Anmeldung, DHCP) |
+| Git-Verlauf | `gitGraph` | Branches und Merges erklären |
+
+#### Flussdiagramm: Formen und Verbindungen
+
+| Schreibweise | Bedeutung |
+|---|---|
+| `A[Text]` | Rechteck |
+| `A(Text)` | abgerundet |
+| `A((Text))` | Kreis (z. B. Internet) |
+| `A{Frage}` | Raute (Entscheidung) |
+| `A --> B` | Pfeil |
+| `A --- B` | Linie ohne Pfeil (z. B. Kabel) |
+| `A -->\|ja\| B` oder `A ---\|Text\| B` | Beschriftete Verbindung |
+| `subgraph Name ... end` | Gruppe (z. B. Serverraum, VLAN) |
+
+Beispiel mit Gruppe und beschrifteten Kabeln:
+
+````markdown
+```mermaid
+flowchart TB
+    subgraph Serverraum
+        fw["fw-01<br/>Firewall"]
+        sw["sw-core-01"]
+    end
+    fw ---|"Trunk VLAN 10,20"| sw
+    sw ---|"VLAN 10"| ap["ap-og1-01"]
+```
+````
+
+```mermaid
+flowchart TB
+    subgraph Serverraum
+        fw["fw-01<br/>Firewall"]
+        sw["sw-core-01"]
+    end
+    fw ---|"Trunk VLAN 10,20"| sw
+    sw ---|"VLAN 10"| ap["ap-og1-01"]
+```
+
+#### Sequenzdiagramm
+
+````markdown
+```mermaid
+sequenceDiagram
+    participant C as Client
+    participant S as DHCP-Server
+    C->>S: DHCPDISCOVER
+    S-->>C: DHCPOFFER (192.168.1.50)
+    C->>S: DHCPREQUEST
+    S-->>C: DHCPACK
+```
+````
+
+```mermaid
+sequenceDiagram
+    participant C as Client
+    participant S as DHCP-Server
+    C->>S: DHCPDISCOVER
+    S-->>C: DHCPOFFER (192.168.1.50)
+    C->>S: DHCPREQUEST
+    S-->>C: DHCPACK
+```
+
+`->>` ist ein durchgezogener, `-->>` ein gestrichelter Pfeil (meist für Antworten).
+
+#### Tipps
+
+- **Bezeichner und Beschriftung trennen:** `fw["fw-01<br/>Firewall"]`. Vorne steht die kurze Kennung, in Klammern der angezeigte Text. Mit `<br/>` entsteht ein Zeilenumbruch.
+- **Text mit Sonderzeichen in Anführungszeichen** setzen: Klammern, Doppelpunkte, Schrägstriche, `#` oder Wörter wie `end` brechen sonst die Syntax (`A["Netz 10.10.10.0/24 (VLAN 10)"]`).
+- **Eine Aussage pro Diagramm.** Ab etwa 15 Knoten wird es unlesbar. Besser teilen (z. B. physisch und logisch getrennt).
+- **Richtung wählen:** `TB` für Hierarchien (Internet oben), `LR` für Abläufe.
+- **Einheitliche Namen** wie im IP-Plan und auf den Geräten verwenden.
+- **Text neben das Diagramm schreiben:** ein Satz, was zu sehen ist, und eine Legende. Das hilft Lesenden mit Screenreader und bei Druck oder in Editoren ohne Mermaid-Unterstützung.
+- **Ausprobieren:** Im [Mermaid Live Editor](https://mermaid.live) siehst du sofort, ob der Code funktioniert. Dort kannst du auch Bilder exportieren, falls einmal ein PNG nötig ist.
+
+#### Typische Fehler bei Mermaid
+
+| Fehler | Symptom | Lösung |
+|---|---|---|
+| Sonderzeichen oder Umlautklammern ohne Anführungszeichen | „Syntax error in text“ statt Diagramm | Text in `"..."` setzen |
+| Der Knotenname `end` | Diagramm bricht ab | anderen Bezeichner verwenden oder `End` schreiben |
+| Einrückungen oder `end` bei `subgraph` vergessen | Syntaxfehler | jeder `subgraph` braucht ein `end` |
+| Codeblock ohne Sprache `mermaid` | Quelltext wird angezeigt | ```` ```mermaid ```` verwenden |
+| Zu großes Diagramm | winzige Schrift, unleserlich | aufteilen |
+| Nur Diagramm, kein Text | nicht barrierefrei, bei Fehlern wertlos | erklärenden Satz ergänzen |
+
+Die vollständige Syntax steht in der [Mermaid-Dokumentation](https://mermaid.js.org/intro/).
 
 ### Git in drei Sätzen
 

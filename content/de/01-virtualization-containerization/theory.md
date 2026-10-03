@@ -17,7 +17,7 @@ Ein typischer Schulserver ist die meiste Zeit **unterfordert** (wenige Prozent C
 | Energie und Platz | weniger Geräte |
 | Unterricht | jede/r Lernende hat eine eigene, sichere Übungsumgebung |
 
-Für Schulen besonders relevant: **kleine Teams** (oft Lehrende im Nebenamt), **begrenzte Budgets**, **personenbezogene Daten** und **wechselnde Betreuung**. Einfache, gut dokumentierte Lösungen sind wichtiger als maximale Technik.
+Für Schulen besonders relevant: **kleine Lehrenden-Teams**, **begrenzte Budgets**, **personenbezogene Daten** und **wechselnde Betreuung**. Einfache, gut dokumentierte Lösungen sind wichtiger als maximale Technik.
 
 ## 2. Grundbegriffe
 

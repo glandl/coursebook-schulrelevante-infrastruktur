@@ -131,7 +131,7 @@ Eine ADR wie „Wir betreiben Nextcloud selbst statt Microsoft 365“ ändert di
 
 ## Kontext
 Die Schule braucht eine Plattform für Unterrichtsmaterial und Abgaben. Personenbezogene
-Schülerdaten sollen in der EU bleiben. Betreuung durch zwei Lehrende im Nebenamt.
+Schülerdaten sollen in der EU bleiben. Betreuung durch ein Lehrenden-Team (zwei Personen).
 
 ## Optionen
 1. **Nextcloud selbst betrieben (VM beim Schulerhalter)** – volle Datenkontrolle, kein Drittland;
