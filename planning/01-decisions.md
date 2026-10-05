@@ -17,7 +17,7 @@ Status: agreed with the author. Change a decision here first, then adapt the wor
 |---|------|---------|
 | 1 | 05.10.2026 | Virtualisierung & Containerisierung |
 | 2 | 19.10.2026 | Netzwerktechnik I (planning, wired and WLAN) |
-| 3 | 09.11.2026 | Netzwerktechnik II (VLANs, permission concepts per user group, analysis tools) |
+| 3 | 16.11.2026 | Netzwerktechnik II (VLANs, permission concepts per user group, analysis tools) |
 | 4 | 23.11.2026 | Server-Administration (Windows/Linux, cloud and hybrid) |
 | 5 | 07.12.2026 | Client- & Mobile Device Management |
 | 6 | 14.12.2026 | IT-Sicherheit & Datenschutz, documentation, wrap-up, capstone |

@@ -113,6 +113,17 @@ Beim ersten Verbinden bestätigst du den Fingerabdruck mit `yes`. **Erwartet:** 
 
 > **Hinweis:** SSH über die Portweiterleitung ist nur vom Host aus erreichbar, nicht von anderen Rechnern im Netz.
 
+> **Tipp – SSH funktioniert nicht?** Auf manchen Rechnern wurde der OpenSSH-Server bei der Installation nicht mitinstalliert (Option „OpenSSH-Server installieren“ nicht gewählt). Installiere ihn in der VM (Konsole des VM-Fensters):
+>
+> ```bash
+> sudo apt update
+> sudo apt install openssh-server
+> sudo systemctl enable --now ssh
+> systemctl status ssh
+> ```
+>
+> **Erwartet:** `status` zeigt `active (running)`. Danach den `ssh`-Befehl auf dem Host erneut ausführen.
+
 ### 1.5 Snapshot erstellen und zurückkehren
 
 1. VM-Manager → VM wählen → **Snapshots** → **Aufnehmen**. Name: `00-frisch-installiert`, Beschreibung: „Nach Installation und Updates“.
@@ -360,7 +371,7 @@ docker system df             # Platzverbrauch von Images, Containern, Volumes
 |---|---|
 | VM startet nicht: „VT-x is not available“ | Virtualisierung im BIOS aktivieren, ggf. Hyper-V/WSL2 prüfen. |
 | Kein Internet in der VM | Netzwerkmodus **NAT**? Neustart der VM, `ip -br addr` prüfen, `ping 1.1.1.1`, `ping ubuntu.com` (trennt Routing und DNS). |
-| SSH: „Connection refused“ | Läuft `ssh` in der VM (`systemctl status ssh`)? Portweiterleitung 2222→22 gesetzt? |
+| SSH: „Connection refused“ | Läuft `ssh` in der VM (`systemctl status ssh`)? Existiert der Dienst nicht: `sudo apt install openssh-server`. Portweiterleitung 2222→22 gesetzt? |
 | `docker: permission denied` | Mit `sudo` ausführen oder Benutzer zur Gruppe `docker` hinzufügen und neu anmelden. |
 | Port 8080 belegt | Anderen Host-Port wählen (`-p 8081:80`) und Portweiterleitung anpassen. |
 | Nextcloud: „Trusted domain“-Fehler | Aufruf über `http://localhost:8080`. Bei anderer Adresse `NEXTCLOUD_TRUSTED_DOMAINS` setzen. |
