@@ -59,7 +59,7 @@ A separate reference chapter `00-documentation` (shown first in the menu) with o
 6. DSGVO processing register (Verzeichnis von Verarbeitungstätigkeiten) and ADRs
 
 ## Labs and hardware
-- Laptop-first, free tools: VirtualBox/Hyper-V, WSL2, Docker, Ubuntu Server, Windows Server evaluation ISO, Packet Tracer or GNS3, Intune/M365 trial tenant plus an open-source MDM for comparison.
+- Laptop-first, free tools: VirtualBox/Hyper-V, WSL2, Docker, Ubuntu Server, Windows Server evaluation ISO, Filius for network simulation (chosen 2026-10-05 instead of Packet Tracer: free, no account, German UI, used in schools; no WLAN/VLAN, so VLANs in chapter 3 need another tool, open), Intune/M365 trial tenant plus an open-source MDM for comparison.
 - Every lab states minimum hardware and has a fallback (Apple Silicon, 8 GB RAM, Windows Home).
 - Server hardware (Proxmox/Hyper-V) is coming. Homework stays independent of it. From chapter 2 it can host shared scenarios (a pool per student or group, campus-only at first). The Proxmox bare-metal install is a lecturer demo. Earliest ready date: **open**.
 - Chapter 1 is fully laptop-based and light on RAM. No Windows VMs before chapter 4.

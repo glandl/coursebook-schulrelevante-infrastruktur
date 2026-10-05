@@ -23,7 +23,7 @@ Legend for status:
 | 00 Documentation: Change logs | Draft | Draft (machine-translated) |
 | 00 Documentation: Processing register, ADR | Draft (legal review open) | Draft (machine-translated) |
 | 01 Virtualization & Containerization | Draft | Draft (machine-translated) |
-| 02 Networking I | Skeleton | Skeleton |
+| 02 Networking I | Draft (lab untested) | Skeleton |
 | 03 Networking II | Skeleton | Skeleton |
 | 04 Server administration | Skeleton | Skeleton |
 | 05 Client & mobile device management | Skeleton | Skeleton |
@@ -77,3 +77,9 @@ Legend for status:
 2. Author review of the EN draft of `00-documentation` and chapter 01 (done translating 2026-10-03).
 3. Start chapter 02 (Networking I, session 19.10.2026) following the plan in `02-tasks.md`.
 4. Update this file whenever a page changes status.
+
+## Chapter 02 pages (DE, drafted 2026-10-05)
+
+All nine pages drafted. Timetable sums to 255 min (lab parts 1-3 = 120 min, Part 0 is homework before the session). Lab is untested and flagged "ungeprüft", especially the Filius menu names and behaviour (Vermittlungsrechner interfaces, DHCP only inside its own subnet, Terminal commands) and the VirtualBox NAT defaults (10.0.2.15/24, gateway 10.0.2.2, DNS 10.0.2.3). IP plan numbers are verified with Python. Part 3 switched from Packet Tracer to Filius on 2026-10-05 (no account needed). Filius has no WLAN, so WLAN stays theory/exercise/homework. Java requirement of Filius on Apple Silicon is unverified.
+
+Open: homework due 08.11.2026 is not "the day before the next session" any more (session 3 moved to 16.11.2026), decide whether to move it; author review; EN version.
