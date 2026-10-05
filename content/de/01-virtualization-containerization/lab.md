@@ -30,6 +30,8 @@ Die Befehle und Einstellungen in diesem Lab wurden noch **nicht** in der Kursumg
 
 ## Teil 0: Vorbereitung
 
+Downloads und Installationen sollten vorab erledigt sein, siehe [Vorbereitungs-Checkliste]({{% relref "/preparation" %}}).
+
 ### Virtualisierung prüfen
 
 - **Windows:** Task-Manager → Leistung → CPU → „Virtualisierung: Aktiviert“. Falls „Deaktiviert“: im BIOS/UEFI *Intel VT-x* bzw. *AMD-V (SVM)* einschalten.
