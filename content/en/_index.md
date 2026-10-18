@@ -7,4 +7,6 @@ Course script for **School-related IT Infrastructure** (teacher training in comp
 
 Author: Gerald Landl · Licence: [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)
 
+Before the first session: work through the [preparation checklist]({{% relref "/preparation" %}}).
+
 {{% pages description="true" display="tree" levels="1" %}}

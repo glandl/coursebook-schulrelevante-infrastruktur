@@ -30,6 +30,8 @@ The commands and settings in this lab have **not yet** been run in the course en
 
 ## Part 0: Preparation
 
+Downloads and installations should be done beforehand, see the [preparation checklist]({{% relref "/preparation" %}}).
+
 ### Check virtualization
 
 - **Windows:** Task Manager → Performance → CPU → "Virtualization: Enabled". If "Disabled": enable *Intel VT-x* or *AMD-V (SVM)* in the BIOS/UEFI.

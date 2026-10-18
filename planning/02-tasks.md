@@ -36,8 +36,9 @@ Outline: why virtualisation in schools, hypervisor types and VM vs. container, l
 ## Phase 4: English chapter 1, then chapters 2-6
 One chapter per about two weeks, each ready a few days before its session. Each chapter: German draft, author review, English version, author review.
 - [x] Ch. 1 English draft of chapter 1 and `00-documentation` (author review open)
-- [ ] Ch. 2 Netzwerktechnik I (19.10)
-- [ ] Ch. 3 Netzwerktechnik II (09.11)
+- [ ] Ch. 2 Netzwerktechnik I (19.10): German draft done 2026-10-05, lab Part 3 moved to Packet Tracer 9.0.1 and homework revised 2026-10-18, EN homework translated 2026-10-18. Open: test the lab in 9.0.1, author review, EN for the other pages
+- [ ] Ch. 2: students need a NetAcad account and Packet Tracer 9.0.1 before 19.10 (preparation checklist updated)
+- [ ] Ch. 3 Netzwerktechnik II (16.11): VLANs in Packet Tracer, building on `schulnetz.pkt` from chapter 2
 - [ ] Ch. 4 Server-Administration (23.11)
 - [ ] Ch. 5 Client- & MDM (07.12)
 - [ ] Ch. 6 IT-Sicherheit & Datenschutz plus capstone (14.12)

@@ -7,4 +7,6 @@ Skript zur Lehrveranstaltung **Schulrelevante Infrastruktur** (Lehramt Informati
 
 Autor: Gerald Landl · Lizenz: [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.de)
 
+Vor der ersten Einheit: [Vorbereitungs-Checkliste]({{% relref "/preparation" %}}) abarbeiten.
+
 {{% pages description="true" display="tree" levels="1" %}}
