@@ -11,6 +11,6 @@ Nach dieser Einheit kannst du:
 4. ein **kabelgebundenes Schulnetz** planen (strukturierte Verkabelung, Medien, Switches, PoE, Uplinks),
 5. ein **WLAN für Unterrichtsräume** dimensionieren (Bänder, Kanäle, Kapazität, Anzahl der Access Points) und eine passende **Sicherheitsvariante** begründet wählen,
 6. mit **`ip`, `ping`, `tracepath`, `resolvectl` und `ss`** den Zustand eines Linux-Rechners im Netz untersuchen,
-7. ein kleines Netz mit Router, Switches, DHCP, DNS und Webserver in **Filius** aufbauen, testen und **dokumentieren** (Diagramm und IP-Plan).
+7. ein kleines Netz mit Router, Switches, DHCP, DNS und Webserver in **Cisco Packet Tracer** aufbauen, einen Router über die **Kommandozeile** konfigurieren, das Netz testen und **dokumentieren** (Diagramm und IP-Plan).
 
 *Zuordnung zur Kompetenzliste: folgt (Platzhalter).*

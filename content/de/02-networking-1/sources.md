@@ -31,7 +31,7 @@ Primärquellen (Standards und offizielle Dokumentationen). Alle Links wurden im 
 - Linux: [`ip(8)`](https://man7.org/linux/man-pages/man8/ip.8.html), [`ss(8)`](https://man7.org/linux/man-pages/man8/ss.8.html), [`resolvectl(1)`](https://www.freedesktop.org/software/systemd/man/latest/resolvectl.html)
 - Ubuntu: [Netplan](https://netplan.readthedocs.io/) und [Ubuntu Server Dokumentation, Networking](https://documentation.ubuntu.com/server/)
 - VirtualBox: [Benutzerhandbuch, Kapitel Virtual Networking](https://www.virtualbox.org/manual/)
-- Filius (Netzwerksimulator für den Unterricht): [lernsoftware-filius.de](https://www.lernsoftware-filius.de/) und [Quellcode auf GitLab](https://gitlab.com/filius1/filius)
+- Cisco Packet Tracer (Netzwerksimulator): [Cisco Networking Academy](https://www.netacad.com/) (Download und Kurs *Getting Started with Cisco Packet Tracer*)
 
 ## Sicherheit und Datenschutz
 

@@ -19,9 +19,9 @@ In dieser Einheit lernst du, wie ein Schulnetz **geplant** wird: Adressen und Te
 | 10:15–10:30 | 15 min | Pause |
 | 10:30–11:45 | 75 min | Lab Teil 1 und 2: Netzwerkwerkzeuge in der VM, Subnetting und IP-Plan |
 | 11:45–12:00 | 15 min | Pause |
-| 12:00–12:45 | 45 min | Lab Teil 3: Schulnetz in Filius |
+| 12:00–12:45 | 45 min | Lab Teil 3: Schulnetz in Packet Tracer |
 | 12:45–13:00 | 15 min | Start der Dokumentationsaufgabe, Ausblick Hausaufgabe |
 
-Die Vorbereitung (Teil 0: Filius installieren) erledigst du **vor der Einheit**. Die [Übung]({{% relref "exercise" %}}) ist freiwillig und wird bei Bedarf zu Hause oder in der nächsten Einheit vertieft.
+Die Vorbereitung (Teil 0: Cisco-Konto anlegen und Packet Tracer installieren) erledigst du **vor der Einheit**. Die [Übung]({{% relref "exercise" %}}) ist freiwillig und wird bei Bedarf zu Hause oder in der nächsten Einheit vertieft.
 
 {{% pages display="tree" levels="1" %}}

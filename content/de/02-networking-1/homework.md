@@ -22,22 +22,21 @@ Das Altgebäude (Verwaltung, Server, Internetanbindung) steht 40 m entfernt und 
 
 Erstelle ein **Netzkonzept für den Zubau** (inklusive Anschluss an das Altgebäude).
 
-### Teil A: IP-Plan (ca. 40 min)
+### Teil A: IP-Plan
 
 - Wähle einen **privaten Gesamtbereich** (RFC 1918) und begründe ihn.
-- Plane **mindestens sechs Netze** (z. B. Verwaltung, Lehrende, Schüler-WLAN, Gäste-WLAN, EDV-Räume, Server, Netzwerkmanagement), jeweils mit **VLAN-Nummer, Adresse mit Präfix, Gateway, DHCP-Bereich** und **30 % Reserve**. Die Geräteanzahl schätzt du aus den Angaben und nennst deine Annahmen.
+- Plane **mindestens drei Netze** (z. B. Verwaltung, Lehrende, Schüler-WLAN, Gäste-WLAN, EDV-Räume, Server, Netzwerkmanagement), jeweils mit **VLAN-Nummer, Adresse mit Präfix, Gateway, DHCP-Bereich** und **30 % Reserve**. Die Geräteanzahl schätzt du aus den Angaben und nennst deine Annahmen.
 - Lege eine **Adresskonvention** und ein **Namensschema** für Geräte fest.
 - Ergebnis: Netzübersicht und Adresstabelle (mindestens fünf feste Geräte) nach der [Vorlage]({{% relref "/00-documentation/network-diagrams-ip-plans" %}}).
-- Rechne mindestens ein Netz mit Python (oder von Hand, mit Rechenweg) nach.
 
-### Teil B: Diagramme und Verkabelung (ca. 40 min)
+### Teil B: Diagramme und Verkabelung
 
 - **Logisches Netzdiagramm** (Mermaid): Internet, Firewall/Router, Core, Verteiler je Geschoss, Netze mit Adressen.
 - **Verkabelungsplan eines Geschosses** (Mermaid oder Tabelle): Verteiler, Dosen je Raum, Access Points, Uplink mit Medium und Geschwindigkeit.
 - **Stückliste (ohne Preise):** Anzahl Dosen, Patchfeld-Ports, Access Points, Switches (Ports, PoE-Standard, PoE-Budget), Verbindungskabel zum Altgebäude (Medium begründen).
 - Trage mindestens **zwei Annahmen** und **eine Reserve** (Ports, Fasern oder Rack-Platz) ein.
 
-### Teil C: WLAN-Konzept (ca. 30 min)
+### Teil C: WLAN-Konzept
 
 Beschreibe in höchstens einer Seite:
 

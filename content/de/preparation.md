@@ -35,10 +35,8 @@ Vorher wissen:
 
 ## Einheit 2: Netzwerke I
 
-{{% callout style="warning" title="Vorläufig" %}}
-Das Kapitel ist noch ein Gerüst. Diese Liste beruht auf dem geplanten Thema (Netzwerkdiagramme und IP-Pläne) und dem Lab aus Einheit 1. Sie wird angepasst, sobald das Lab geschrieben ist.
-{{% /callout %}}
-
+- [ ] **Konto bei der Cisco Networking Academy** angelegt ([netacad.com](https://www.netacad.com/), kostenlos) und die Bestätigungs-E-Mail beantwortet.
+- [ ] **Cisco Packet Tracer 9.0.1 installiert** und **einmal mit dem Konto angemeldet** (die erste Anmeldung braucht Internet). Ein leeres Projekt speichern und wieder öffnen. Siehe [Lab, Teil 0]({{% relref "/02-networking-1/lab" %}}).
 - [ ] **Die VM aus Einheit 1 startet noch**, du kannst dich anmelden und `ssh -p 2222 <user>@127.0.0.1` funktioniert. Wenn nicht, stelle den Snapshot `00-fresh-install` oder `10-docker-installed` **zu Hause** wieder her.
 - [ ] **Freier Speicherplatz:** mindestens 10 GB frei für Klone und zusätzliche VMs.
 - [ ] **VM aktualisiert:** `sudo apt update && sudo apt upgrade -y`, danach neuen Snapshot erstellen.

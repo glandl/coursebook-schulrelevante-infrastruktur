@@ -30,4 +30,4 @@ Die *Mittelschule Musterstadt* erhält einen **neuen Klassentrakt** (ein Stockwe
 
 ## Erweiterung (für Schnelle)
 
-Baue in Filius ein zweites Stockwerk mit eigenem Switch, einem eigenen Router-Anschluss und einem neuen Teilnetz, vergib Adressen und weise nach, dass beide Stockwerke miteinander und mit dem Server kommunizieren. Beschreibe, was bei Ausfall des Uplinks passiert.
+Baue in Packet Tracer ein zweites Stockwerk mit eigenem Switch, einem eigenen Router-Anschluss (2911: Erweiterungsmodul oder zweiter Router mit statischer Route) und einem neuen Teilnetz, vergib Adressen und weise nach, dass beide Stockwerke miteinander und mit dem Server kommunizieren. Beschreibe, was bei Ausfall des Uplinks passiert.

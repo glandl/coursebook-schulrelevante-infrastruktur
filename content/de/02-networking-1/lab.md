@@ -4,33 +4,35 @@ weight = 30
 +++
 
 {{% callout style="warning" title="Status: ungeprüft" %}}
-Die Befehle und Einstellungen in diesem Lab wurden noch **nicht** in der Kursumgebung ausgeführt. Das gilt besonders für die Menüpunkte und Bezeichnungen in Filius (Teil 3). Stand der Software-Angaben: Oktober 2026. Prüfe Versionen vor dem Einsatz. *Getestet am: offen.*
+Die Befehle und Einstellungen in diesem Lab wurden noch **nicht** in der Kursumgebung ausgeführt. Das gilt besonders für die Menüpunkte, Gerätemodelle und das DHCP-Relay in Packet Tracer (Teil 3). Stand der Software-Angaben: Oktober 2026. Prüfe Versionen vor dem Einsatz. *Getestet am: offen.*
 {{% /callout %}}
 
 ## Überblick
 
 | Teil | Inhalt | Dauer |
 |---|---|---|
-| 0 | Vorbereitung: Filius installieren (**vor der Einheit**) | 15 min (zu Hause) |
+| 0 | Vorbereitung: Cisco-Konto anlegen, Packet Tracer installieren (**vor der Einheit**) | 20 min (zu Hause) |
 | 1 | Netzwerkwerkzeuge in der Ubuntu-VM aus Einheit 1 | 40 min |
 | 2 | Subnetting und IP-Plan | 35 min |
-| 3 | Schulnetz in Filius: Router, DHCP, DNS, Webserver | 45 min |
+| 3 | Schulnetz in Packet Tracer: Router, DHCP, DNS, Webserver | 45 min |
 
-**Mindestausstattung:** wie in Einheit 1 (8 GB RAM, die VM `ubuntu-lab` aus Einheit 1) plus Filius (klein, benötigt Java).
+**Mindestausstattung:** wie in Einheit 1 (8 GB RAM, die VM `ubuntu-lab` aus Einheit 1) plus Cisco Packet Tracer (ca. 300 MB Download, ca. 1 GB Speicher).
 
 **Verwendete Software:**
 
 | Software | Version | Hinweis |
 |---|---|---|
 | Ubuntu Server (VM `ubuntu-lab`) | 24.04 LTS | aus Einheit 1 |
-| Filius | aktuelle Version | kostenlos und ohne Konto, [lernsoftware-filius.de](https://www.lernsoftware-filius.de/); deutsche Oberfläche, läuft auf Windows, macOS und Linux (Java erforderlich, falls nicht mitgeliefert) |
+| Cisco Packet Tracer | 9.0.1 | kostenlos, benötigt ein kostenloses Konto bei der [Cisco Networking Academy](https://www.netacad.com/); englische Oberfläche; Windows, macOS und Linux (Ubuntu, `.deb`) |
 | Python 3 | in Ubuntu enthalten | für Subnetting-Berechnungen (`ipaddress`) |
 
 ## Teil 0: Vorbereitung (vor der Einheit)
 
-1. Filius von der Projektseite herunterladen und installieren (Hinweise zu Java auf der Download-Seite beachten). Starte das Programm einmal und speichere ein leeres Projekt, um zu prüfen, dass alles läuft.
-2. Die VM `ubuntu-lab` aus Einheit 1 starten, per SSH anmelden (siehe [Einheit 1, Lab 1.4]({{% relref "/01-virtualization-containerization/lab" %}})).
-3. Portfolio-Ordner anlegen:
+1. **Konto anlegen** bei der [Cisco Networking Academy](https://www.netacad.com/) (kostenlos). Packet Tracer gibt es dort über den Kurs *Getting Started with Cisco Packet Tracer* bzw. die Seite *Resources → Download Packet Tracer*.
+2. **Packet Tracer installieren** und **einmal starten**. Beim ersten Start meldest du dich mit dem Konto an; das braucht Internet und klappt im WLAN der Einheit oft nicht zuverlässig. Speichere ein leeres Projekt, um zu prüfen, dass alles läuft.
+3. Optional: das Einführungsvideo bzw. den ersten Abschnitt des Kurses *Getting Started with Cisco Packet Tracer* ansehen (Arbeitsfläche, Geräte, Kabel).
+4. Die VM `ubuntu-lab` aus Einheit 1 starten, per SSH anmelden (siehe [Einheit 1, Lab 1.4]({{% relref "/01-virtualization-containerization/lab" %}})).
+5. Portfolio-Ordner anlegen:
 
 ```bash
 cd <dein-portfolio>
@@ -38,13 +40,18 @@ git switch -c einheit-02
 mkdir -p 02-networking-1/assets
 ```
 
+{{% callout style="info" title="Datenschutz: Cisco-Konto" %}}
+Für Packet Tracer legst du ein Konto bei einem US-Unternehmen an. Verwende eine Adresse, die du dafür verwenden willst, und lies die Datenschutzhinweise. Für den Unterricht mit **minderjährigen** Schülerinnen und Schülern ist das ein Punkt, den die Schule klären muss (siehe Reflexion in der Dokumentationsaufgabe).
+{{% /callout %}}
+
 ### Ausweichlösungen
 
 | Situation | Lösung |
 |---|---|
-| **Filius lässt sich nicht installieren** (Gerät gesperrt, Java fehlt) | Teil 3 gemeinsam am Beamer als Vorführung mitverfolgen, danach Teil 2 vertiefen. Die Dokumentationsaufgabe nutzt dann das Netz aus dem Beispiel der Lehrperson. |
+| **Packet Tracer lässt sich nicht installieren** (Gerät gesperrt) oder **kein Cisco-Konto gewünscht** | Teil 3 zu zweit an einem Laptop durchführen oder am Beamer als Vorführung mitverfolgen. Die Dokumentationsaufgabe nutzt dann die gemeinsame Datei bzw. das Netz der Lehrperson. |
+| **Anmeldung beim ersten Start schlägt fehl** (kein Internet, Konto noch nicht bestätigt) | Bestätigungs-E-Mail prüfen, Anmeldung zu Hause wiederholen. Ohne Anmeldung startet Packet Tracer nicht bzw. nur eingeschränkt (nicht verifiziert). |
 | **VM `ubuntu-lab` nicht mehr vorhanden** | Teil 1 mit WSL2 oder einem Linux-Rechner durchführen. Die Adressen weichen dann ab, die Befehle sind gleich. |
-| **Apple Silicon** | Filius benötigt eine passende Java-Version für arm64 (nicht verifiziert). Die VM läuft in UTM wie in Einheit 1. |
+| **Apple Silicon** | Packet Tracer für macOS läuft auf Apple Silicon (ggf. über Rosetta 2, nicht verifiziert). Die VM läuft in UTM wie in Einheit 1. |
 
 ## Teil 1: Netzwerkwerkzeuge in der Ubuntu-VM
 
@@ -204,82 +211,123 @@ Der Rest des jeweiligen `/24` bleibt **reserviert** für Wachstum (z. B. kann `1
 
 Speichere deine ausgefüllte Tabelle als `02-networking-1/ip-plan-lab.md` im Portfolio. Sie wird in der [Dokumentationsaufgabe]({{% relref "documentation" %}}) wiederverwendet.
 
-## Teil 3: Schulnetz in Filius
+## Teil 3: Schulnetz in Packet Tracer
 
-**Ziel:** Du baust ein kleines Schulnetz mit drei Netzen (Verwaltung, Lehrende, Server), vergibst Adressen von Hand und per DHCP, richtest DNS und einen Webserver ein und beobachtest, wie die Pakete durch die Schichten laufen. Die Adressen entsprechen dem Plan aus Teil 2. VLANs und Zugriffsregeln folgen in Einheit 3. **WLAN** lässt sich in Filius nicht simulieren und wird über Theorie, Übung und Hausaufgabe behandelt.
+**Ziel:** Du baust ein kleines Schulnetz mit drei Netzen (Verwaltung, Lehrende, Server), konfigurierst den Router über die Kommandozeile, vergibst Adressen von Hand und per DHCP, richtest DNS und einen Webserver ein und beobachtest im Simulationsmodus, wie die Pakete durch die Schichten laufen. Die Adressen entsprechen dem Plan aus Teil 2. VLANs und Zugriffsregeln folgen in Einheit 3 mit derselben Datei.
 
-**Bedienung in Filius:** Das Programm hat zwei Modi. Im **Entwurfsmodus** (Hammer-Symbol) baust und konfigurierst du das Netz. Im **Aktionsmodus** (Play-Symbol) läuft die Simulation: Dort installierst du Software auf den Rechnern und führst Befehle aus. Die Namen der Menüpunkte können je nach Version abweichen.
+**Bedienung in Packet Tracer:** Unten links wählst du die Gerätegruppe (*Network Devices*, *End Devices*, *Connections*), daneben das konkrete Gerät. Klick auf ein Gerät öffnet seine Registerkarten: **Config** (Einstellungen per Formular), **CLI** (Kommandozeile bei Routern und Switches), **Desktop** (Programme auf PCs: *IP Configuration*, *Command Prompt*, *Web Browser*), **Services** (Dienste auf Servern). Unten rechts wechselst du zwischen **Realtime** (Echtzeit) und **Simulation** (Pakete Schritt für Schritt). Die Oberfläche ist englisch; Menünamen können je nach Version abweichen.
 
 ### 3.1 Topologie aufbauen (ca. 8 min)
 
-Entwurfsmodus: Komponenten per Drag and Drop auf die Arbeitsfläche ziehen und mit Kabeln verbinden.
+Geräte auf die Arbeitsfläche ziehen und verkabeln:
 
-| Gerät | Filius-Komponente | Name | Verbunden mit |
+| Gerät | Packet-Tracer-Modell | Name | Verbunden mit |
 |---|---|---|---|
-| Router | **Vermittlungsrechner** | `r1` | je ein Anschluss an `sw-verw`, `sw-lehr`, `sw-srv` |
-| Switch | Switch | `sw-verw`, `sw-lehr`, `sw-srv` | `r1` und seine Rechner |
-| Rechner Verwaltung | Rechner | `pc-verw-01`, `pc-verw-02` | `sw-verw` |
-| DHCP-Server | Rechner | `srv-dhcp-01` | `sw-verw` |
-| Rechner Lehrende | Rechner | `pc-lehr-01`, `pc-lehr-02` | `sw-lehr` |
-| Webserver und DNS | Rechner | `srv-web-01` | `sw-srv` |
+| Router | **2911** (*Network Devices → Routers*) | `r1` | `Gi0/0` → `sw-verw`, `Gi0/1` → `sw-lehr`, `Gi0/2` → `sw-srv` |
+| Switch | **2960** (*Network Devices → Switches*) | `sw-verw`, `sw-lehr`, `sw-srv` | Uplink `Gi0/1` zu `r1`, Rechner an `Fa0/1`, `Fa0/2`, … |
+| Rechner Verwaltung | PC | `pc-verw-01`, `pc-verw-02` | `sw-verw` |
+| Rechner Lehrende | PC | `pc-lehr-01`, `pc-lehr-02` | `sw-lehr` |
+| Server (Web, DNS, DHCP) | Server | `srv-01` | `sw-srv` |
 
-Benenne die Komponenten um (Doppelklick, Feld *Anzeigename*). Die Namen müssen exakt wie im Plan lauten. Der Vermittlungsrechner braucht **drei Netzwerkkarten** (Anschlüsse): Prüfe in seiner Konfiguration, dass drei Schnittstellen vorhanden sind.
+Kabel: *Connections* → **Copper Straight-Through** (durchgehende Linie), dann Gerät anklicken und den Anschluss **gezielt auswählen**. Die automatische Verbindung (Blitz-Symbol) wählt beliebige Ports, dann stimmt die Tabelle nicht mehr. Namen der PCs und des Servers änderst du unter *Config → Display Name*; den Router benennst du in 3.2 per CLI.
 
-### 3.2 Adressen festlegen (ca. 8 min)
+**Erwartet:** Nach einigen Sekunden werden die Punkte an den Kabelenden grün. Am Router bleiben sie **rot**, bis die Schnittstellen eingeschaltet sind (3.2): Router-Schnittstellen sind ab Werk abgeschaltet (`shutdown`).
 
-Doppelklick auf die Komponente und die Adressen eintragen:
+### 3.2 Router per Kommandozeile konfigurieren (ca. 8 min)
+
+Klick auf `r1` → **CLI**. Die Frage nach dem *initial configuration dialog* mit `no` beantworten. Dann:
+
+```text
+enable
+configure terminal
+hostname r1
+interface GigabitEthernet0/0
+ description Verwaltung (sw-verw)
+ ip address 10.10.10.1 255.255.255.224
+ ip helper-address 10.10.40.10
+ no shutdown
+interface GigabitEthernet0/1
+ description Lehrende (sw-lehr)
+ ip address 10.10.20.1 255.255.255.128
+ no shutdown
+interface GigabitEthernet0/2
+ description Server (sw-srv)
+ ip address 10.10.40.1 255.255.255.224
+ no shutdown
+end
+copy running-config startup-config
+```
+
+Prüfen:
+
+```text
+show ip interface brief
+show ip route
+```
+
+**Erwartet:** Alle drei Schnittstellen `up`/`up` mit den richtigen Adressen. `show ip route` zeigt drei Einträge mit `C` (*connected*): Direkt verbundene Netze kennt der Router von selbst, eine statische Route ist hier nicht nötig.
+
+**Was macht `ip helper-address`?** DHCP-Anfragen sind Broadcasts und bleiben im eigenen Netz. Der Router leitet sie als **DHCP-Relay** gezielt an den Server `10.10.40.10` weiter. So reicht **ein** zentraler DHCP-Server für alle Netze, wie in einem echten Schulnetz.
+
+### 3.3 Server und Rechner einrichten (ca. 10 min)
+
+**Feste Adressen** (bei PCs und Server: *Desktop → IP Configuration → Static*):
 
 | Gerät | IP-Adresse | Netzmaske | Gateway | DNS-Server |
 |---|---|---|---|---|
-| `r1` Schnittstelle 1 (zu `sw-verw`) | `10.10.10.1` | `255.255.255.224` | – | – |
-| `r1` Schnittstelle 2 (zu `sw-lehr`) | `10.10.20.1` | `255.255.255.128` | – | – |
-| `r1` Schnittstelle 3 (zu `sw-srv`) | `10.10.40.1` | `255.255.255.224` | – | – |
-| `srv-dhcp-01` | `10.10.10.2` | `255.255.255.224` | `10.10.10.1` | `10.10.40.10` |
-| `srv-web-01` | `10.10.40.10` | `255.255.255.224` | `10.10.40.1` | `10.10.40.10` |
+| `srv-01` | `10.10.40.10` | `255.255.255.224` | `10.10.40.1` | `10.10.40.10` |
 | `pc-lehr-01` | `10.10.20.10` | `255.255.255.128` | `10.10.20.1` | `10.10.40.10` |
 | `pc-lehr-02` | `10.10.20.11` | `255.255.255.128` | `10.10.20.1` | `10.10.40.10` |
-| `pc-verw-01`, `pc-verw-02` | per DHCP (3.3) | | | |
+| `pc-verw-01`, `pc-verw-02` | per DHCP (siehe unten) | | | |
 
-Die direkt verbundenen Netze kennt der Vermittlungsrechner von selbst. Eine Routing-Tabelle ist nur nötig, wenn Netze **hinter** einem weiteren Router liegen (hier nicht).
+**Dienste auf `srv-01`** (Registerkarte *Services*):
 
-**Wichtig:** Für Verwaltung vergibt `srv-dhcp-01` später die Adressen. Im Lehrenden-Netz bleiben die Adressen **fest**, damit du beides vergleichen kannst. (Nach meiner Kenntnis arbeitet der DHCP-Server in Filius nur im eigenen Netz. In einem echten Schulnetz übernimmt meist der Router oder ein zentraler Server mit DHCP-Relay diese Aufgabe für alle Netze.)
+1. **HTTP:** ist ab Werk eingeschaltet. Unter *HTTP* kannst du `index.html` bearbeiten, z. B. eine Überschrift „Schulserver Musterstadt“ eintragen.
+2. **DNS:** *DNS Service* auf **On**. Eintrag anlegen: *Name* `web.schule.test`, *Type* `A Record`, *Address* `10.10.40.10` → **Add**. (Die Endung `.test` ist für Übungen reserviert und kollidiert nicht mit echten Domains.)
+3. **DHCP:** *Service* auf **On**. Einen neuen Pool für die Verwaltung anlegen und mit **Add** speichern:
 
-### 3.3 Dienste einrichten (ca. 9 min)
+   | Feld | Wert |
+   |---|---|
+   | Pool Name | `verwaltung` |
+   | Default Gateway | `10.10.10.1` |
+   | DNS Server | `10.10.40.10` |
+   | Start IP Address | `10.10.10.10` |
+   | Subnet Mask | `255.255.255.224` |
+   | Maximum Number of Users | `21` (also `.10` bis `.30`) |
 
-Wechsle in den **Aktionsmodus**. Software installierst du per Doppelklick auf den Rechner → *Softwareinstallation* (Anwendung auswählen, installieren, anwenden).
+   Den vorhandenen Eintrag `serverPool` lässt du unverändert. Die Adressen `.1` bis `.9` bleiben für feste Geräte frei (Router, Drucker).
 
-1. **`srv-web-01`**: *Webserver* und *DNS-Server* installieren. Webserver starten (Doppelklick auf das Symbol). Im DNS-Server einen **Adress-Eintrag** anlegen: Name `web.schule.test` → `10.10.40.10`. (Die Endung `.test` ist für Übungen reserviert und kollidiert nicht mit echten Domains.) DNS-Server starten.
-2. **`srv-dhcp-01`**: *DHCP-Server* installieren. Einstellungen: Adressbereich `10.10.10.10` bis `10.10.10.30`, Netzmaske `255.255.255.224`, Gateway `10.10.10.1`, DNS-Server `10.10.40.10`. DHCP **aktivieren** und starten. Die Adressen `.1` bis `.9` bleiben für feste Geräte frei (Router, Server).
-3. **`pc-verw-01`, `pc-verw-02`**: In der Rechner-Konfiguration **DHCP zur Konfiguration verwenden** auswählen. Auf beiden Rechnern *Terminal* und *Webbrowser* installieren. Auf `pc-lehr-01` und `pc-lehr-02` ebenfalls.
+**DHCP-Clients:** Auf `pc-verw-01` und `pc-verw-02` → *Desktop → IP Configuration* → **DHCP** wählen.
 
-**Erwartet:** Die Verwaltungs-PCs erhalten nach kurzer Zeit Adressen aus `10.10.10.10–30` samt Gateway und DNS-Server.
+**Erwartet:** Nach wenigen Sekunden zeigen die Verwaltungs-PCs eine Adresse aus `10.10.10.10–30` samt Gateway `10.10.10.1` und DNS-Server `10.10.40.10`. Erscheint *DHCP request failed*, prüfe `ip helper-address` an `Gi0/0` und den Pool (Fehlersuche unten).
 
-### 3.4 Testen von unten nach oben (ca. 8 min)
+### 3.4 Testen von unten nach oben (ca. 7 min)
 
-Auf `pc-verw-01` → *Terminal* (Befehle mit `help` anzeigen, falls ein Befehl anders heißt):
+Auf `pc-verw-01` → *Desktop → Command Prompt*:
 
 ```text
-ipconfig
+ipconfig /all
 ping 10.10.10.1
 ping 10.10.20.10
 ping 10.10.40.10
-traceroute 10.10.40.10
+tracert 10.10.40.10
+nslookup web.schule.test
 ping web.schule.test
 ```
 
-Öffne im *Webbrowser* `http://10.10.40.10` und danach `http://web.schule.test`. Wiederhole die Tests von `pc-lehr-01` aus.
+Öffne danach *Desktop → Web Browser* mit `http://10.10.40.10` und mit `http://web.schule.test`. Wiederhole die Tests von `pc-lehr-01` aus.
 
-**Erwartet:** Alle Pings sind erfolgreich. `traceroute` zeigt `10.10.10.1` als ersten Hop. Der Browser lädt die Startseite des Webservers, einmal per IP-Adresse und einmal per Name. Notiere: Welche Adresse hat `pc-verw-01` bekommen, und woher kommt sie?
+**Erwartet:** Alle Pings sind erfolgreich. Der **erste** Ping in ein anderes Netz meldet oft ein *Request timed out*, weil der Router zuerst per ARP die MAC-Adresse des Ziels ermittelt. `tracert` zeigt `10.10.10.1` als ersten Hop. `nslookup` liefert `10.10.40.10`. Der Browser lädt die Startseite, einmal per IP-Adresse und einmal per Name. Notiere: Welche Adresse hat `pc-verw-01` bekommen, und woher kommt sie?
 
-### 3.5 Pakete beobachten (ca. 6 min)
+### 3.5 Pakete beobachten im Simulationsmodus (ca. 6 min)
 
-Im Aktionsmodus: Rechtsklick auf `pc-verw-01` → **Datenaustausch** (Anzeige der Pakete). Starte auf dem PC erneut einen `ping` auf `10.10.40.10` und rufe die Webseite auf. Beobachte die Einträge je Schicht (Vermittlung/IP, Transport, Anwendung):
+Unten rechts auf **Simulation** umschalten. Unter *Edit Filters* nur **ARP, ICMP, DNS, HTTP, DHCP** auswählen. Mit **Play** (oder *Capture/Forward* Schritt für Schritt) laufen die Pakete als Umschläge über die Arbeitsfläche; jedes Ereignis erscheint in der *Event List*. Ein Klick auf einen Umschlag zeigt die **OSI-Ansicht** (welche Schicht was tut) und die Paketinhalte (*Inbound/Outbound PDU Details*).
 
-- Welche Pakete erscheinen **vor** dem ersten Ping (ARP, wer fragt nach wem)?
-- Welche Adressen stehen als Quelle und Ziel im Paket, und was ändert sich beim Durchgang durch den Router?
-- Beim Aufruf von `web.schule.test`: Wo erscheint die **DNS-Anfrage** und wo die HTTP-Anfrage?
+1. **ARP und ICMP:** Auf `pc-verw-01` im *Command Prompt* `arp -d` ausführen, dann `ping 10.10.40.10`. Welche Pakete kommen **vor** dem ersten ICMP-Paket (wer fragt nach wem)? Welche MAC-Adressen und welche IP-Adressen stehen im Paket vor und nach dem Router? Was ändert sich, was bleibt gleich?
+2. **DNS und HTTP:** Im Browser `http://web.schule.test` aufrufen. Wo erscheint die DNS-Anfrage, wo die HTTP-Anfrage? Welche Ports (UDP/TCP) siehst du?
+3. **DHCP:** Auf `pc-verw-02` im *Command Prompt* `ipconfig /release` und dann `ipconfig /renew`. Verfolge DISCOVER, OFFER, REQUEST und ACK. Was macht `r1` mit dem Broadcast (Relay)? Vergleiche mit dem Diagramm in der Theorie.
 
-Um den DHCP-Ablauf zu sehen, stelle `pc-verw-02` auf eine feste Adresse um, starte ihn neu oder aktiviere DHCP erneut und beobachte die Meldungen (DISCOVER, OFFER, REQUEST, ACK) am `srv-dhcp-01`. Vergleiche mit dem Diagramm in der Theorie.
+Danach zurück auf **Realtime** schalten.
 
 ### 3.6 Fehlersuche üben (ca. 6 min)
 
@@ -288,26 +336,38 @@ Baue einen Fehler ein und finde ihn mit der Schichten-Reihenfolge. Tausche mit e
 | Fehler | Beobachtung | Ursache zeigen mit |
 |---|---|---|
 | Falsche **Netzmaske** am `pc-lehr-01` (z. B. `255.255.255.0`) | | `ipconfig`, Vergleich mit dem Plan |
-| **Gateway** am `pc-lehr-01` gelöscht | Ping im eigenen Netz geht, ins andere nicht | `ipconfig`, `traceroute` |
-| **DNS-Eintrag** entfernt | `ping 10.10.40.10` geht, `ping web.schule.test` nicht | DNS-Server prüfen |
-| **Kabel** zwischen `r1` und `sw-srv` entfernt | Server nicht erreichbar | Entwurfsmodus, Topologie |
+| **Gateway** am `pc-lehr-01` gelöscht | Ping im eigenen Netz geht, ins andere nicht | `ipconfig`, `tracert` |
+| **DNS-Eintrag** gelöscht | `ping 10.10.40.10` geht, `ping web.schule.test` nicht | `nslookup`, *Services → DNS* |
+| `shutdown` auf `r1` `Gi0/2` | Server aus keinem Netz erreichbar, roter Punkt am Kabel | `show ip interface brief` |
+| `no ip helper-address` auf `Gi0/0` | `ipconfig /renew` schlägt fehl | `show running-config` |
 
 Stelle danach den Zustand wieder her.
 
 ### 3.7 Speichern und Screenshots
 
-Speichere das Projekt als `02-networking-1/assets/schulnetz.fls`. Mache Screenshots: Topologie (mit sichtbaren Namen), `ipconfig` eines DHCP-Clients, ein Ping zwischen Netzen oder der Browser mit `web.schule.test` und das Fenster *Datenaustausch*.
+Speichere das Projekt als `02-networking-1/assets/schulnetz.pkt` (*File → Save As*). Du brauchst die Datei in Einheit 3 wieder. Mache Screenshots: Topologie (mit sichtbaren Namen), `ipconfig /all` eines DHCP-Clients, ein Ping zwischen Netzen oder der Browser mit `web.schule.test` und den Simulationsmodus mit geöffnetem DHCP- oder DNS-Paket. Kopiere außerdem `show ip interface brief` und `show running-config` von `r1` als Text.
+
+### 3.8 Erweiterung: WLAN im Lehrerzimmer (optional)
+
+Anders als viele einfache Simulatoren kann Packet Tracer WLAN darstellen:
+
+1. Einen **AccessPoint-PT** (*Network Devices → Wireless Devices*) an `sw-lehr` anschließen. Unter *Config → Port 1*: SSID `schule-lehrende`, Authentifizierung **WPA2-PSK**, Passphrase frei wählen (keine echten Passwörter).
+2. Einen **Laptop** hinzufügen. Unter *Physical* den Laptop ausschalten, die Ethernet-Karte herausziehen, das Modul **WPC300N** einsetzen, wieder einschalten.
+3. Im Laptop *Desktop → PC Wireless* (oder *Config → Wireless0*) mit SSID und Passphrase verbinden. Feste Adresse aus dem Lehrenden-Netz, z. B. `10.10.20.20`, oder ergänze dafür einen DHCP-Pool und `ip helper-address` an `Gi0/1`.
+
+**Erwartet:** Zwischen Laptop und Access Point erscheint eine Funkverbindung, `ping 10.10.40.10` funktioniert. Überlege: Warum landen WLAN-Geräte hier im selben Netz wie die Lehrenden-PCs, und warum ist das für ein Schüler-WLAN keine gute Idee? (Lösung mit VLANs in Einheit 3.)
 
 ## Erwartete Ergebnisse (Checkliste)
 
 - [ ] `ip -br addr`, `ip route`, `resolvectl status` und `ss -tuln` der VM notiert und erklärt.
 - [ ] Unterschied „Ping auf IP funktioniert, Name nicht“ erklärbar (DNS).
 - [ ] IP-Plan (Teil 2) ausgefüllt, mit Python geprüft.
-- [ ] Filius-Netz: Verwaltungs-PCs erhalten Adressen per DHCP, Lehrenden-PCs haben feste Adressen.
+- [ ] Router `r1` per CLI konfiguriert, `show ip interface brief` zeigt drei Schnittstellen `up`.
+- [ ] Packet-Tracer-Netz: Verwaltungs-PCs erhalten Adressen per DHCP (über das Relay), Lehrenden-PCs haben feste Adressen.
 - [ ] Ping und Browser-Zugriff zwischen allen Netzen und auf den Webserver funktionieren, auch per Name.
-- [ ] Im *Datenaustausch* ARP, DNS und HTTP gefunden und erklärt.
+- [ ] Im Simulationsmodus ARP, DHCP, DNS und HTTP gefunden und erklärt.
 - [ ] Eingebauten Fehler selbst gefunden und repariert (3.6).
-- [ ] Datei `schulnetz.fls` im Portfolio, keine echten Passwörter.
+- [ ] Datei `schulnetz.pkt` im Portfolio, keine echten Passwörter.
 
 ## Fehlersuche
 
@@ -317,7 +377,9 @@ Speichere das Projekt als `02-networking-1/assets/schulnetz.fls`. Mache Screensh
 | `ping 1.1.1.1` geht, `ping ubuntu.com` nicht | DNS-Problem: `resolvectl status` prüfen, VM neu starten. |
 | `tracepath` fehlt | `sudo apt install iputils-tracepath`. |
 | Python meldet `ModuleNotFoundError` | `python3` verwenden (nicht `python`), das Modul `ipaddress` ist Teil der Standardbibliothek. |
-| Filius: Simulation reagiert nicht | Aktionsmodus aktiv? Dienste (Webserver, DNS, DHCP) wirklich **gestartet**? |
-| Filius: PC bekommt keine DHCP-Adresse | `srv-dhcp-01` im selben Netz wie der PC? DHCP aktiviert, Bereich und Netzmaske richtig? Beim PC *DHCP verwenden* gewählt? |
-| Filius: Ping zwischen Netzen schlägt fehl | Gateway am Rechner eingetragen? Alle drei Schnittstellen von `r1` konfiguriert und mit dem richtigen Switch verbunden? |
-| Filius: Name wird nicht aufgelöst | DNS-Server auf `srv-web-01` gestartet, Eintrag `web.schule.test` vorhanden, DNS-Server-Adresse am Rechner eingetragen? |
+| Packet Tracer: rote Punkte am Router | Schnittstelle noch `shutdown`: in der CLI `interface …` und `no shutdown`. Kabel am richtigen Port? |
+| Packet Tracer: Pakete bewegen sich nicht | Steht der Modus auf **Simulation** ohne Play? Auf **Realtime** umschalten oder Play drücken. |
+| Packet Tracer: *DHCP request failed* | `ip helper-address 10.10.40.10` an `Gi0/0`? DHCP-Dienst auf `srv-01` **On**, Pool mit richtigem Gateway (`10.10.10.1`) und Netzmaske? Server erreichbar (`ping 10.10.40.10` von `r1`)? |
+| Packet Tracer: Ping zwischen Netzen schlägt fehl | Gateway am Rechner eingetragen? `show ip interface brief`: alle drei Schnittstellen `up`/`up` mit richtiger Adresse? Erster Ping darf wegen ARP ein *timed out* haben. |
+| Packet Tracer: Name wird nicht aufgelöst | DNS-Dienst auf `srv-01` **On**, A-Record `web.schule.test` vorhanden, DNS-Server-Adresse am Rechner eingetragen? |
+| Packet Tracer: Befehl in der CLI wird nicht angenommen | Richtiger Modus? `Router>` (nur anzeigen), `Router#` (nach `enable`), `Router(config)#` (nach `configure terminal`). Mit `?` die möglichen Befehle anzeigen. |
