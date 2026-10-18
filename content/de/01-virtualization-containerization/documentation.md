@@ -15,7 +15,7 @@ Dokumentiere dein Lab als **Portfolio-Eintrag** (Pflichtabgabe, bewertet nach de
 
 ### Inhalt
 
-1. **Umgebung:** Host-Betriebssystem, RAM, VirtualBox-/UTM-Version, Ubuntu-Version, Docker-Version.
+1. **Umgebung:** Host-Betriebssystem, RAM, Virtualisierung mit Version (VirtualBox, UTM, virt-manager oder Hyper-V), Debian-Version, Docker-Version.
 2. **Durchführung** mit allen wichtigen Schritten (Befehle als Codeblöcke, nicht als Screenshot):
    - VM angelegt (Einstellungen),
    - Snapshot erstellt und wiederhergestellt,

@@ -20,28 +20,29 @@ Große Downloads und Installationen kosten Zeit in der Lehrveranstaltung, besond
 
 **Vor** der Einheit herunterladen und testen:
 
-- [ ] **VirtualBox 7.x** installiert und einmal gestartet ([virtualbox.org](https://www.virtualbox.org)). Windows: Treiberinstallation zulassen und bei Aufforderung neu starten.
-- [ ] **Ubuntu-Server-24.04-LTS-ISO** heruntergeladen (ca. 2–3 GB, [ubuntu.com/download/server](https://ubuntu.com/download/server)). Prüfe, dass die Datei vollständig ist; ein defekter Download fällt sonst erst bei der Installation auf.
-- [ ] **Apple Silicon (M1–M4):** statt der beiden Punkte oben UTM ([mac.getutm.app](https://mac.getutm.app)) und die **Ubuntu-Server-ARM64-ISO**.
-- [ ] **Windows mit WSL2/Hyper-V:** VirtualBox läuft, aber langsamer. Schließe vor der Einheit andere rechenintensive Programme und VMs.
-- [ ] Optional, spart viel Zeit: **VM zu Hause anlegen und Ubuntu installieren** (Lab Teil 1), mit gesetztem Haken bei *Install OpenSSH server* im Installer. Snapshot `00-fresh-install` erstellen.
-- [ ] Optional: in der laufenden VM `sudo apt update && sudo apt upgrade -y` ausführen, damit die Updates nicht während der Einheit geladen werden.
+- [ ] **Virtualisierung gewählt und installiert** (Tabelle *Welche Virtualisierung?* im [Lab]({{% relref "/01-virtualization-containerization/lab" %}})):
+  - **VirtualBox 7.x** ([virtualbox.org](https://www.virtualbox.org)) installiert und einmal gestartet. Windows: Treiberinstallation zulassen und bei Aufforderung neu starten.
+  - **Linux:** `virt-manager` installiert, Benutzer in der Gruppe `libvirt`, `ls /dev/kvm` zeigt die Datei.
+  - **Apple Silicon (M1–M4):** **UTM** ([mac.getutm.app](https://mac.getutm.app)) installiert.
+  - **Windows Pro/Education mit WSL2 oder Hyper-V:** Windows-Feature **Hyper-V** aktiviert (Neustart nötig).
+- [ ] **Debian-13-DVD-Image** zu Hause heruntergeladen (Datei `debian-13.x.x-<arch>-DVD-1.iso`, ca. 4 GB, [debian.org/CD/http-ftp](https://www.debian.org/CD/http-ftp/)): `amd64` für Intel/AMD, `arm64` für Apple Silicon. **Nicht** das kleine Netinst-Image: Das lädt während der Installation aus dem Internet, und die Installation machen wir gemeinsam in der Einheit.
+- [ ] **Download geprüft:** Prüfsumme mit der Datei `SHA512SUMS` im selben Download-Ordner vergleichen. Windows (PowerShell): `Get-FileHash -Algorithm SHA512 <datei>.iso`; macOS: `shasum -a 512 <datei>.iso`; Linux: `sha512sum <datei>.iso`. Ein defekter Download fällt sonst erst bei der Installation auf.
 
 Vorher wissen:
 
-- [ ] Die **Installer-Option „Install OpenSSH server“** muss aktiviert sein, sonst funktioniert SSH vom Host nicht (Abhilfe: Hinweis in Lab Teil 1.4).
-- [ ] **Portweiterleitung** in VirtualBox: Host `2222` → Gast `22` und Host `8080` → Gast `8080`.
-- [ ] **Ports 2222 und 8080** am Laptop freihalten (kein anderes Programm darauf).
+- [ ] Im Debian-Installer **Root-Passwort leer lassen** (dann funktioniert `sudo`), **keinen Netzwerk-Spiegelserver** verwenden und bei der Softwareauswahl **nur** *SSH server* und *Standard-Systemwerkzeuge* anhaken (Abhilfe bei fehlendem SSH: Hinweis in Lab Teil 1.4).
+- [ ] **Zugriff vom Host:** VirtualBox braucht eine **Portweiterleitung** (Host `2222` → Gast `22`, Host `8080` → Gast `8080`). Bei virt-manager, UTM und Hyper-V erreichst du die VM direkt über ihre IP-Adresse.
+- [ ] VirtualBox: **Ports 2222 und 8080** am Laptop freihalten (kein anderes Programm darauf).
 
 ## Einheit 2: Netzwerke I
 
 - [ ] **Konto bei der Cisco Networking Academy** angelegt ([netacad.com](https://www.netacad.com/), kostenlos) und die Bestätigungs-E-Mail beantwortet.
 - [ ] **Cisco Packet Tracer 9.0.1 installiert** und **einmal mit dem Konto angemeldet** (die erste Anmeldung braucht Internet). Ein leeres Projekt speichern und wieder öffnen. Siehe [Lab, Teil 0]({{% relref "/02-networking-1/lab" %}}).
-- [ ] **Die VM aus Einheit 1 startet noch**, du kannst dich anmelden und `ssh -p 2222 <user>@127.0.0.1` funktioniert. Wenn nicht, stelle den Snapshot `00-fresh-install` oder `10-docker-installed` **zu Hause** wieder her.
+- [ ] **Die VM `debian-lab` aus Einheit 1 startet noch**, du kannst dich anmelden und per SSH verbinden (VirtualBox: `ssh -p 2222 <user>@127.0.0.1`, sonst `ssh <user>@<VM-IP>`). Wenn nicht, stelle den Snapshot `00-frisch-installiert` oder `10-docker-installiert` **zu Hause** wieder her.
 - [ ] **Freier Speicherplatz:** mindestens 10 GB frei für Klone und zusätzliche VMs.
 - [ ] **VM aktualisiert:** `sudo apt update && sudo apt upgrade -y`, danach neuen Snapshot erstellen.
-- [ ] **Netzwerkwerkzeuge in der VM installiert** (zu Hause laden, nicht im WLAN der Einheit): `sudo apt install -y traceroute dnsutils tcpdump nmap`. Prüfen mit `ip a`, `ping -c 3 1.1.1.1` und `traceroute --version`.
-- [ ] **Netzwerkeinstellungen in VirtualBox kennen:** *Einstellungen → Netzwerk*, Adaptertypen (NAT, Internes Netzwerk, Host-only-Adapter). Finde das Menü einmal, du wirst einen zweiten Adapter hinzufügen.
+- [ ] **Werkzeuge in der VM installiert** (zu Hause laden, nicht im WLAN der Einheit): `sudo apt install -y python3 iputils-tracepath bind9-dnsutils traceroute tcpdump nmap`. Prüfen mit `ip a`, `ping -c 3 1.1.1.1`, `tracepath -V` und `python3 --version`.
+- [ ] **Netzwerkeinstellungen deiner Virtualisierung kennen:** Wo stellst du das Netz der VM ein (VirtualBox: *Einstellungen → Netzwerk*; virt-manager: *NIC*; UTM: *Network*; Hyper-V: *Netzwerkkarte*)? Finde das Menü einmal; im Lab wechselst du optional von NAT auf eine Brücke.
 - [ ] **Diagramm-Werkzeug bereit:** VS Code mit Mermaid-Vorschau oder [diagrams.net](https://app.diagrams.net) (Desktop-App oder Browser). Probiere ein kleines Diagramm aus.
 - [ ] **Technik vorab lesen:** [Netzwerkdiagramme und IP-Pläne]({{% relref "/00-documentation/network-diagrams-ip-plans" %}}).
 - [ ] **Optional:** [Wireshark](https://www.wireshark.org/download.html) am Host. Unter Windows die Npcap-Installation zulassen.

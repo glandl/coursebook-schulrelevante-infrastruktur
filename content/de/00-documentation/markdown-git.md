@@ -226,7 +226,7 @@ Lege die Dateien im Ordner der Einheit an (siehe [Ordnerstruktur](#ordnerstruktu
 ```bash
 git status                  # was hat sich geändert?
 git add 01-virtualization-containerization/
-git commit -m "Lab 1: Ubuntu-VM mit Snapshot dokumentiert"
+git commit -m "Lab 1: Debian-VM mit Snapshot dokumentiert"
 ```
 
 **Gute Commit-Nachrichten** beschreiben, *was* und *warum*, in einer Zeile unter etwa 70 Zeichen, im Imperativ oder als kurzer Satz. Mehrere kleine Commits sind besser als ein riesiger am Ende.
@@ -340,7 +340,7 @@ Regeln:
 
 ````markdown
 ## Was enthält dieser PR?
-Dokumentationsaufgabe Einheit 1 (Ubuntu-VM, Snapshots, Docker).
+Dokumentationsaufgabe Einheit 1 (Debian-VM, Snapshots, Docker).
 
 ## Checkliste
 - [ ] README.md im Ordner der Einheit vorhanden
@@ -360,7 +360,7 @@ Ein kurzer Ausschnitt einer Abgabe, wie er auf GitHub gerendert würde:
 ````markdown
 ## Durchführung
 
-1. VM in VirtualBox angelegt (Ubuntu Server 24.04 LTS, 2 vCPU, 2 GB RAM, 20 GB Disk).
+1. VM in VirtualBox angelegt (Debian 13, 2 vCPU, 2 GB RAM, 20 GB Disk).
 2. Nach der Installation einen Snapshot `00-frisch-installiert` erstellt.
 3. Docker installiert und getestet:
 

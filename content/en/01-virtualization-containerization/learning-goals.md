@@ -7,7 +7,7 @@ After this session you can:
 
 1. **explain** what a hypervisor is and distinguish type 1 from type 2 hypervisors,
 2. **compare VM and container** (isolation, resource needs, startup, portability, security),
-3. **create a Linux VM** (Ubuntu Server) in VirtualBox, operate it, back it up with **snapshots** and **clone** it,
+3. **create a Linux VM** (Debian) in VirtualBox, UTM, virt-manager or Hyper-V, operate it, back it up with **snapshots** and **clone** it,
 4. **install Docker**, manage images and containers (`run`, `ps`, `logs`, `exec`, `stop`, `rm`),
 5. **start a service with Docker Compose** (web server or Nextcloud with database), back up and restore persistent data via **volumes**,
 6. **decide with reasons** whether a school service should run as a VM, as a container or not locally at all,

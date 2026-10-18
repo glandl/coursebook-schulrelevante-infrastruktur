@@ -58,7 +58,7 @@ flowchart TB
 
 **Hinweis:** Hyper-V und KVM werden oft als Typ 1 eingeordnet, obwohl sie Teil eines Betriebssystems sind. Die Einteilung ist ein Denkmodell, die Grenzen sind fließend.
 
-**Im Kurs:** Auf dem Laptop nutzen wir Typ 2 (VirtualBox). Später kann ein Server mit Proxmox oder Hyper-V gemeinsame Szenarien beherbergen.
+**Im Kurs:** Auf dem Laptop nutzen wir je nach Gerät VirtualBox, UTM (QEMU), virt-manager (QEMU/KVM) oder Hyper-V. Später kann ein Server mit Proxmox oder Hyper-V gemeinsame Szenarien beherbergen.
 
 ### Hardwareunterstützung
 
@@ -68,7 +68,7 @@ Moderne CPUs haben Erweiterungen für Virtualisierung (Intel **VT-x**, AMD **AMD
 
 Jede VM enthält ein **vollständiges Betriebssystem mit eigenem Kernel**. Der Hypervisor stellt virtuelle Hardware bereit: CPU-Kerne, RAM, Festplatte, Netzwerkkarte.
 
-### Netzwerkmodi (am Beispiel VirtualBox)
+### Netzwerkmodi (am Beispiel VirtualBox; die anderen Plattformen haben entsprechende Modi)
 
 | Modus | Verhalten | Typischer Einsatz |
 |---|---|---|
@@ -81,7 +81,7 @@ Jede VM enthält ein **vollständiges Betriebssystem mit eigenem Kernel**. Der H
 ### Snapshots, Klone, Backups
 
 - Ein **Snapshot** friert den Zustand ein (Disk, optional RAM). Er eignet sich als **kurzfristige Rückfallebene** vor Änderungen. Er ist **kein Backup**: Er liegt auf demselben Datenträger wie die VM, und lange Snapshot-Ketten verlangsamen und blähen die VM auf.
-- Ein **Klon** ist eine eigenständige Kopie, nützlich für Vorlagen (*Golden Image*): einmal eine saubere Ubuntu-VM bauen, dann beliebig oft klonen. Achtung: Klone haben sonst gleiche Hostnamen und gleiche *Machine-ID* und müssen angepasst werden.
+- Ein **Klon** ist eine eigenständige Kopie, nützlich für Vorlagen (*Golden Image*): einmal eine saubere Debian-VM bauen, dann beliebig oft klonen. Achtung: Klone haben sonst gleiche Hostnamen und gleiche *Machine-ID* und müssen angepasst werden.
 - Ein **Backup** ist eine Kopie **an einem anderen Ort**, die auch bei Verlust des Hosts verfügbar ist, und muss die **Wiederherstellung** nachweislich ermöglichen (Restore-Test).
 
 ## 5. Container im Detail
