@@ -58,7 +58,7 @@ flowchart TB
 
 **Note:** Hyper-V and KVM are often classified as type 1, although they are part of an operating system. The classification is a mental model, the boundaries are fluid.
 
-**In the course:** On the laptop we use type 2 (VirtualBox). Later a server with Proxmox or Hyper-V can host shared scenarios.
+**In the course:** On the laptop we use VirtualBox, UTM (QEMU), virt-manager (QEMU/KVM) or Hyper-V, depending on the device. Later a server with Proxmox or Hyper-V can host shared scenarios.
 
 ### Hardware support
 
@@ -68,7 +68,7 @@ Modern CPUs have extensions for virtualization (Intel **VT-x**, AMD **AMD-V**, b
 
 Each VM contains a **complete operating system with its own kernel**. The hypervisor provides virtual hardware: CPU cores, RAM, hard disk, network card.
 
-### Network modes (using VirtualBox as an example)
+### Network modes (using VirtualBox as an example; the other platforms have equivalent modes)
 
 | Mode | Behaviour | Typical use |
 |---|---|---|
@@ -81,7 +81,7 @@ Each VM contains a **complete operating system with its own kernel**. The hyperv
 ### Snapshots, clones, backups
 
 - A **snapshot** freezes the state (disk, optionally RAM). It is suitable as a **short-term fallback** before changes. It is **not a backup**: it lies on the same storage as the VM, and long snapshot chains slow down and bloat the VM.
-- A **clone** is an independent copy, useful for templates (*golden image*): build a clean Ubuntu VM once, then clone it as often as you like. Caution: otherwise clones have the same hostname and the same *machine ID* and must be adjusted.
+- A **clone** is an independent copy, useful for templates (*golden image*): build a clean Debian VM once, then clone it as often as you like. Caution: otherwise clones have the same hostname and the same *machine ID* and must be adjusted.
 - A **backup** is a copy **in a different location** that is also available if the host is lost, and it must demonstrably allow **recovery** (restore test).
 
 ## 5. Containers in detail

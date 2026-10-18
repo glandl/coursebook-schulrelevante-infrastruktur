@@ -1,6 +1,6 @@
 # Progress
 
-Stand: 2026-10-18 (chapter 02 switched to Packet Tracer 9.0.1, homework revised by the author, EN homework translated). Companion to `01-decisions.md` and `02-tasks.md`.
+Stand: 2026-10-18 (chapter 02 switched to Packet Tracer 9.0.1, homework revised by the author, EN homework translated; lab VM switched to Debian 13 with platform tabs for VirtualBox, virt-manager, UTM and Hyper-V). Companion to `01-decisions.md` and `02-tasks.md`.
 
 Legend for status:
 - **Skeleton**: files exist, content is "folgt"
@@ -36,7 +36,7 @@ Legend for status:
 | Intro (`_index`) | Draft | Timetable fits 08:45-13:00 with two breaks (lab parts 0-3 = 135 min, to verify in practice) |
 | Learning goals | Draft | Mapping to competency list is a placeholder |
 | Theory | Draft | One page; plan says "several short pages", split if too long |
-| Lab | Draft, untested | Marked "ungeprüft"; Nextcloud tag `31-apache` to be checked; Apple Silicon/UTM path untested |
+| Lab | Draft, untested | Marked "ungeprüft". Since 2026-10-18: Debian 13 VM `debian-lab` from the DVD-1 image, installed offline in class without network mirror, then a copy-paste block enables the online apt sources, Part 1 in tabs for VirtualBox, virt-manager, UTM and Hyper-V (create, SSH, snapshot, clone), optional raw-QEMU box. Nextcloud compose has `NEXTCLOUD_TRUSTED_DOMAINS` for access via VM IP. Untested: Debian installer steps, all non-VirtualBox menus, UTM without snapshots (clone as substitute), Hyper-V Secure Boot template, Nextcloud tag `31-apache` |
 | Exercise | Draft | Optional, not graded |
 | Documentation task | Draft | Deadline set to 18.10.2026 together with homework, to confirm |
 | Homework | Draft | Wiki or ticket service as Compose project, ADR, reflection |
@@ -67,7 +67,9 @@ Drafted 2026-10-05, lab Part 3 rewritten for Cisco Packet Tracer on 2026-10-18.
 | Security box | Draft | |
 | Sources | Draft | Filius removed, NetAcad link added. Links not checked |
 
-Untested in Packet Tracer 9.0.1 (lab was written from knowledge of 8.x): menu names, 2911/2960 port names, the default `serverPool` next to the relayed DHCP pool, Simulation filters, WPC300N wireless module, login without internet, Apple Silicon. Also untested: VirtualBox NAT defaults (10.0.2.15/24, gateway 10.0.2.2, DNS 10.0.2.3).
+Lab Part 1 uses the Debian VM; expected addresses per platform are in tabs (VirtualBox 10.0.2.x, libvirt 192.168.122.x, UTM 192.168.64.x, Hyper-V 172.x), DNS via `/etc/resolv.conf` and `getent`, bridge step 1.7 in tabs. All non-VirtualBox values are unverified.
+
+Untested in Packet Tracer 9.0.1 (lab was written from knowledge of 8.x): menu names, 2911/2960 port names, the default `serverPool` next to the relayed DHCP pool, Simulation filters, WPC300N wireless module, login without internet, Apple Silicon. Also untested: VirtualBox NAT defaults (10.0.2.15/24, gateway 10.0.2.2, DNS 10.0.2.3), the DHCP lease display (`valid_lft`) with Debian's DHCP client.
 
 History: Part 3 was planned with Packet Tracer, switched to Filius on 2026-10-05 (no account needed) and back to Packet Tracer on 2026-10-18 (router CLI, DHCP relay, WLAN, VLANs for chapter 03).
 
@@ -97,11 +99,19 @@ Carried over from before the 05.10.2026 session; not re-checked since.
 ## Open for chapter 02
 
 - [ ] Run lab Part 3 in Packet Tracer 9.0.1, fix menu names, set "getestet am"
-- [ ] Run lab Part 1 in `ubuntu-lab` and confirm the VirtualBox NAT defaults
+- [ ] Run lab Part 1 in `debian-lab` on each platform and confirm the expected addresses
 - [ ] Homework due 08.11.2026 is not "the day before the next session" (session 3 is 16.11.2026): keep or move
-- [ ] Preparation checklist, Unit 2: the item "du wirst einen zweiten Adapter hinzufügen" does not match the lab (no second adapter is used)
 - [ ] Author review of the DE pages
 - [ ] EN version of the remaining pages
+
+## Open for the Debian/platform switch (2026-10-18)
+
+- [ ] Install Debian 13 once per platform (VirtualBox, virt-manager, UTM, Hyper-V) and check menu names, snapshot/clone steps, default interface names
+- [ ] Check what the installer writes to `/etc/apt/sources.list` without network mirror (cdrom line only, or also security lines?) and whether the copy-paste block in Lab 1.2 gives a clean `apt update`
+- [ ] Check that an `arm64` DVD-1 ISO is published for Debian 13 (otherwise Apple Silicon needs netinst)
+- [ ] Check whether Debian 13 standard install includes `python3`, `iputils-tracepath`, and which services `ss -tuln` shows
+- [ ] Check the QEMU command in the "für Neugierige" box
+- [ ] Chapter 01 already took place (05.10.2026) with Ubuntu: students' existing VMs are `ubuntu-lab`; decide whether they reinstall or keep Ubuntu for chapter 02. The ch02 lab has a fallback row for an Ubuntu VM (`resolvectl status` instead of `/etc/resolv.conf`, Netplan instead of `/etc/network/interfaces`)
 
 ## Known issues
 

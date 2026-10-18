@@ -7,7 +7,7 @@ Nach dieser Einheit kannst du:
 
 1. **erklären**, was ein Hypervisor ist, und Typ-1- von Typ-2-Hypervisoren unterscheiden,
 2. **VM und Container vergleichen** (Isolation, Ressourcenbedarf, Start, Portabilität, Sicherheit),
-3. **eine Linux-VM** (Ubuntu Server) in VirtualBox anlegen, bedienen, mit **Snapshots** sichern und **klonen**,
+3. **eine Linux-VM** (Debian) in VirtualBox, UTM, virt-manager oder Hyper-V anlegen, bedienen, mit **Snapshots** sichern und **klonen**,
 4. **Docker** installieren, Images und Container verwalten (`run`, `ps`, `logs`, `exec`, `stop`, `rm`),
 5. **einen Dienst mit Docker Compose** (Webserver oder Nextcloud mit Datenbank) starten, persistente Daten über **Volumes** sichern und wiederherstellen,
 6. **begründet entscheiden**, ob ein Schuldienst als VM, als Container oder gar nicht lokal betrieben werden soll,

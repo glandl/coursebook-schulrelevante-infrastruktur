@@ -10,7 +10,7 @@ Nach dieser Einheit kannst du:
 3. die Aufgaben von **DHCP, DNS, Gateway und NAT** erklären und in einer Konfiguration wiederfinden,
 4. ein **kabelgebundenes Schulnetz** planen (strukturierte Verkabelung, Medien, Switches, PoE, Uplinks),
 5. ein **WLAN für Unterrichtsräume** dimensionieren (Bänder, Kanäle, Kapazität, Anzahl der Access Points) und eine passende **Sicherheitsvariante** begründet wählen,
-6. mit **`ip`, `ping`, `tracepath`, `resolvectl` und `ss`** den Zustand eines Linux-Rechners im Netz untersuchen,
+6. mit **`ip`, `ping`, `tracepath`, `getent` und `ss`** den Zustand eines Linux-Rechners im Netz untersuchen,
 7. ein kleines Netz mit Router, Switches, DHCP, DNS und Webserver in **Cisco Packet Tracer** aufbauen, einen Router über die **Kommandozeile** konfigurieren, das Netz testen und **dokumentieren** (Diagramm und IP-Plan).
 
 *Zuordnung zur Kompetenzliste: folgt (Platzhalter).*

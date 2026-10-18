@@ -15,11 +15,11 @@ Dokumentiere dein Lab als **Portfolio-Eintrag** (Pflichtabgabe, bewertet nach de
 
 ### Inhalt
 
-1. **Umgebung:** Host-Betriebssystem, Packet-Tracer-Version, Ubuntu-Version der VM.
+1. **Umgebung:** Host-Betriebssystem, Packet-Tracer-Version, Virtualisierung (VirtualBox, virt-manager, UTM oder Hyper-V) und Debian-Version der VM.
 2. **Netzdiagramm (logische Ebene)** als Mermaid-Diagramm mit Titel, Datum, Version, Legende und beschrifteten Verbindungen (Router, Switches, AP, Server, Netze mit Adresse).
 3. **Netzübersicht und Adresstabelle** nach der Vorlage des Dokumentationsskripts (Netz, Adresse, Gateway, DHCP-Bereich, Zweck; Hostname, IP, Standort, Zweck). Namen im Diagramm und in den Tabellen stimmen überein.
 4. **Durchführung** der wichtigen Schritte: Router-Konfiguration (`show running-config`, gekürzt auf Schnittstellen), `show ip route`, DHCP-Pool, DNS-Eintrag (als Tabelle oder Codeblock, nicht nur als Screenshot).
-5. **Nachweise:** Mindestens **vier Screenshots**: Topologie in Packet Tracer, `ipconfig /all` eines DHCP-Clients, ein erfolgreicher Ping oder Browser-Zugriff zwischen Netzen, der Simulationsmodus mit einem geöffneten DHCP- oder DNS-Paket. Dazu die Ausgabe `ip -br addr` und `ip route` der Ubuntu-VM als Text.
+5. **Nachweise:** Mindestens **vier Screenshots**: Topologie in Packet Tracer, `ipconfig /all` eines DHCP-Clients, ein erfolgreicher Ping oder Browser-Zugriff zwischen Netzen, der Simulationsmodus mit einem geöffneten DHCP- oder DNS-Paket. Dazu die Ausgabe `ip -br addr` und `ip route` der Debian-VM als Text.
 6. **Probleme und Lösungen:** Mindestens ein aufgetretenes Problem mit Ursache und Lösung (z. B. die absichtlich herbeigeführte Störung aus 3.6).
 7. **Reflexion (Schulkontext), ca. 150–200 Wörter:** Was würde sich in einem echten Schulnetz gegenüber der Simulation ändern (Anzahl der Geräte, WLAN, Verwaltung, Sicherheit, Zuständigkeit)? Was ist die größte Fehlerquelle bei der Netzplanung?
 8. **Quellen:** Verwendete Anleitungen und Dokumentationen.

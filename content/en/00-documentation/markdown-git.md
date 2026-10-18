@@ -226,7 +226,7 @@ Create the files in the folder of the session (see [Folder structure](#folder-st
 ```bash
 git status                  # what has changed?
 git add 01-virtualization-containerization/
-git commit -m "Lab 1: document Ubuntu VM with snapshot"
+git commit -m "Lab 1: document Debian VM with snapshot"
 ```
 
 **Good commit messages** describe *what* and *why*, in one line of under about 70 characters, in the imperative or as a short sentence. Several small commits are better than one huge one at the end.
@@ -340,7 +340,7 @@ Rules:
 
 ````markdown
 ## What does this PR contain?
-Documentation task session 1 (Ubuntu VM, snapshots, Docker).
+Documentation task session 1 (Debian VM, snapshots, Docker).
 
 ## Checklist
 - [ ] README.md present in the session folder
@@ -360,7 +360,7 @@ A short excerpt of a submission, as it would be rendered on GitHub:
 ````markdown
 ## Procedure
 
-1. Created VM in VirtualBox (Ubuntu Server 24.04 LTS, 2 vCPU, 2 GB RAM, 20 GB disk).
+1. Created VM in VirtualBox (Debian 13, 2 vCPU, 2 GB RAM, 20 GB disk).
 2. Created a snapshot `00-fresh-install` after the installation.
 3. Installed and tested Docker:
 

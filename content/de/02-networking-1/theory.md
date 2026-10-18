@@ -86,7 +86,7 @@ Zu große Netze (ein /16 für alles) sind ebenso ein Fehler wie zu kleine: Das e
 - **Standard-Gateway:** Der Router eines Netzes, Adresse oft `.1`. Ohne Gateway funktioniert nur das lokale Netz.
 - **DHCP** vergibt Adresse, Netzmaske, Gateway und DNS-Server automatisch (Ablauf siehe Diagramm). Wichtig sind **Adressbereiche** (Pools), **Ausnahmen** für feste Adressen und die **Lease-Zeit** (Gültigkeit). Faustregel: im Schüler-WLAN kurze Leases (ca. 1–4 Stunden), weil viele Geräte kommen und gehen, im Kabelnetz lange.
 - **Feste Adressen** brauchen Server, Drucker und Netzwerkgeräte. Entweder außerhalb des DHCP-Pools festlegen oder per **DHCP-Reservierung** (MAC → feste IP).
-- **DNS** übersetzt Namen in Adressen (`ubuntu.com` → IP). Fällt DNS aus, wirkt „das Internet“ kaputt, obwohl `ping 1.1.1.1` funktioniert. Das ist die wichtigste Unterscheidung bei Störungen.
+- **DNS** übersetzt Namen in Adressen (`debian.org` → IP). Fällt DNS aus, wirkt „das Internet“ kaputt, obwohl `ping 1.1.1.1` funktioniert. Das ist die wichtigste Unterscheidung bei Störungen.
 - **NAT** (genauer PAT): Der Router setzt viele private Adressen auf eine öffentliche um. Das ist **keine Firewall**, auch wenn es ähnlich wirkt. Von außen erreichbare Dienste (Portweiterleitung) vergrößern die Angriffsfläche und sollten die Ausnahme sein.
 
 ```mermaid

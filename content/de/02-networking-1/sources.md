@@ -28,9 +28,12 @@ Primärquellen (Standards und offizielle Dokumentationen). Alle Links wurden im 
 
 ## Werkzeuge
 
-- Linux: [`ip(8)`](https://man7.org/linux/man-pages/man8/ip.8.html), [`ss(8)`](https://man7.org/linux/man-pages/man8/ss.8.html), [`resolvectl(1)`](https://www.freedesktop.org/software/systemd/man/latest/resolvectl.html)
-- Ubuntu: [Netplan](https://netplan.readthedocs.io/) und [Ubuntu Server Dokumentation, Networking](https://documentation.ubuntu.com/server/)
+- Linux: [`ip(8)`](https://man7.org/linux/man-pages/man8/ip.8.html), [`ss(8)`](https://man7.org/linux/man-pages/man8/ss.8.html), [`resolv.conf(5)`](https://man7.org/linux/man-pages/man5/resolv.conf.5.html)
+- Debian: [Debian-Referenz, Kapitel Netzwerkkonfiguration](https://www.debian.org/doc/manuals/debian-reference/ch05.de.html) und [`interfaces(5)`](https://manpages.debian.org/trixie/ifupdown/interfaces.5.en.html)
 - VirtualBox: [Benutzerhandbuch, Kapitel Virtual Networking](https://www.virtualbox.org/manual/)
+- libvirt: [NAT-Netz „default“ und Brücken](https://wiki.libvirt.org/VirtualNetworking.html)
+- UTM: [Netzwerkmodi](https://docs.getutm.app/settings-qemu/devices/network/)
+- Hyper-V: [Virtuelle Switches](https://learn.microsoft.com/windows-server/virtualization/hyper-v/plan/plan-hyper-v-networking-in-windows-server)
 - Cisco Packet Tracer (Netzwerksimulator): [Cisco Networking Academy](https://www.netacad.com/) (Download und Kurs *Getting Started with Cisco Packet Tracer*)
 
 ## Sicherheit und Datenschutz

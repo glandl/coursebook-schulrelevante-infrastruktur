@@ -4,7 +4,7 @@ weight = 30
 +++
 
 {{% callout style="warning" title="Status: ungeprüft" %}}
-Die Befehle und Einstellungen in diesem Lab wurden noch **nicht** in der Kursumgebung ausgeführt. Das gilt besonders für die Menüpunkte, Gerätemodelle und das DHCP-Relay in Packet Tracer (Teil 3). Stand der Software-Angaben: Oktober 2026. Prüfe Versionen vor dem Einsatz. *Getestet am: offen.*
+Die Befehle und Einstellungen in diesem Lab wurden noch **nicht** in der Kursumgebung ausgeführt. Das gilt besonders für die Menüpunkte, Gerätemodelle und das DHCP-Relay in Packet Tracer (Teil 3) und für die erwarteten Adressen bei virt-manager, UTM und Hyper-V (Teil 1). Stand der Software-Angaben: Oktober 2026. Prüfe Versionen vor dem Einsatz. *Getestet am: offen.*
 {{% /callout %}}
 
 ## Überblick
@@ -12,27 +12,35 @@ Die Befehle und Einstellungen in diesem Lab wurden noch **nicht** in der Kursumg
 | Teil | Inhalt | Dauer |
 |---|---|---|
 | 0 | Vorbereitung: Cisco-Konto anlegen, Packet Tracer installieren (**vor der Einheit**) | 20 min (zu Hause) |
-| 1 | Netzwerkwerkzeuge in der Ubuntu-VM aus Einheit 1 | 40 min |
+| 1 | Netzwerkwerkzeuge in der Debian-VM aus Einheit 1 | 40 min |
 | 2 | Subnetting und IP-Plan | 35 min |
 | 3 | Schulnetz in Packet Tracer: Router, DHCP, DNS, Webserver | 45 min |
 
-**Mindestausstattung:** wie in Einheit 1 (8 GB RAM, die VM `ubuntu-lab` aus Einheit 1) plus Cisco Packet Tracer (ca. 300 MB Download, ca. 1 GB Speicher).
+**Mindestausstattung:** wie in Einheit 1 (8 GB RAM, die VM `debian-lab` aus Einheit 1) plus Cisco Packet Tracer (ca. 300 MB Download, ca. 1 GB Speicher).
 
 **Verwendete Software:**
 
 | Software | Version | Hinweis |
 |---|---|---|
-| Ubuntu Server (VM `ubuntu-lab`) | 24.04 LTS | aus Einheit 1 |
-| Cisco Packet Tracer | 9.0.1 | kostenlos, benötigt ein kostenloses Konto bei der [Cisco Networking Academy](https://www.netacad.com/); englische Oberfläche; Windows, macOS und Linux (Ubuntu, `.deb`) |
-| Python 3 | in Ubuntu enthalten | für Subnetting-Berechnungen (`ipaddress`) |
+| Debian (VM `debian-lab`) | 13 „trixie“ | aus Einheit 1, mit VirtualBox, virt-manager, UTM oder Hyper-V |
+| Cisco Packet Tracer | 9.0.1 | kostenlos, benötigt ein kostenloses Konto bei der [Cisco Networking Academy](https://www.netacad.com/); englische Oberfläche; Windows, macOS und Linux (`.deb`-Paket) |
+| Python 3 | aus den Debian-Paketquellen (`sudo apt install python3`) | für Subnetting-Berechnungen (`ipaddress`) |
 
 ## Teil 0: Vorbereitung (vor der Einheit)
 
 1. **Konto anlegen** bei der [Cisco Networking Academy](https://www.netacad.com/) (kostenlos). Packet Tracer gibt es dort über den Kurs *Getting Started with Cisco Packet Tracer* bzw. die Seite *Resources → Download Packet Tracer*.
 2. **Packet Tracer installieren** und **einmal starten**. Beim ersten Start meldest du dich mit dem Konto an; das braucht Internet und klappt im WLAN der Einheit oft nicht zuverlässig. Speichere ein leeres Projekt, um zu prüfen, dass alles läuft.
 3. Optional: das Einführungsvideo bzw. den ersten Abschnitt des Kurses *Getting Started with Cisco Packet Tracer* ansehen (Arbeitsfläche, Geräte, Kabel).
-4. Die VM `ubuntu-lab` aus Einheit 1 starten, per SSH anmelden (siehe [Einheit 1, Lab 1.4]({{% relref "/01-virtualization-containerization/lab" %}})).
-5. Portfolio-Ordner anlegen:
+4. Die VM `debian-lab` aus Einheit 1 starten, per SSH anmelden (siehe [Einheit 1, Lab 1.4]({{% relref "/01-virtualization-containerization/lab" %}})).
+5. In der VM die Werkzeuge für Teil 1 und 2 installieren (zu Hause, nicht im WLAN der Einheit):
+
+   ```bash
+   sudo apt update
+   sudo apt install -y python3 iputils-tracepath bind9-dnsutils
+   ```
+
+   Das funktioniert nur, wenn die Online-Paketquellen eingetragen sind ([Einheit 1, Lab 1.2]({{% relref "/01-virtualization-containerization/lab" %}})): Wurde Debian von der DVD installiert, kennt `apt` sonst nur die DVD.
+6. Portfolio-Ordner anlegen:
 
 ```bash
 cd <dein-portfolio>
@@ -50,10 +58,11 @@ Für Packet Tracer legst du ein Konto bei einem US-Unternehmen an. Verwende eine
 |---|---|
 | **Packet Tracer lässt sich nicht installieren** (Gerät gesperrt) oder **kein Cisco-Konto gewünscht** | Teil 3 zu zweit an einem Laptop durchführen oder am Beamer als Vorführung mitverfolgen. Die Dokumentationsaufgabe nutzt dann die gemeinsame Datei bzw. das Netz der Lehrperson. |
 | **Anmeldung beim ersten Start schlägt fehl** (kein Internet, Konto noch nicht bestätigt) | Bestätigungs-E-Mail prüfen, Anmeldung zu Hause wiederholen. Ohne Anmeldung startet Packet Tracer nicht bzw. nur eingeschränkt (nicht verifiziert). |
-| **VM `ubuntu-lab` nicht mehr vorhanden** | Teil 1 mit WSL2 oder einem Linux-Rechner durchführen. Die Adressen weichen dann ab, die Befehle sind gleich. |
+| **VM `debian-lab` nicht mehr vorhanden** | Neu installieren wie in [Einheit 1, Lab Teil 1]({{% relref "/01-virtualization-containerization/lab" %}}) (von der DVD etwa 10 min), oder Teil 1 mit WSL2 oder einem Linux-Rechner durchführen. Die Adressen weichen dann ab, die Befehle sind gleich. |
+| **VM aus Einheit 1 ist noch Ubuntu** (`ubuntu-lab`) | Funktioniert. Unterschiede in Teil 1: In `/etc/resolv.conf` steht `127.0.0.53` (ein lokaler Zwischenspeicher, `systemd-resolved`); den echten DNS-Server zeigt `resolvectl status`. Die Netzwerkkonfiguration liegt in `/etc/netplan/` statt in `/etc/network/interfaces`. |
 | **Apple Silicon** | Packet Tracer für macOS läuft auf Apple Silicon (ggf. über Rosetta 2, nicht verifiziert). Die VM läuft in UTM wie in Einheit 1. |
 
-## Teil 1: Netzwerkwerkzeuge in der Ubuntu-VM
+## Teil 1: Netzwerkwerkzeuge in der Debian-VM
 
 **Ziel:** Du liest Adresse, Gateway, DNS und offene Ports ab und prüfst das Netz von unten nach oben. Notiere alle Ausgaben in deiner Dokumentation.
 
@@ -65,20 +74,53 @@ ip -br addr        # IP-Adressen je Schnittstelle
 ip route           # Routing-Tabelle, Standard-Gateway
 ```
 
-**Erwartet (VirtualBox, NAT):** Eine Schnittstelle (meist `enp0s3`) mit `10.0.2.15/24` und `default via 10.0.2.2`. Das ist die Standardkonfiguration des VirtualBox-NAT-Netzes. Beantworte: Welche MAC-Adresse hat die VM? Welche Netzadresse und welcher Präfix? Wie viele Geräte passen in dieses Netz?
+**Erwartet:** Neben `lo` eine Schnittstelle mit einer privaten Adresse und eine Zeile `default via <Gateway>`. Die Werte hängen von deiner Virtualisierung ab; alle vier Varianten sind NAT-Netze, die nur auf deinem Laptop existieren:
+
+{{< tabs groupid="vm-platform" >}}
+{{% tab title="VirtualBox" %}}
+| Schnittstelle | Adresse | Gateway | DNS-Server |
+|---|---|---|---|
+| meist `enp0s3` | `10.0.2.15/24` | `10.0.2.2` | `10.0.2.3` |
+
+Das ist die feste Standardkonfiguration des VirtualBox-NAT-Netzes: Jede VM bekommt dieselbe Adresse, weil jede ihr eigenes NAT-Netz hat.
+{{% /tab %}}
+{{% tab title="Linux: virt-manager" %}}
+| Schnittstelle | Adresse | Gateway | DNS-Server |
+|---|---|---|---|
+| meist `enp1s0` | `192.168.122.x/24` | `192.168.122.1` | `192.168.122.1` |
+
+Das Netz `default` von libvirt: Der Host ist unter `192.168.122.1` zugleich Gateway, DHCP- und DNS-Server (Programm `dnsmasq`).
+{{% /tab %}}
+{{% tab title="macOS: UTM" %}}
+| Schnittstelle | Adresse | Gateway | DNS-Server |
+|---|---|---|---|
+| meist `enp0s1` | `192.168.64.x/24` | `192.168.64.1` | `192.168.64.1` |
+
+Das *Shared Network* von macOS: Der Mac ist Gateway, DHCP- und DNS-Server.
+{{% /tab %}}
+{{% tab title="Windows: Hyper-V" %}}
+| Schnittstelle | Adresse | Gateway | DNS-Server |
+|---|---|---|---|
+| meist `eth0` | `172.x.y.z/20` | `172.x.y.1` | `172.x.y.1` |
+
+Der *Default Switch*: Windows wählt das Netz beim Start selbst, die genauen Zahlen ändern sich daher.
+{{% /tab %}}
+{{< /tabs >}}
+
+Trage deine Werte in die Dokumentation ein; in den folgenden Schritten steht `<Gateway>` für deine Gateway-Adresse. Beantworte: Welche MAC-Adresse hat die VM? Welche Netzadresse und welcher Präfix? Wie viele Geräte passen in dieses Netz?
 
 Gültigkeit der Adresse (DHCP-Lease) anzeigen:
 
 ```bash
-ip addr show enp0s3     # Schnittstellennamen ggf. anpassen
+ip addr show <schnittstelle>   # Name aus ip -br link, z. B. enp0s3
 ```
 
-In der Zeile `inet` steht `valid_lft <Sekunden>`: so lange gilt die per DHCP erhaltene Adresse noch.
+In der Zeile `inet` steht `valid_lft <Sekunden>`: so lange gilt die per DHCP erhaltene Adresse noch. Steht dort `forever`, trägt der DHCP-Client die Gültigkeit nicht an der Schnittstelle ein (abhängig vom DHCP-Client, nicht verifiziert).
 
 ### 1.2 Gateway und Internet (Schicht 3)
 
 ```bash
-ping -c 3 10.0.2.2      # das Gateway
+ping -c 3 <Gateway>     # das Gateway
 ping -c 3 1.1.1.1       # ein Ziel im Internet (nur per IP-Adresse)
 ```
 
@@ -87,14 +129,14 @@ ping -c 3 1.1.1.1       # ein Ziel im Internet (nur per IP-Adresse)
 ### 1.3 Namensauflösung (DNS, Schicht 7)
 
 ```bash
-resolvectl status | head -20      # welcher DNS-Server wird verwendet?
-resolvectl query ubuntu.com       # Name auflösen
-ping -c 3 ubuntu.com              # funktioniert nur, wenn DNS funktioniert
+cat /etc/resolv.conf              # welcher DNS-Server wird verwendet?
+getent hosts debian.org           # Name auflösen
+ping -c 3 debian.org              # funktioniert nur, wenn DNS funktioniert
 ```
 
-**Erwartet:** Als DNS-Server erscheint in VirtualBox-NAT meist `10.0.2.3`. Die Abfrage liefert eine oder mehrere Adressen. Merke dir: Funktioniert `ping 1.1.1.1`, aber nicht `ping ubuntu.com`, liegt das Problem bei **DNS**, nicht bei der Verbindung.
+**Erwartet:** In der Zeile `nameserver` steht der DNS-Server aus der Tabelle in 1.1. Debian trägt ihn beim Bezug der Adresse per DHCP in diese Datei ein. `getent` liefert eine oder mehrere Adressen. Merke dir: Funktioniert `ping 1.1.1.1`, aber nicht `ping debian.org`, liegt das Problem bei **DNS**, nicht bei der Verbindung.
 
-*Optional:* Mit `sudo apt install bind9-dnsutils` steht `dig ubuntu.com` zur Verfügung, das mehr Details zeigt.
+*Optional:* Mit `sudo apt install bind9-dnsutils` steht `dig debian.org` zur Verfügung, das mehr Details zeigt.
 
 ### 1.4 Weg der Pakete
 
@@ -102,7 +144,7 @@ ping -c 3 ubuntu.com              # funktioniert nur, wenn DNS funktioniert
 tracepath -n 1.1.1.1
 ```
 
-**Erwartet:** Liste der Zwischenstationen (Hops). Der erste Hop ist das Gateway `10.0.2.2`. Einzelne Zeilen mit `no reply` sind normal (manche Geräte antworten nicht).
+**Erwartet:** Liste der Zwischenstationen (Hops). Der erste Hop ist dein Gateway. Einzelne Zeilen mit `no reply` sind normal (manche Geräte antworten nicht).
 
 ### 1.5 Nachbarn im lokalen Netz (ARP, Schicht 2)
 
@@ -110,7 +152,7 @@ tracepath -n 1.1.1.1
 ip neigh
 ```
 
-**Erwartet:** Ein Eintrag für das Gateway `10.0.2.2` mit dessen MAC-Adresse (nach dem Ping). Das ist die ARP-Tabelle: Das Gerät kennt nur Nachbarn im **eigenen** Netz per MAC.
+**Erwartet:** Ein Eintrag für dein Gateway mit dessen MAC-Adresse (nach dem Ping). Das ist die ARP-Tabelle: Das Gerät kennt nur Nachbarn im **eigenen** Netz per MAC.
 
 ### 1.6 Wer lauscht auf welchem Port? (Schicht 4)
 
@@ -119,15 +161,32 @@ ss -tuln              # TCP und UDP, nur lauschende Ports, numerisch
 sudo ss -tulpn        # zusätzlich mit Programmnamen
 ```
 
-**Erwartet:** Der SSH-Server lauscht auf `0.0.0.0:22` (und `[::]:22`), außerdem lokale Dienste auf `127.0.0.x:53` (Namensauflösung). Beantworte: Welche dieser Ports sind von außen erreichbar, welche nur lokal (`127.0.0.1`)? Das ist die Grundfrage jeder Härtung.
+**Erwartet:** Der SSH-Server lauscht auf `0.0.0.0:22` (und `[::]:22`), der DHCP-Client auf UDP-Port `68`. Je nach Installation kommen Dienste hinzu, die nur auf `127.0.0.1` lauschen. Beantworte: Welche dieser Ports sind von außen erreichbar, welche nur lokal (`127.0.0.1`)? Das ist die Grundfrage jeder Härtung.
 
 Wenn du in Einheit 1 Docker-Container mit Portfreigabe gestartet hast, erscheinen sie ebenfalls (z. B. `:8080`).
 
 ### 1.7 Vergleich: anderes Netz (optional, 10 min)
 
-Ändere in den VM-Einstellungen *Netzwerk → Angeschlossen an* von **NAT** auf **Netzwerkbrücke** (*Bridged Adapter*) und starte die VM neu. Prüfe dann erneut `ip -br addr` und `ip route`.
+Hänge die VM statt ins NAT-Netz **direkt in das Netz deines Laptops** (Brücke) und starte sie neu:
 
-**Erwartet:** Die VM hat jetzt eine Adresse **aus dem Netz, in dem dein Laptop hängt** (z. B. WLAN der Schule). Beobachte Gateway und DNS. Stelle danach wieder **NAT** ein.
+{{< tabs groupid="vm-platform" >}}
+{{% tab title="VirtualBox" %}}
+VM-Einstellungen *Netzwerk → Angeschlossen an*: **Netzwerkbrücke** (*Bridged Adapter*), als Name den WLAN- oder LAN-Adapter des Laptops. Danach wieder **NAT**.
+{{% /tab %}}
+{{% tab title="Linux: virt-manager" %}}
+VM-Details → *NIC* → Netzwerkquelle **Host-Gerät … : macvtap**, Modus **Bridge**, Gerät: LAN-Adapter des Laptops. Über WLAN funktioniert macvtap meist nicht; dann den Schritt nur lesen. Achtung: Mit macvtap erreicht der Host selbst die VM nicht mehr. Danach wieder **Virtuelles Netzwerk „default“**.
+{{% /tab %}}
+{{% tab title="macOS: UTM" %}}
+VM ausschalten → *Edit → Network* → *Network Mode*: **Bridged (Advanced)**, *Bridged Interface*: `en0` (meist WLAN). Danach wieder **Shared Network**.
+{{% /tab %}}
+{{% tab title="Windows: Hyper-V" %}}
+*Manager für virtuelle Switches* → **Extern** → neuer Switch mit dem WLAN- oder LAN-Adapter, dann in den VM-Einstellungen die Netzwerkkarte auf diesen Switch stellen. Achtung: Windows baut dabei die Netzwerkverbindung des Laptops um, die Verbindung bricht kurz ab. Danach wieder **Default Switch** und den externen Switch löschen.
+{{% /tab %}}
+{{< /tabs >}}
+
+Prüfe dann erneut `ip -br addr` und `ip route`.
+
+**Erwartet:** Die VM hat jetzt eine Adresse **aus dem Netz, in dem dein Laptop hängt** (z. B. WLAN der Schule). Beobachte Gateway und DNS. Stelle danach die ursprüngliche Einstellung wieder her.
 
 {{% callout style="warning" title="Nur mit Erlaubnis" %}}
 Eine Netzwerkbrücke macht die VM zu einem **eigenständigen Gerät im Schulnetz**. Sie ist im Schul-WLAN oft nicht erlaubt oder technisch gesperrt. Führe diesen Schritt nur aus, wenn er erlaubt ist, und scanne niemals fremde Geräte oder Netze.
@@ -137,7 +196,7 @@ Eine Netzwerkbrücke macht die VM zu einem **eigenständigen Gerät im Schulnetz
 
 ### 2.1 Rechnen mit Python
 
-Python ist auf Ubuntu Server enthalten. Das Modul `ipaddress` rechnet Netze aus:
+Python installierst du einmal mit `sudo apt install -y python3` (falls in der Vorbereitung noch nicht geschehen). Das Modul `ipaddress` rechnet Netze aus:
 
 ```bash
 python3 - <<'EOF'
@@ -359,7 +418,7 @@ Anders als viele einfache Simulatoren kann Packet Tracer WLAN darstellen:
 
 ## Erwartete Ergebnisse (Checkliste)
 
-- [ ] `ip -br addr`, `ip route`, `resolvectl status` und `ss -tuln` der VM notiert und erklärt.
+- [ ] `ip -br addr`, `ip route`, `/etc/resolv.conf` und `ss -tuln` der VM notiert und erklärt.
 - [ ] Unterschied „Ping auf IP funktioniert, Name nicht“ erklärbar (DNS).
 - [ ] IP-Plan (Teil 2) ausgefüllt, mit Python geprüft.
 - [ ] Router `r1` per CLI konfiguriert, `show ip interface brief` zeigt drei Schnittstellen `up`.
@@ -373,9 +432,11 @@ Anders als viele einfache Simulatoren kann Packet Tracer WLAN darstellen:
 
 | Problem | Ursache und Lösung |
 |---|---|
-| `ip -br addr` zeigt keine Adresse | Netzwerkmodus in VirtualBox prüfen (NAT?), VM neu starten. |
-| `ping 1.1.1.1` geht, `ping ubuntu.com` nicht | DNS-Problem: `resolvectl status` prüfen, VM neu starten. |
+| `ip -br addr` zeigt keine Adresse | Netzwerk der VM wie in Einheit 1, Lab 1.1 eingestellt? VM neu starten. Fehlt `/etc/network/interfaces` (Übung aus Einheit 1), Snapshot wiederherstellen (UTM: die Kopie starten). |
+| `ping 1.1.1.1` geht, `ping debian.org` nicht | DNS-Problem: `cat /etc/resolv.conf` prüfen, VM neu starten. |
 | `tracepath` fehlt | `sudo apt install iputils-tracepath`. |
+| `apt install` findet ein Paket nicht oder verlangt eine DVD (*Medium wechseln*) | Online-Paketquellen fehlen: Block aus [Einheit 1, Lab 1.2]({{% relref "/01-virtualization-containerization/lab" %}}) ausführen, dann `sudo apt update`. |
+| SSH-Verbindung aus Einheit 1 klappt nicht mehr (virt-manager, UTM, Hyper-V) | Die VM hat eventuell eine neue Adresse bekommen (bei Hyper-V nach jedem Windows-Neustart möglich). In der VM-Konsole `ip -br addr` prüfen und mit der neuen `<VM-IP>` verbinden. |
 | Python meldet `ModuleNotFoundError` | `python3` verwenden (nicht `python`), das Modul `ipaddress` ist Teil der Standardbibliothek. |
 | Packet Tracer: rote Punkte am Router | Schnittstelle noch `shutdown`: in der CLI `interface …` und `no shutdown`. Kabel am richtigen Port? |
 | Packet Tracer: Pakete bewegen sich nicht | Steht der Modus auf **Simulation** ohne Play? Auf **Realtime** umschalten oder Play drücken. |

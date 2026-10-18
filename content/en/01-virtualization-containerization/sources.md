@@ -8,14 +8,16 @@ Primary sources (official documentation). The links were *not* checked individua
 ## Virtualization
 
 - VirtualBox: [User Manual](https://www.virtualbox.org/manual/) (chapters Virtual Networking, Snapshots, Cloning)
-- Ubuntu: [Ubuntu Server documentation](https://documentation.ubuntu.com/server/) and [installation tutorial](https://ubuntu.com/tutorials/install-ubuntu-server)
+- Debian: [Installation guide](https://www.debian.org/releases/trixie/installmanual) and [Debian Reference](https://www.debian.org/doc/manuals/debian-reference/)
+- virt-manager and libvirt: [virt-manager.org](https://virt-manager.org/), [libvirt.org](https://libvirt.org/)
+- QEMU: [QEMU documentation](https://www.qemu.org/docs/master/)
 - UTM (macOS): [docs.getutm.app](https://docs.getutm.app)
 - Proxmox VE: [pve.proxmox.com/pve-docs](https://pve.proxmox.com/pve-docs/)
 - Microsoft Hyper-V: [Microsoft Learn: Hyper-V on Windows](https://learn.microsoft.com/virtualization/hyper-v-on-windows/)
 
 ## Containers
 
-- Docker: [Docker Docs](https://docs.docker.com/) (in particular *Install Docker Engine on Ubuntu*, *Volumes*, *Compose file reference*, *Docker security*)
+- Docker: [Docker Docs](https://docs.docker.com/) (in particular *Install Docker Engine on Debian*, *Volumes*, *Compose file reference*, *Docker security*)
 - Docker Compose: [docs.docker.com/compose](https://docs.docker.com/compose/)
 - Open Container Initiative: [opencontainers.org](https://opencontainers.org/)
 - Podman: [podman.io](https://podman.io/docs)

@@ -15,7 +15,7 @@ Document your lab as a **portfolio entry** (mandatory submission, assessed with 
 
 ### Content
 
-1. **Environment:** host operating system, RAM, VirtualBox/UTM version, Ubuntu version, Docker version.
+1. **Environment:** host operating system, RAM, virtualization with version (VirtualBox, UTM, virt-manager or Hyper-V), Debian version, Docker version.
 2. **Procedure** with all important steps (commands as code blocks, not as screenshots):
    - VM created (settings),
    - snapshot created and restored,

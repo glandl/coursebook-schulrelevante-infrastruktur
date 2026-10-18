@@ -96,7 +96,7 @@ Kurzes Routine-Runbook (Befehle *ungeprüft*, Pfade abhängig von der Installati
 - **Auswirkung:** keine (VM läuft weiter)
 
 ## Voraussetzungen
-- VirtualBox-Host mit Zugriff auf die VM `ubuntu-lab`
+- VirtualBox-Host mit Zugriff auf die VM `debian-lab`
 - Mindestens 5 GB freier Speicher auf dem Host
 
 ## Schritte
@@ -104,19 +104,19 @@ Kurzes Routine-Runbook (Befehle *ungeprüft*, Pfade abhängig von der Installati
    ```bash
    VBoxManage list runningvms
    ```
-   **Erwartet:** `"ubuntu-lab" {…}` ist in der Liste.
+   **Erwartet:** `"debian-lab" {…}` ist in der Liste.
 2. Snapshot erstellen.
    ```bash
-   VBoxManage snapshot ubuntu-lab take "vor-update-2026-10-05" --description "Vor apt upgrade"
+   VBoxManage snapshot debian-lab take "vor-update-2026-10-05" --description "Vor apt upgrade"
    ```
 3. Update in der VM durchführen: `sudo apt update && sudo apt upgrade`.
 
 ## Erfolg prüfen
-- [ ] `VBoxManage snapshot ubuntu-lab list` zeigt den neuen Snapshot.
+- [ ] `VBoxManage snapshot debian-lab list` zeigt den neuen Snapshot.
 
 ## Rollback
 1. VM herunterfahren.
-2. `VBoxManage snapshot ubuntu-lab restore "vor-update-2026-10-05"`
+2. `VBoxManage snapshot debian-lab restore "vor-update-2026-10-05"`
 > **Achtung:** Beim Wiederherstellen gehen alle Änderungen seit dem Snapshot verloren.
 ````
 
