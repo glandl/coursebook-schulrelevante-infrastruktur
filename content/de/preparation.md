@@ -1,6 +1,6 @@
 +++
 title = "Vorbereitungs-Checkliste"
-weight = 2
+weight = 0
 +++
 
 Große Downloads und Installationen kosten Zeit in der Lehrveranstaltung, besonders wenn 20 Laptops am selben WLAN hängen. Arbeite diese Liste **zu Hause und mindestens zwei Tage vor jeder Einheit** ab. Pro Einheit gibt es eine kurze Liste, die allgemeinen Punkte gelten für den ganzen Kurs.
