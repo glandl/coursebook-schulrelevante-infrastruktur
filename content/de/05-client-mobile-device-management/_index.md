@@ -1,7 +1,7 @@
 +++
 title = "Client- & Mobile Device Management"
 type = "chapter"
-weight = 50
+weight = 5
 +++
 
 **Einheit:** 07.12.2026 · **Dokumentationstechnik:** [Änderungsprotokolle für Geräterichtlinien]({{% relref "/00-documentation/change-logs" %}}) · **Abgabe Hausaufgabe:** 13.12.2026

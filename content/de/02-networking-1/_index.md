@@ -1,7 +1,7 @@
 +++
 title = "Netzwerktechnik I"
 type = "chapter"
-weight = 20
+weight = 2
 +++
 
 **Einheit:** 19.10.2026 · **Dokumentationstechnik:** [Netzwerkdiagramme und IP-Pläne]({{% relref "/00-documentation/network-diagrams-ip-plans" %}}) · **Abgabe Hausaufgabe:** 08.11.2026

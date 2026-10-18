@@ -1,7 +1,7 @@
 +++
 title = "Netzwerktechnik II"
 type = "chapter"
-weight = 30
+weight = 3
 +++
 
 **Einheit:** 16.11.2026 · **Dokumentationstechnik:** [VLAN- und Berechtigungsmatrizen]({{% relref "/00-documentation/vlan-permission-matrices" %}}) · **Abgabe Hausaufgabe:** 22.11.2026
