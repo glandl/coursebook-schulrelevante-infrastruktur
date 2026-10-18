@@ -4,6 +4,10 @@ theme = 'hugo-theme-relearn'
 defaultContentLanguage = 'de'
 defaultContentLanguageInSubdir = true
 
+# the Relearn `pages` shortcode emits Markdown block attributes ({class=...})
+[markup.goldmark.parser.attribute]
+  block = true
+
 [outputs]
   home = ['html', 'rss', 'print']
   section = ['html', 'rss', 'print']
