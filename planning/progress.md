@@ -111,7 +111,7 @@ Carried over from before the 05.10.2026 session; not re-checked since.
 - [ ] Check that an `arm64` DVD-1 ISO is published for Debian 13 (otherwise Apple Silicon needs netinst)
 - [ ] Check whether Debian 13 standard install includes `python3`, `iputils-tracepath`, and which services `ss -tuln` shows
 - [ ] Check the QEMU command in the "für Neugierige" box
-- [ ] Chapter 01 already took place (05.10.2026) with Ubuntu: students' existing VMs are `ubuntu-lab`; decide whether they reinstall or keep Ubuntu for chapter 02 (the ch02 commands mostly work on Ubuntu too, except `/etc/resolv.conf` shows `127.0.0.53`)
+- [ ] Chapter 01 already took place (05.10.2026) with Ubuntu: students' existing VMs are `ubuntu-lab`; decide whether they reinstall or keep Ubuntu for chapter 02. The ch02 lab has a fallback row for an Ubuntu VM (`resolvectl status` instead of `/etc/resolv.conf`, Netplan instead of `/etc/network/interfaces`)
 
 ## Known issues
 

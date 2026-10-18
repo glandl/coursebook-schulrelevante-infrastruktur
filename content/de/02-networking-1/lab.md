@@ -32,7 +32,15 @@ Die Befehle und Einstellungen in diesem Lab wurden noch **nicht** in der Kursumg
 2. **Packet Tracer installieren** und **einmal starten**. Beim ersten Start meldest du dich mit dem Konto an; das braucht Internet und klappt im WLAN der Einheit oft nicht zuverlässig. Speichere ein leeres Projekt, um zu prüfen, dass alles läuft.
 3. Optional: das Einführungsvideo bzw. den ersten Abschnitt des Kurses *Getting Started with Cisco Packet Tracer* ansehen (Arbeitsfläche, Geräte, Kabel).
 4. Die VM `debian-lab` aus Einheit 1 starten, per SSH anmelden (siehe [Einheit 1, Lab 1.4]({{% relref "/01-virtualization-containerization/lab" %}})).
-5. Portfolio-Ordner anlegen:
+5. In der VM die Werkzeuge für Teil 1 und 2 installieren (zu Hause, nicht im WLAN der Einheit):
+
+   ```bash
+   sudo apt update
+   sudo apt install -y python3 iputils-tracepath bind9-dnsutils
+   ```
+
+   Das funktioniert nur, wenn die Online-Paketquellen eingetragen sind ([Einheit 1, Lab 1.2]({{% relref "/01-virtualization-containerization/lab" %}})): Wurde Debian von der DVD installiert, kennt `apt` sonst nur die DVD.
+6. Portfolio-Ordner anlegen:
 
 ```bash
 cd <dein-portfolio>
@@ -50,7 +58,8 @@ Für Packet Tracer legst du ein Konto bei einem US-Unternehmen an. Verwende eine
 |---|---|
 | **Packet Tracer lässt sich nicht installieren** (Gerät gesperrt) oder **kein Cisco-Konto gewünscht** | Teil 3 zu zweit an einem Laptop durchführen oder am Beamer als Vorführung mitverfolgen. Die Dokumentationsaufgabe nutzt dann die gemeinsame Datei bzw. das Netz der Lehrperson. |
 | **Anmeldung beim ersten Start schlägt fehl** (kein Internet, Konto noch nicht bestätigt) | Bestätigungs-E-Mail prüfen, Anmeldung zu Hause wiederholen. Ohne Anmeldung startet Packet Tracer nicht bzw. nur eingeschränkt (nicht verifiziert). |
-| **VM `debian-lab` nicht mehr vorhanden** | Teil 1 mit WSL2 oder einem Linux-Rechner durchführen. Die Adressen weichen dann ab, die Befehle sind gleich. |
+| **VM `debian-lab` nicht mehr vorhanden** | Neu installieren wie in [Einheit 1, Lab Teil 1]({{% relref "/01-virtualization-containerization/lab" %}}) (von der DVD etwa 10 min), oder Teil 1 mit WSL2 oder einem Linux-Rechner durchführen. Die Adressen weichen dann ab, die Befehle sind gleich. |
+| **VM aus Einheit 1 ist noch Ubuntu** (`ubuntu-lab`) | Funktioniert. Unterschiede in Teil 1: In `/etc/resolv.conf` steht `127.0.0.53` (ein lokaler Zwischenspeicher, `systemd-resolved`); den echten DNS-Server zeigt `resolvectl status`. Die Netzwerkkonfiguration liegt in `/etc/netplan/` statt in `/etc/network/interfaces`. |
 | **Apple Silicon** | Packet Tracer für macOS läuft auf Apple Silicon (ggf. über Rosetta 2, nicht verifiziert). Die VM läuft in UTM wie in Einheit 1. |
 
 ## Teil 1: Netzwerkwerkzeuge in der Debian-VM
@@ -103,7 +112,7 @@ Trage deine Werte in die Dokumentation ein; in den folgenden Schritten steht `<G
 Gültigkeit der Adresse (DHCP-Lease) anzeigen:
 
 ```bash
-ip addr show enp0s3     # Schnittstellennamen ggf. anpassen
+ip addr show <schnittstelle>   # Name aus ip -br link, z. B. enp0s3
 ```
 
 In der Zeile `inet` steht `valid_lft <Sekunden>`: so lange gilt die per DHCP erhaltene Adresse noch. Steht dort `forever`, trägt der DHCP-Client die Gültigkeit nicht an der Schnittstelle ein (abhängig vom DHCP-Client, nicht verifiziert).
@@ -423,9 +432,11 @@ Anders als viele einfache Simulatoren kann Packet Tracer WLAN darstellen:
 
 | Problem | Ursache und Lösung |
 |---|---|
-| `ip -br addr` zeigt keine Adresse | Netzwerk der VM wie in Einheit 1, Lab 1.1 eingestellt? VM neu starten. Fehlt `/etc/network/interfaces` (Übung aus Einheit 1), Snapshot wiederherstellen. |
+| `ip -br addr` zeigt keine Adresse | Netzwerk der VM wie in Einheit 1, Lab 1.1 eingestellt? VM neu starten. Fehlt `/etc/network/interfaces` (Übung aus Einheit 1), Snapshot wiederherstellen (UTM: die Kopie starten). |
 | `ping 1.1.1.1` geht, `ping debian.org` nicht | DNS-Problem: `cat /etc/resolv.conf` prüfen, VM neu starten. |
 | `tracepath` fehlt | `sudo apt install iputils-tracepath`. |
+| `apt install` findet ein Paket nicht oder verlangt eine DVD (*Medium wechseln*) | Online-Paketquellen fehlen: Block aus [Einheit 1, Lab 1.2]({{% relref "/01-virtualization-containerization/lab" %}}) ausführen, dann `sudo apt update`. |
+| SSH-Verbindung aus Einheit 1 klappt nicht mehr (virt-manager, UTM, Hyper-V) | Die VM hat eventuell eine neue Adresse bekommen (bei Hyper-V nach jedem Windows-Neustart möglich). In der VM-Konsole `ip -br addr` prüfen und mit der neuen `<VM-IP>` verbinden. |
 | Python meldet `ModuleNotFoundError` | `python3` verwenden (nicht `python`), das Modul `ipaddress` ist Teil der Standardbibliothek. |
 | Packet Tracer: rote Punkte am Router | Schnittstelle noch `shutdown`: in der CLI `interface …` und `no shutdown`. Kabel am richtigen Port? |
 | Packet Tracer: Pakete bewegen sich nicht | Steht der Modus auf **Simulation** ohne Play? Auf **Realtime** umschalten oder Play drücken. |

@@ -22,6 +22,6 @@ In dieser Einheit lernst du, wie ein Schulnetz **geplant** wird: Adressen und Te
 | 12:00–12:45 | 45 min | Lab Teil 3: Schulnetz in Packet Tracer |
 | 12:45–13:00 | 15 min | Start der Dokumentationsaufgabe, Ausblick Hausaufgabe |
 
-Die Vorbereitung (Teil 0: Cisco-Konto anlegen und Packet Tracer installieren) erledigst du **vor der Einheit**. Die [Übung]({{% relref "exercise" %}}) ist freiwillig und wird bei Bedarf zu Hause oder in der nächsten Einheit vertieft.
+Die Vorbereitung (Teil 0: Cisco-Konto anlegen, Packet Tracer installieren, Werkzeuge in der VM installieren) erledigst du **vor der Einheit**. Die [Übung]({{% relref "exercise" %}}) ist freiwillig und wird bei Bedarf zu Hause oder in der nächsten Einheit vertieft.
 
 {{% pages display="tree" levels="1" %}}
