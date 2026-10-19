@@ -1,0 +1,9 @@
+{
+    "python.analysis.extraPaths": [
+        "/Users/glandl/.vscode/extensions/peterstaev.lego-spikeprime-mindstorms-vscode-3.1.4-phealy.14/python-stubs"
+    ],
+    "python.analysis.stubPath": "/Users/glandl/.vscode/extensions/peterstaev.lego-spikeprime-mindstorms-vscode-3.1.4-phealy.14/python-stubs",
+    "python.analysis.diagnosticSeverityOverrides": {
+        "reportMissingModuleSource": "none"
+    }
+}

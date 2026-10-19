@@ -20,7 +20,7 @@ Das Altgebäude (Verwaltung, Server, Internetanbindung) steht 40 m entfernt und 
 
 ## Aufgabe
 
-Erstelle ein **Netzkonzept für den Zubau** (inklusive Anschluss an das Altgebäude).
+Erstelle einen **IP-Plan für den Zubau** (inklusive Anschluss an das Altgebäude).
 
 ### Teil A: IP-Plan
 
@@ -29,23 +29,7 @@ Erstelle ein **Netzkonzept für den Zubau** (inklusive Anschluss an das Altgebä
 - Lege eine **Adresskonvention** und ein **Namensschema** für Geräte fest.
 - Ergebnis: Netzübersicht und Adresstabelle (mindestens fünf feste Geräte) nach der [Vorlage]({{% relref "/00-documentation/network-diagrams-ip-plans" %}}).
 
-### Teil B: Diagramme und Verkabelung
-
-- **Logisches Netzdiagramm** (Mermaid): Internet, Firewall/Router, Core, Verteiler je Geschoss, Netze mit Adressen.
-- **Verkabelungsplan eines Geschosses** (Mermaid oder Tabelle): Verteiler, Dosen je Raum, Access Points, Uplink mit Medium und Geschwindigkeit.
-- **Stückliste (ohne Preise):** Anzahl Dosen, Patchfeld-Ports, Access Points, Switches (Ports, PoE-Standard, PoE-Budget), Verbindungskabel zum Altgebäude (Medium begründen).
-- Trage mindestens **zwei Annahmen** und **eine Reserve** (Ports, Fasern oder Rack-Platz) ein.
-
-### Teil C: WLAN-Konzept
-
-Beschreibe in höchstens einer Seite:
-
-1. **Anzahl und Platzierung** der Access Points (mit Begründung der Kapazität).
-2. **Bänder und Kanalbreite** (2,4 / 5 GHz, ggf. 6 GHz) und Sendeleistung.
-3. **SSIDs** mit Zweck, Netz (VLAN) und **Sicherheitsverfahren** (PSK oder 802.1X). Begründe die Wahl **für Lehrende, Schüler und Gäste**. Was muss die Schule organisatorisch leisten, damit das Verfahren funktioniert (z. B. Benutzerverwaltung, Passwortwechsel)?
-4. **Verwaltung** der Access Points (Standalone, Controller, Cloud) mit Aussage zum Datenschutz.
-
-### Teil D: Kurzreflexion (ca. 15 min)
+### Teil B: Kurzreflexion (ca. 15 min)
 
 Beantworte in 100–150 Wörtern: *Welche Annahme in deinem Konzept ist am riskantesten, und wie würdest du sie vor der Umsetzung prüfen?*
 
@@ -55,10 +39,8 @@ Ordner: `02-networking-1/` im Portfolio-Repository.
 
 ```text
 02-networking-1/
-├── homework.md            # Szenario, Annahmen, Reflexion (Teil D)
+├── homework.md            # Szenario, Annahmen, Reflexion (Teil B)
 ├── ip-plan.md             # Teil A: Netzübersicht, Adresstabelle, Konvention
-├── netzplan.md            # Teil B: Diagramme, Stückliste
-├── wlan-konzept.md        # Teil C
 └── assets/
 ```
 
@@ -66,10 +48,10 @@ Branch `hausaufgabe-02`, Pull Request auf `main`. Das Feedback erhältst du als 
 
 | Kriterium | Worauf geachtet wird |
 |---|---|
-| Technische Korrektheit | Subnetze stimmen (Netzadresse, Gateway im Netz, keine Überschneidungen), Kabellängen und PoE-Budget plausibel, WLAN-Planung nachvollziehbar |
-| Vollständigkeit | Teile A bis D vorhanden, Annahmen genannt, Diagramme und Tabellen konsistent |
-| Dokumentationsqualität | Markdown sauber, Mermaid rendert, einheitliche Namen, Commit-Nachrichten |
-| Reflexion im Schulkontext | Datenschutz (WLAN-Anmeldung, Protokolle), Betrieb und Zuständigkeit begründet |
+| Technische Korrektheit | Subnetze stimmen (Netzadresse, Gateway im Netz, keine Überschneidungen), Präfixe passen zur Geräteanzahl inklusive 30 % Reserve |
+| Vollständigkeit | Teile A und B vorhanden, Annahmen genannt, Netzübersicht und Adresstabelle konsistent |
+| Dokumentationsqualität | Markdown sauber, Vorlage eingehalten, einheitliche Namen, Commit-Nachrichten |
+| Reflexion im Schulkontext | Riskante Annahme begründet, Prüfung vor der Umsetzung realistisch (Betrieb durch ein kleines Lehrenden-Team) |
 
 {{% callout style="info" title="Hinweis zur Zusammenarbeit" %}}
 Austausch über Probleme ist erwünscht. Abgegeben wird **individuell**. Verwendest du KI-Werkzeuge, kennzeichne das und prüfe Berechnungen selbst. Erkläre in der Besprechung jede Adresse und jeden Präfix deines IP-Plans.

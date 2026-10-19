@@ -20,7 +20,7 @@ The old building (administration, servers, internet connection) is 40 m away and
 
 ## Task
 
-Create a **network concept for the extension** (including the connection to the old building).
+Create an **IP plan for the extension** (including the connection to the old building).
 
 ### Part A: IP plan
 
@@ -29,23 +29,7 @@ Create a **network concept for the extension** (including the connection to the 
 - Define an **addressing convention** and a **naming scheme** for devices.
 - Result: network overview and address table (at least five fixed devices) following the [template]({{% relref "/00-documentation/network-diagrams-ip-plans" %}}).
 
-### Part B: Diagrams and cabling
-
-- **Logical network diagram** (Mermaid): internet, firewall/router, core, distribution per floor, networks with addresses.
-- **Cabling plan for one floor** (Mermaid or table): distribution cabinet, outlets per room, access points, uplink with medium and speed.
-- **Bill of materials (without prices):** number of outlets, patch panel ports, access points, switches (ports, PoE standard, PoE budget), connecting cable to the old building (justify the medium).
-- Include at least **two assumptions** and **one reserve** (ports, fibres or rack space).
-
-### Part C: WLAN concept
-
-Describe on one page at most:
-
-1. **Number and placement** of the access points (with justification of the capacity).
-2. **Bands and channel width** (2.4 / 5 GHz, possibly 6 GHz) and transmit power.
-3. **SSIDs** with purpose, network (VLAN) and **security method** (PSK or 802.1X). Justify the choice **for teachers, students and guests**. What does the school have to provide organisationally for the method to work (e.g. user management, password changes)?
-4. **Management** of the access points (standalone, controller, cloud) with a statement on data protection.
-
-### Part D: Short reflection (approx. 15 min)
+### Part B: Short reflection (approx. 15 min)
 
 Answer in 100–150 words: *Which assumption in your concept is the riskiest, and how would you check it before implementation?*
 
@@ -55,10 +39,8 @@ Folder: `02-networking-1/` in the portfolio repository.
 
 ```text
 02-networking-1/
-├── homework.md            # Scenario, assumptions, reflection (part D)
+├── homework.md            # Scenario, assumptions, reflection (part B)
 ├── ip-plan.md             # Part A: network overview, address table, convention
-├── network-plan.md        # Part B: diagrams, bill of materials
-├── wlan-concept.md        # Part C
 └── assets/
 ```
 
@@ -66,10 +48,10 @@ Branch `homework-02`, pull request to `main`. You receive the feedback as a comm
 
 | Criterion | What is looked at |
 |---|---|
-| Technical correctness | Subnets are correct (network address, gateway inside the network, no overlaps), cable lengths and PoE budget plausible, WLAN planning comprehensible |
-| Completeness | Parts A to D present, assumptions stated, diagrams and tables consistent |
-| Documentation quality | Clean Markdown, Mermaid renders, consistent names, commit messages |
-| School-context reflection | Data protection (WLAN login, logs), operation and responsibility justified |
+| Technical correctness | Subnets are correct (network address, gateway inside the network, no overlaps), prefixes fit the number of devices including 30 % reserve |
+| Completeness | Parts A and B present, assumptions stated, network overview and address table consistent |
+| Documentation quality | Clean Markdown, template followed, consistent names, commit messages |
+| School-context reflection | Risky assumption justified, check before implementation realistic (operated by a small teacher team) |
 
 {{% callout style="info" title="Note on collaboration" %}}
 Exchanging ideas about problems is welcome. Submission is **individual**. If you use AI tools, label this and check calculations yourself. In the discussion, explain every address and every prefix in your IP plan.
