@@ -1,39 +1,39 @@
 +++
-title = "Lab (not graded)"
+title = "Lab (no graded)"
 weight = 40
 +++
 
-{{% callout style="warning" title="Status: not yet fully checked" %}}
-**There is neither cloud nor hybrid network** here, and **managed VLANs of real networks via cloud console** — and the **VLAN functionality of Packet Tracer version 9.0.1** is **not yet fully checked** in the course environment. Where this unit touches functions that cannot be shown yet, it **explicitly names** them. **No Wireshark** — this lab works with **Packet Tracer** and **one single Debian-Linux-VM** only. *Checked:* [[Lab]({{% relref "/03-networking-2/lab" %}}) — **open.**
+{{% callout style="warning" title="Status: ungeprüft" %}}
+Die Befehle und Einstellungen in diesem Lab wurden noch **nicht** in der Kursumgebung ausgeführt. Das gilt besonders für die Menüpunkte, Gerätemodelle und die VLAN-Filter in Packet Tracer (Teil 1) und für die erwarteten Adressen bei virt-manager, UTM und Hyper-V (Teil 2 und 3). Stand der Software-Angaben: Oktober 2026. Prüfe Versionen vor dem Einsatz. *Getested am: offen.*
 {{% /callout %}}
 
 ## Überblick
 
 | Part | Content | Duration |
 |---|---|---|
-| 0 | Preparation: Packet Tracer incl. Cisco account, Windows Server ISO (at home, before the unit) | 40 min (at home) |
-| 1 | VLANs in the Packet Tracer file of unit 2: both VLAN models, network first aid | 70 min |
-| 2 | Network configuration of the Debian VM, DNS and DHCP in the simulation mode | 60 min |
-| 3 | Windows Server 2025 Evaluation in the VM (textmode), first commands in the console | 45 min |
-| 4 | Server-Setup-Log — documentation of your lab work, **not part of the grade** | 40 min |
+| 0 | Preparation: Packet Tracer incl. Cisco account, Window Server ISO (at home, before ein unit) | 40 min (at home) |
+| 1 | VLANs in ein Packet Tracer file of unit 2: both VLAN model, Netze first aid | 70 min |
+| 2 | Netz configuration of ein Debian VM, DNS und DHCP in ein simulation mode | 60 min |
+| 3 | Window Server 2025 Evaluation in ein VM (textmode), first command in ein console | 45 min |
+| 4 | Server-Setup-Log — documentation of your lab work, **no part of ein grade** | 40 min |
 
-Total **255 min** — same distribution as in the other lab parts.
+Total **255 min** — same distribution as in ein other lab parts.
 
-**Mindestausstattung:** the VM **`debian-lab`** from unit 1 ([Lab unit 1]({{% relref "/01-virtualization-containerization/lab" %}})), the **evaluation media for Windows Server 2025** (ISO, download at home) and **Cisco Packet Tracer** (download approx. 300 MB).
+**Mindestausstattung:** ein VM **`debian-lab`** from unit 1 ([Lab unit 1]({{% relref "/01-virtualization-containerization/lab" %}})), ein **evaluation media for Window Server 2025** (ISO, download at home) und **Cisco Packet Tracer** (download approx. 300 MB).
 
 **Verwendete Software:**
 
 | Software | Version | Remark |
 |---|---|---|
 | Debian (VM `debian-lab`) | 13 "trixie" | from unit 1, known from [VM Container]({{% relref "/01-virtualization-containerization/exercise" %}}) |
-| Cisco Packet Tracer | 9.0.1 | free download, needs Cisco account; English interface |
-| Windows Server 2025 Evaluation | `10.0.26100.24.07` | ISO, Evaluation version with time limit — see [Security and Data Protection]({{% relref "security" %}}) |
+| Cisco Packet Tracer | 9.0.1 | free download, need Cisco account; English interface |
+| Window Server 2025 Evaluation | `10.0.26100.24.07` | ISO, Evaluation version mit time limit — see [Security and Data Protection]({{% relref "security" %}}) |
 
-## Teil 0: Preparation (before the unit, at home)
+## Teil 0: Preparation (before ein unit, at home)
 
-1. **At [www.netacad.com](https://www.netacad.com) a Cisco Networking / Cisco Business account gets created** and **Packet Tracer gets downloaded** (approx. 300 MB) — **at home**, not in the network of the school! **Installed** and **started once**, then closed.
-2. **Download Windows Server 2025 Evaluation (ISO)** — several GB, **must be downloaded in advance** on your machine already! **The build number** `10.0.26100.24.07` — **what is expected gets written down.**
-3. **VM `debian-lab` starts**, **SSH on the host**; **network observation tools get installed** for Teil 2:
+1. **At [www.netacad.com](https://www.netacad.com) ein Cisco Networking / Cisco Business account get created** und **Packet Tracer get downloaded** (approx. 300 MB) — **at home**, no in ein Netze of ein School! **Installed** und **started once**, then closed.
+2. **Download Window Server 2025 Evaluation (ISO)** — several GB, **must be downloaded in advance** on your machine already! **Ein build number** `10.0.26100.24.07` — **what is expected get note down.**
+3. **VM `debian-lab` start**, **SSH on ein host**; **Netze observation tools get installed** for Teil 2:
 
    ```bash
    sudo apt update
@@ -49,25 +49,25 @@ Total **255 min** — same distribution as in the other lab parts.
    ```
 
 {{% callout style="info" title="Datenschutz — Cisco account" %}}
-Packet Tracer **needs a Cisco account** — **registered with the course alias**, **no** address of your family, **no** real workplace. At the download page it is **described** where to get the software for your operating system.
+Packet Tracer **need ein Cisco account** — **registered mit ein course alias**, **no** address of your family, **no** real workplace. At ein download pages it is **described** where to get ein software for your operating system.
 {{% /callout %}}
 
-## Teil 1: VLANs in the Packet Tracer file of unit 2 (70 min)
+## Teil 1: VLANs in ein Packet Tracer file of unit 2 (70 min)
 
-**Ziel:** Both VLAN models in Packet Tracer can be **named**, the VLAN number can be **read off from an address** — and it becomes visible: **VLAN 3 is not reachable everywhere**. **In the file:** the Packet Tracer file from unit 2, part 3 ([Netz from scratch]({{% relref "/02-networking-1/lab" %}})). **The network does not get rewired — it gets labeled!**
+**Ziel:** Both VLAN model in Packet Tracer can be **named**, ein VLAN number can be **read off from ein address** — und it becomes visible: **VLAN 3 is no reachable everywhere**. **In ein file:** ein Packet Tracer file from unit 2, part 3 ([Netz from scratch]({{% relref "/02-networking-1/lab" %}})). **Ein Netze do no get rewired — it get labeled!**
 
-> **About the two number conventions:** In the file from unit 2 `10.10.x.x` is used. In this unit **the convention of the class list gets used: `10.11.<VLAN>.0/24`** — **third octet = VLAN-Id**. In the documentation task **both number ranges get written down** (see [VLAN- and permission matrices]({{% relref "/00-documentation/vlan-permission-matrices" %}})).
+> **About ein two number convention:** In ein file from unit 2 `10.10.x.x` is used. In these unit **ein convention of ein class lists get used: `10.11.<VLAN>.0/24`** — **third octet = VLAN-Id**. In ein documentation tasks **both number ranges get note down** (see [VLAN- and permission matrices]({{% relref "/00-documentation/vlan-permission-matrices" %}})).
 
-| Group | VLAN | VLAN-Id as 3rd octet | Range in the file (from unit 2) | Range class list | Usable devices |
+| Group | VLAN | VLAN-Id as 3rd octet | Range in ein file (from unit 2) | Range class lists | Usable Geräte |
 |---|---|---|---|---|---|
-| Schuler | 0 | `0` | `10.10.0.0/24` | `10.11.0.0/24` | 254 |
+| Schüler | 0 | `0` | `10.10.0.0/24` | `10.11.0.0/24` | 254 |
 | Lehrende | 1 | `1` | `10.10.1.0/24` | `10.11.1.0/24` | 254 |
 | Administration | 2 | `2` | `10.10.2.0/24` | `10.11.2.0/24` | 254 |
 | Storage | 3 | `3` | `10.10.3.0/24` | `10.11.3.0/24` | 254 |
 
-### 1.1 VLAN model 1 — the internal VLAN field (20 min)
+### 1.1 VLAN model 1 — ein internal VLAN fields (20 min)
 
-In the Simulation every device and every link **carries an internal VLAN field** — the number **belongs to the device**, not to the packet. **The CLI of a managed Switch (2960) opens** and **reads**:
+In ein Simulation each Geräte und each links **carry ein internal VLAN fields** — ein number **belongs to ein Geräte**, no to ein packets. **Ein CLI of ein managed Switch (2960) open** und **read**:
 
 ```text
 2960> enable
@@ -77,9 +77,9 @@ In the Simulation every device and every link **carries an internal VLAN field**
 2960# show ethernet vlan 2
 ```
 
-**Erwartet:** the **VLAN-Ids** with **bitmask / number range** of the Switch — and which **interfaces** belong to the VLAN.
+**Erwartet:** ein **VLAN-Ids** mit **bitmask / number range** of ein Switch — und which **interface** belong to ein VLAN.
 
-Then **device and Switch get the VLANs of the class list**, e.g. Administration:
+Then **Geräte und Switch get ein VLANs of ein class lists**, e.g. Administration:
 
 ```text
 Device pc-verw/1:   VLAN-Insert: VLAN = 2
@@ -87,62 +87,62 @@ Device pc-verw/1:   VLAN-Insert: VLAN = 2
 2960(config-if)# set vlan 2
 ```
 
-With **bitmask** `0.0.255.0` one works **bitwise per octet** — **the bitmask in binary, one line per octet, gets written down** (see [Theorie]({{% relref "theory" %}})). A **packet from a Schuler device** that wants to cross the **managed Switch** into VLAN 2 **proceeds only if the Switch allows VLAN 2 on the link** — **test it:**
+Mit **bitmask** `0.0.255.0` ein work **bitwise per octet** — **ein bitmask in binary, ein lines per octet, get note down** (see [Theorie]({{% relref "theory" %}})). Ein **packets from ein Schüler Geräte** those wants to cross ein **managed Switch** in VLAN 2 **proceeds only if ein Switch allow VLAN 2 on ein links** — **test it:**
 
-1. **One link open** for VLAN 2 (`set vlan 2 ... accept`), **one closed**, **one partly granted**
-2. In the **Simulation send:** **frame stops at the closed Switch**, proceeds through the open one
-3. **Screenshot** one stop and one pass — **the number decides at the network device, not the address**
+1. **Ein links open** for VLAN 2 (`set vlan 2 ... accept`), **ein closed**, **ein partly granted**
+2. In ein **Simulation send:** **frames stops at ein closed Switch**, proceeds through ein open ein
+3. **Screenshot** ein stop und ein pass — **ein number decide at ein Netze Geräte, no ein address**
 
-**Write down:** In the Simulation this is **the decision per connection**. On **real hardware** a **managed Switch** decides **depending on the VLAN in the frame** — same effect, different place where the number lies (next part!).
+**Write down:** In ein Simulation these is **ein decision per connection**. On **real hardware** ein **managed Switch** decide **depending on ein VLAN in ein frames** — same effect, different place where ein number lies (next part!).
 
-### 1.2 VLAN model 2 — VLAN-Id leg: the EtherType field (15 min)
+### 1.2 VLAN model 2 — VLAN-Id leg: ein EtherType fields (15 min)
 
-Now the number **belongs to the frame**: **`vlan 2` gets written** into the **EtherType field** of the Ethernet header — into the EtherType field of the **sending device** — **the frame carries VLAN 2**:
+Now ein number **belongs to ein frames**: **`vlan 2` get write** in ein **EtherType fields** of ein Ethernet headers — in ein EtherType fields of ein **sending Geräte** — **ein frames carry VLAN 2**:
 
 ```text
 EtherType field of the device:  vlan 2
 Frame on the wire:              EtherType "vlan 2" + payload
 ```
 
-Test: **One packet from a Schuler device gets sent** whose EtherType field **one set to VLAN 2**: **The Simulation lets it through — the sending device can write whatever one likes!** The **decision still happens at the Switch**, **the VLAN number only accompanies the frame**.
+Test: **Ein packets from ein Schüler Geräte get sent** whose EtherType fields **ein set to VLAN 2**: **Ein Simulation lets it through — ein sending Geräte can write whatever ein likes!** Ein **decision still happens at ein Switch**, **ein VLAN number only accompanies ein frames**.
 
-**Write down:** **Both models in one table** — where the number lies, what that means for the Simulation and for reality of Ethernet: **the VLAN tag lies in the frame** and **can be set arbitrarily** — **the Switch reads, the device does not enforce**.
+**Write down:** **Both model in ein tables** — where ein number lies, what those mean for ein Simulation und for reality of Ethernet: **ein VLAN tags lies in ein frames** und **can be set arbitrarily** — **ein Switch read, ein Geräte do no enforce**.
 
-**Write down:** **What one does not need a VLAN for:** If one has a separate network per group anyway and no network device that decides per VLAN, the VLAN number **belongs to nothing**.
+**Write down:** **What ein do no need ein VLAN for:** If ein has ein separate Netze per group anyway und no Netze Geräte those decide per VLAN, ein VLAN number **belongs to nothing**.
 
-### 1.3 VLAN 3 — not reachable everywhere (15 min)
+### 1.3 VLAN 3 — no reachable everywhere (15 min)
 
-**The Storage network** hangs in **VLAN 3**. **A managed Switch** in the file: **does not allow VLAN 3**. **The Command Prompt on a teacher- or Schuler PC opens** in Packet Tracer:
+**Ein Storage Netze** hangs in **VLAN 3**. **Ein managed Switch** in ein file: **do no allow VLAN 3**. **Ein Command Prompt on ein teacher- or Schüler PC open** in Packet Tracer:
 
 ```text
 ping -c 3 10.11.3.1
 ```
 
-(In the **Command Prompt** of Packet Tracer `ping <address>` without `-c` also exists — then **the three requests get counted by one oneself**. `-c 3` is a Debian command, see 2.1.)
+(In ein **Command Prompt** of Packet Tracer `ping <address>` without `-c` also exists — then **ein three requests get counted by ein oneself**. `-c 3` is ein Debian command, see 2.1.)
 
-**Erwartet:** **All three requests time out** — the frame **stops at the managed Switch**: **VLAN 3 is not allowed on the link**. Now **one switches to the Simulation**: There **one sees where** the frame **stops** — **it is not accepted**, **it does not even travel a part of the way and turn back**.
+**Erwartet:** **All three requests time out** — ein frames **stops at ein managed Switch**: **VLAN 3 is no allowed on ein links**. Now **ein switch to ein Simulation**: There **ein see where** ein frames **stops** — **it is no accepted**, **it do no even travel ein part of ein way und turn back**.
 
-**Write down in the documentation: Where the frame stops** — and from **which role where** one would have to be able to reach VLAN 3. **The address proves nothing, the Switch decides** — see [VLAN- and permission matrices]({{% relref "/00-documentation/vlan-permission-matrices" %}}).
+**Write down in ein documentation: Where ein frames stops** — und from **which role where** ein would have to be able to reach VLAN 3. **Ein address prove nothing, ein Switch decide** — see [VLAN- and permission matrices]({{% relref "/00-documentation/vlan-permission-matrices" %}}).
 
-### 1.4 DNS and DHCP — observation in the simulation mode (10 min)
+### 1.4 DNS und DHCP — observation in ein simulation mode (10 min)
 
-**Between the typing of a name and the first packet lies a resolution order** — see [Theorie]({{% relref "theory" %}}): **DNS** turns **name into number**, **DHCP** **gives an address in the network** — **that is a network device, not DNS**.
+**Between ein type of ein name und ein first packets lies ein resolution orders** — see [Theorie]({{% relref "theory" %}}): **DNS** turns **name in number**, **DHCP** **give ein address in ein Netze** — **those is ein Netze Geräte, no DNS**.
 
-**In the Simulation one opens the packages of the network devices** and **observes** — **no network tool outside the Simulator**, **the Simulator shows the layers:**
+**In ein Simulation ein open ein packages of ein Netze Geräte** und **observes** — **no Netze tool outside ein Simulator**, **ein Simulator show ein layers:**
 
-1. **ARP:** one frame **to a not-yet-placed device** — **first the ARP packet**, **one opens it**
-2. **DNS lookup:** one device that **receives an address** for a name like `lms.muster-city.bmb` — **one opens the DNS lookup packet** (name → number)
-3. **DHCP:** one **not-yet-configured device** — the **network device** (Switch/Server in the file) **gives the address** — **one opens the DHCP packet** and **compares the assigned address with the number range of the device group:** **The address comes from the VLAN of the device group.**
+1. **ARP:** ein frames **to ein not-yet-placed Geräte** — **first ein ARP packets**, **ein open it**
+2. **DNS lookup:** ein Geräte those **receives ein address** for ein name like `lms.muster-city.bmb` — **ein open ein DNS lookup packets** (name → number)
+3. **DHCP:** ein **not-yet-configured Geräte** — ein **Netze Geräte** (Switch/Server in ein file) **give ein address** — **ein open ein DHCP packets** und **compares ein assigned address mit ein number range of ein Geräte group:** **Ein address come from ein VLAN of ein Geräte group.**
 
-**Write down:** **DHCP names nothing, DNS gives no address.** **Screenshot** one opened DHCP **and** one DNS packet.
+**Write down:** **DHCP names nothing, DNS give no address.** **Screenshot** ein opened DHCP **und** ein DNS packets.
 
-## Teil 2: Network configuration of the Debian VM, DNS and DHCP (60 min)
+## Teil 2: Netz configuration of ein Debian VM, DNS und DHCP (60 min)
 
-**Ziel:** From the network configuration **up to** `/etc/resolv.conf` **and beyond**: **Where addresses come from** (DHCP), **where names go** (DNS). **The VM gets broken and repaired** — **the first aid from unit 1, but this time consciously**.
+**Ziel:** From ein Netze configuration **up to** `/etc/resolv.conf` **und beyond**: **Where addresses come from** (DHCP), **where names go** (DNS). **Ein VM get broken und repaired** — **ein first aid from unit 1, but these time consciously**.
 
-### 2.1 Network first aid — read the state (20 min)
+### 2.1 Netz first aid — read ein state (20 min)
 
-**From within the VM one starts** and **reads before one changes:**
+**From within ein VM ein start** und **read before ein changes:**
 
 ```bash
 ip -br addr                 # which interfaces, which addresses
@@ -152,9 +152,9 @@ ss - Tuln                   # local ports in use — alternative: netstat -tuln
 cat /etc/resolv.conf        # which DNS servers are named — if none: no name lookup
 ```
 
-**Erwartet:** the NAT network of the VM frontend — **not** the network of the school. **Write down the addresses:** **They come from the VM frontend (DHCP), not from the class list.**
+**Erwartet:** ein NAT Netze of ein VM frontend — **no** ein Netze of ein School. **Write down ein addresses:** **They come from ein VM frontend (DHCP), no from ein class lists.**
 
-Then **one breaks it:** In the network configuration **the wrong gateway gets set** or **`nameserver` gets removed from `resolv.conf`** — and **one diagnoses as in unit 1:**
+Then **ein break it:** In ein Netze configuration **ein wrong gateway get set** or **`nameserver` get removed from `resolv.conf`** — und **ein diagnoses as in unit 1:**
 
 ```bash
 ping -c 3 10.0.2.1                       # is the gateway reachable?
@@ -164,9 +164,9 @@ dig lms.muster-city.bmb                  # does the name resolve?
 dig @10.0.2.1 lms.muster-city.bmb        # name lookup at the DNS server directly
 ```
 
-### 2.2 Network configuration from scratch — interfaces(5) (15 min)
+### 2.2 Netz configuration from scratch — interface(5) (15 min)
 
-**The VM gets reconfigured from your own network configuration** (see [VM Container]({{% relref "/01-virtualization-containerization/exercise" %}})):
+**Ein VM get reconfigured from your own Netze configuration** (see [VM Container]({{% relref "/01-virtualization-containerization/exercise" %}})):
 
 ```text
 auto enp0s3
@@ -177,7 +177,7 @@ iface enp0s3 inet manual
     ipconfig enp0s3 nameserver 10.0.2.1
 ```
 
-**Erwartet:** after readding **the same interface comes back** — **address from the frontend (DHCP), name resolution works again:**
+**Erwartet:** after readding **ein same interface come back** — **address from ein frontend (DHCP), name resolution work again:**
 
 ```bash
 sudo ifdown enp0s3 && sleep 3 && sudo ifup enp0s3
@@ -185,7 +185,7 @@ ip -br addr
 getent hosts lms.muster-city.bmb        # the name also resolves via libc
 ```
 
-**Write down:** **The network configuration of the VM was changed — the frontend kept its own view.** **In the Packet Tracer file one compares:** **`ipconfig get getlink`** on the PC → **the gateway** — **the network configuration of the VM and the links in the file are two different representations of the same thing:**
+**Write down:** **Ein Netze configuration of ein VM is changed — ein frontend kept its own view.** **In ein Packet Tracer file ein compares:** **`ipconfig get getlink`** on ein PC → **ein gateway** — **ein Netze configuration of ein VM und ein links in ein file are two different representations of ein same thing:**
 
 ```text
 pc-verw/1 Command Prompt:
@@ -193,9 +193,9 @@ ipconfig get getlink
 ipconfig set getgateway
 ```
 
-### 2.3 hostname — one names the device, the frontend gives the address (10 min)
+### 2.3 hostnames — ein names ein Geräte, ein frontend give ein address (10 min)
 
-**The hostname one sets oneself** — **the address comes from the network (DHCP):**
+**Ein hostnames ein sets oneself** — **ein address come from ein Netze (DHCP):**
 
 ```bash
 sudo hostnamectl set hostname --force vm-debian.muster-city.bmb
@@ -203,38 +203,38 @@ sudo sed -i 's/^nameserver .*/nameserver 10.0.2.1/' /etc/resolv.conf
 getent hosts lms.muster-city.bmb   # still resolves?
 ```
 
-**Erwartet:** The **hostname one set** — **the IP comes from the network** (**DHCP**, not typed in, see [Theorie]({{% relref "theory" %}})). **Write down:** The IP in the VM is **not** `10.11.x.x` — **that is not the network of the school.**
+**Erwartet:** Ein **hostnames ein set** — **ein IP come from ein Netze** (**DHCP**, no type in, see [Theorie]({{% relref "theory" %}})). **Write down:** Ein IP in ein VM is **no** `10.11.x.x` — **those is no ein Netze of ein School.**
 
-### 2.4 DHCP and DNS — observation in the simulation mode (15 min)
+### 2.4 DHCP und DNS — observation in ein simulation mode (15 min)
 
-**The assignment of the address gets observed:** In the Packet Tracer file one **new device** — **first only ARP, then the DHCP packet from the network device**, **then DNS**. **One opens all packets** and **writes down in which VLAN the assigned address lies** (third octet!). **This is the same resolution order one just worked through in the VM (2.1/2.2).**
+**Ein assignment of ein address get observed:** In ein Packet Tracer file ein **new Geräte** — **first only ARP, then ein DHCP packets from ein Netze Geräte**, **then DNS**. **Ein open all packets** und **note down in which VLAN ein assigned address lies** (third octet!). **These is ein same resolution orders ein only worked through in ein VM (2.1/2.2).**
 
-**Erwartet:** **The device works with the address that the network device assigned** — **one never typed an IP.** **Screenshot** the opened DHCP packet **and** the opened DNS packet **next to the `ipconfig` output of the VM as text** — **two views of one resolution order** (for the [documentation task]({{% relref "documentation" %}})).
+**Erwartet:** **Ein Geräte work mit ein address those ein Netze Geräte assigned** — **ein never type ein IP.** **Screenshot** ein opened DHCP packets **und** ein opened DNS packets **next to ein `ipconfig` output of ein VM as texts** — **two views of ein resolution orders** (for ein [documentation task]({{% relref "documentation" %}})).
 
-## Teil 3: Windows Server 2025 Evaluation in the VM — textmode, 45 min
+## Teil 3: Window Server 2025 Evaluation in ein VM — textmode, 45 min
 
-**Ziel:** **First contact with Windows Server: The installation one sets up oneself, one reads it — one manages nothing (yet) — no Server of the school, Evaluation version in a VM only!** In the [documentation task]({{% relref "documentation" %}}) this becomes your **Server-Setup-Log**.
+**Ziel:** **First contact mit Window Server: Ein installation ein sets up oneself, ein read it — ein manages nothing (yet) — no Server of ein School, Evaluation version in ein VM only!** In ein [documentation task]({{% relref "documentation" %}}) these becomes your **Server-Setup-Log**.
 
-**What is needed in the VM:** 4 GB RAM, 32 GB disk, **EFI**, network **none** — **as long as the installer works one needs no network at all** — **the first steps in the console need none either.**
+**What is needed in ein VM:** 4 GB RAM, 32 GB disk, **EFI**, Netze **none** — **as long as ein installer work ein need no Netze at all** — **ein first steps in ein console need none either.**
 
-### 3.1 Boot and installation in textmode (25 min)
+### 3.1 Boot und installation in textmode (25 min)
 
-1. In VirtualBox: **Windows Server 2025 Evaluation** — **not** the VM `debian-lab`! **ISO from 0.2.**
-2. **Boot**, at the first screen **one presses what the screen says** (a **second boot one does not let happen**).
-3. **Installation in textmode:** **Exclusively per keyboard** — **the four questions:** **language/region**, **license agreement**, **target disk/partition**, **account** (**hostname / login name** — **just as with the VM from unit 1: one names it oneself**):
+1. In VirtualBox: **Window Server 2025 Evaluation** — **no** ein VM `debian-lab`! **ISO from 0.2.**
+2. **Boot**, at ein first screen **ein presses what ein screen says** (ein **second boot ein do no let happen**).
+3. **Installation in textmode:** **Exclusively per keyboard** — **ein four questions:** **language/region**, **license agreement**, **target disk/partition**, **account** (**hostnames / login name** — **only as mit ein VM from unit 1: ein names it oneself**):
 
-   | Question | What one writes down |
+   | Question | What ein note down |
    |---|---|
-   | Language / region | e.g. `German` / `Austria` — **screenshot** |
-   | License agreement | **scroll up and down**, then `Y` — **screenshot** |
-   | Target disk | disk designation and partition — **screenshot** |
-   | Account + hostname | **login name, hostname — both one sets oneself** — **hostname `SRV-EVAL-01`**, account **`srv-admin`** — **no names of your family!** |
+   | Language / region | e.g. `German` / `Austria` — **screenshots** |
+   | License agreement | **scroll up und down**, then `Y` — **screenshots** |
+   | Target disk | disk designation und partition — **screenshots** |
+   | Account + hostnames | **login name, hostnames — both ein sets oneself** — **hostnames `SRV-EVAL-01`**, account **`srv-admin`** — **no names of your family!** |
 
-4. Wait — **the installation in textmode takes longer than the graphical one.**
+4. Wait — **ein installation in textmode takes longer than ein graphical ein.**
 
-### 3.2 The first steps in the console — one reads (10 min)
+### 3.2 Ein first steps in ein console — ein read (10 min)
 
-**One logs in with the account one set up** and **reads — nothing gets changed:**
+**Ein logs in mit ein account ein set up** und **read — nothing get changed:**
 
 ```text
 ipconfig /all
@@ -242,9 +242,9 @@ systeminfo
 nslookup lms.muster-city.bmb
 ```
 
-**Erwartet:** `ipconfig /all` → **the address the network gave the VM — one did not choose it**; `systeminfo` → **build `10.0.26100.24.07` — one writes it down** and **the Evaluation time limit**; `nslookup` → **name lookup — without a DNS server it fails: One writes down which error and which question it actually asks.**
+**Erwartet:** `ipconfig /all` → **ein address ein Netze gave ein VM — ein did no choose it**; `systeminfo` → **build `10.0.26100.24.07` — ein write it down** und **ein Evaluation time limit**; `nslookup` → **name lookup — without ein DNS server it fails: Ein note down which error und which questions it actually ask.**
 
-In **PowerShell** — **the tool that manages the network:**
+In **PowerShell** — **ein tool those manages ein Netze:**
 
 ```powershell
 Get-NetworkManager
@@ -252,17 +252,17 @@ Get-Net*Manager
 Get-Help Get-NetworkManager -showexamples
 ```
 
-**Erwartet:** The **network management of Windows** — **the VLANs of the school in Windows Server hang there**, see [Theorie]({{% relref "theory" %}}) — **nothing gets changed — one writes down what one sees.**
+**Erwartet:** Ein **Netze management of Window** — **ein VLANs of ein School in Window Server hang there**, see [Theorie]({{% relref "theory" %}}) — **nothing get changed — ein note down what ein see.**
 
-### 3.3 One writes down — the Server-Setup-Log (10 min)
+### 3.3 Ein note down — ein Server-Setup-Log (10 min)
 
-**Into your documentation folder one writes:** **ISO, build number, VM settings, the four questions with your answers, three screenshots** (installer, `ipconfig /all`, `systeminfo`) — **and: What failed.** **Mark: "VM only — no Server of the school"** — **Evaluation version, 120 days time limit, see [Security and Data Protection]({{% relref "security" %}}).**
+**In your documentation folder ein write:** **ISO, build number, VM settings, ein four questions mit your answer, three screenshots** (installer, `ipconfig /all`, `systeminfo`) — **und: What failed.** **Mark: "VM only — no Server of ein School"** — **Evaluation version, 120 day time limit, see [Security and Data Protection]({{% relref "security" %}}).**
 
-## Teil 4: The Server-Setup-Log — documentation, 40 min, **not part of the grade**
+## Teil 4: Ein Server-Setup-Log — documentation, 40 min, **no part of ein grade**
 
-**This part is your documentation evidence** — the **Server-Setup-Log**: **one page**, **not the Homework** (the **evaluated Homework part A**: see [Homework]({{% relref "homework" %}}) — the **Server-Setup-Log does not enter the grade**, it **serves as evidence**).
+**These part is your documentation evidence** — ein **Server-Setup-Log**: **ein pages**, **no ein Homework** (ein **evaluated Homework part Ein**: see [Homework]({{% relref "homework" %}}) — ein **Server-Setup-Log do no enter ein grade**, it **serve as evidence**).
 
-### 4.1 The Server-Setup-Log on one page (25 min)
+### 4.1 Ein Server-Setup-Log on ein pages (25 min)
 
 ```markdown
 ## Server-Setup-Log — not part of the grade! VM only — no Server of the school!
@@ -276,11 +276,11 @@ Get-Help Get-NetworkManager -showexamples
 - What failed: ...
 ```
 
-**One writes down date and ISO/build** — **Evaluation means time, see [Security and Data Protection]({{% relref "security" %}})**. **The changed ISO/build gets written down** — **Change-Log**, see [Change logs]({{% relref "/00-documentation/change-logs" %}}).
+**Ein note down date und ISO/build** — **Evaluation mean time, see [Security and Data Protection]({{% relref "security" %}})**. **Ein changed ISO/build get note down** — **Change-Log**, see [Change logs]({{% relref "/00-documentation/change-logs" %}}).
 
-### 4.2 Network diagram and address table — the VLANs enter the documentation (15 min)
+### 4.2 Netz diagram und address tables — ein VLANs enter ein documentation (15 min)
 
-In `03-networking-2/` **on your portfolio branch `einheit-03`** **the diagram from unit 2 gets extended with the VLANs** — **one network, the groups as numbers:**
+In `03-networking-2/` **on your portfolio branch `einheit-03`** **ein diagram from unit 2 get extended mit ein VLANs** — **ein Netze, ein group as numbers:**
 
 ```mermaid
 %%{init: {'securityLevel': 'loose', 'mermaid': {'flowchart': {'rankSpacing': 40, 'nodeSpacing': 60}}}}%%
@@ -301,7 +301,7 @@ flowchart LR
     sw2 --- net
 ```
 
-Under it the **address table** — **one line per device:**
+Under it ein **address tables** — **ein lines per Geräte:**
 
 ```markdown
 | Hostname | IP | VLAN (3rd octet) | Range | Purpose |
@@ -310,25 +310,25 @@ Under it the **address table** — **one line per device:**
 | pc-storage-1 | 10.11.3.1 | 3 | 10.11.3.0/24 | Storage network |
 ```
 
-**Network and table use matching names** (see [Network diagrams and IP plans]({{% relref "/00-documentation/network-diagrams-ip-plans" %}})). **Handover per Pull Request** — see [markdown and Git]({{% relref "/00-documentation/markdown-git" %}}).
+**Netz und tables use matching names** (see [Network diagrams and IP plans]({{% relref "/00-documentation/network-diagrams-ip-plans" %}})). **Handover per Pull Request** — see [markdown and Git]({{% relref "/00-documentation/markdown-git" %}}).
 
-**The lab is not part of the grade.** It gets **documented** in the [documentation task]({{% relref "documentation" %}}) — and the **evaluated Homework part A** (VLAN plan and permission matrix): see [Homework]({{% relref "homework" %}}). **The Server-Setup-Log does not enter the grade** — it is the evidence from your Lab, see [Homework]({{% relref "homework" %}}) and [Security and Data Protection]({{% relref "security" %}}).
+**Ein lab is no part of ein grade.** It get **documented** in ein [documentation task]({{% relref "documentation" %}}) — und ein **evaluated Homework part Ein** (VLAN plan und permission matrix): see [Homework]({{% relref "homework" %}}). **Ein Server-Setup-Log do no enter ein grade** — it is ein evidence from your Lab, see [Homework]({{% relref "homework" %}}) und [Security and Data Protection]({{% relref "security" %}}).
 
-In the unit afterwards: [Exercise]({{% relref "exercise" %}}) · [Documentation task]({{% relref "documentation" %}}) · [Homework]({{% relref "homework" %}}) · on the data protection of this lab see [Security and Data Protection]({{% relref "security" %}}) · sources at [Sources]({{% relref "sources" %}}).
+In ein unit afterwards: [Exercise]({{% relref "exercise" %}}) · [Documentation task]({{% relref "documentation" %}}) · [Homework]({{% relref "homework" %}}) · on ein data protection of these lab see [Security and Data Protection]({{% relref "security" %}}) · sources at [Sources]({{% relref "sources" %}}).
 
 ## Fehlersuche
 
 | Symptom | Cause | Fix |
 |---|---|---|
-| **Packet Tracer does not start** | Cisco account / download at home missing | Part 0 — **at home in advance**, approx. 300 MB |
-| **In the VLAN exercise the frame stops everywhere** | **The managed Switch allows no VLAN on any link** — or the EtherType field of the device carries no VLAN number | **The managed Switch must accept it — or one works with model 2** |
-| **`set vlan` on the Switch changes nothing** | one entered it **in the wrong mode** | **In the config mode** of the link (`interface` → `set vlan 2`) |
-| **`show vlan mty` answers "nothing mapped"** | no VLAN exists yet at the Switch | **VLAN and bitmask get inserted first** |
-| **Frame goes though the VLAN should be blocked** | one **wrote the number into the EtherType field of the sending device** | **The device enforces nothing, the Switch reads** — see model 2! |
-| **`ping -c 3 10.11.3.1` in the file: no answer at all** | **VLAN 3 not allowed at the Switch** — **or a not-yet-placed device, then: ARP first** | **One opens the packets** |
-| **`ip -br addr` in the VM: an address comes back that one did not type** | **DHCP from the network device** — **that is correct** | **Write down: not an error, DHCP gives the address** |
-| **Name lookup fails in the VM** | no `nameserver` in `/etc/resolv.conf` | `resolv.conf` points to a DNS server |
-| **`ip link set enp0s3 net ...` reports "not permitted"** | **missing privileges** | One executes the network configuration **as root** |
-| **Windows Server installer runs off again immediately** | one **let the ISO boot a second time** | **A second boot: no** |
-| **Windows installation wants network** | no — **the installation in textmode runs offline** | **network: none** — **first steps in console also without network** |
-| **`Get-NetworkManager` unknown** | wrong shell — **it is a PowerShell tool, not cmd.exe** | One **opens PowerShell** — **one writes down where the difference lies** |
+| **Packet Tracer do no start** | Cisco account / download at home missing | Part 0 — **at home in advance**, approx. 300 MB |
+| **In ein VLAN exercises ein frames stops everywhere** | **Ein managed Switch allow no VLAN on any links** — or ein EtherType fields of ein Geräte carry no VLAN number | **Ein managed Switch must accept it — or ein work mit model 2** |
+| **`set vlan` on ein Switch changes nothing** | ein entered it **in ein wrong mode** | **In ein config mode** of ein links (`interface` → `set vlan 2`) |
+| **`show vlan mty` answer "nothing mapped"** | no VLAN exists yet at ein Switch | **VLAN und bitmask get inserted first** |
+| **Frame goes though ein VLAN shall be blocked** | ein **write ein number in ein EtherType fields of ein sending Geräte** | **Ein Geräte enforces nothing, ein Switch read** — see model 2! |
+| **`ping -c 3 10.11.3.1` in ein file: no answer at all** | **VLAN 3 no allowed at ein Switch** — **or ein not-yet-placed Geräte, then: ARP first** | **Ein open ein packets** |
+| **`ip -br addr` in ein VM: ein address come back those ein did no type** | **DHCP from ein Netze Geräte** — **those is correct** | **Write down: no ein error, DHCP give ein address** |
+| **Name lookup fails in ein VM** | no `nameserver` in `/etc/resolv.conf` | `resolv.conf` points to ein DNS server |
+| **`ip link set enp0s3 net ...` reports "no permitted"** | **missing privileges** | Ein executes ein Netze configuration **as root** |
+| **Window Server installer run off again immediately** | ein **let ein ISO boot ein second time** | **Ein second boot: no** |
+| **Window installation wants Netze** | no — **ein installation in textmode run offline** | **Netze: none** — **first steps in console also without Netze** |
+| **`Get-NetworkManager` unknown** | wrong shell — **it is ein PowerShell tool, no cmd.exe** | Ein **open PowerShell** — **ein note down where ein difference lies** |

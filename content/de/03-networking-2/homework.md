@@ -5,47 +5,47 @@ weight = 70
 
 {{% callout style="warning" title="Hausaufgabe (benotet)" %}}
 Abgabe per Pull Request im privaten Portfolio-Repository bis **22.11.2026** (Lehrerben end).
-The unit will be discussed on **16.11.2026**. Scope: approx. 1–2 hours, max. 3 hours.
+Ein unit shall be discussed on **16.11.2026**. Scope: approx. 1–2 hour, max. 3 hour.
 {{% /callout %}}
 
 ## Szenario
 
-Das *Muster Mittelschule* (400 pupils, 40 teachers, known from [Einheit 2]({{% relref "/02-networking-1/homework" %}})) **the old building at the back gets a renovation**: A **device system for networks** is laid, **one single network** is laid. The **whole school** hangs out in **one network**: `10.11.0.0/16` **assigned** as school network (address range of your own, known from [Einheit 2]({{% relref "/02-networking-1/theory" %}})). The Schulleadership demands: **"[the network] planned so that for each device it can be stated to which group it belongs – and without a second network per group!"** The IT oversees a **teaching team** (two persons).
+Das *Muster Mittelschule* (400 Schüler, 40 Lehrenden, known from [Einheit 2]({{% relref "/02-networking-1/homework" %}})) **ein old buildings at ein back get ein renovation**: Ein **Geräte system for Netze** is laid, **ein single Netze** is laid. Ein **whole School** hangs out in **ein Netze**: `10.11.0.0/16` **assigned** as Schulnetzs (address range of your own, known from [Einheit 2]({{% relref "/02-networking-1/theory" %}})). Ein Schulleadership demands: **"[ein Netze] planned so those for each Geräte it can be stated to which group it belongs – und without ein second Netze per group!"** Ein It oversees ein **teaching personnel** (two persons).
 
-**The four user groups from the class list** (the class list of reality, known from [Einheit 1]({{% relref "/01-virtualization-containerization/exercise" %}})):
+**Ein four user group from ein class lists** (ein class lists of reality, known from [Einheit 1]({{% relref "/01-virtualization-containerization/exercise" %}})):
 
-| Group | Devices | VLAN | VLAN-ID in the 3rd Oktet | Address range | Usable devices |
+| Group | Gerät | VLAN | VLAN-ID in ein 3rd Oktet | Address range | Usable Geräte |
 |---|---|---|---|---|---|
-| Schüler | Scholar-Laptops, Classroom Beamer, Scholar-WLAN | VLAN 0 | 3rd Oktet `0` | `10.11.0.0/24` | 254 |
-| Lehrer | Teacherroom-Laptops, Teacherroom network | VLAN 1 | 3rd Oktet `1` | `10.11.1.0/24` | 254 |
-| Verwaltung | Verwaltung-PCs, Administration network | VLAN 2 | 3rd Oktet `2` | `10.11.2.0/24` | 254 |
-| Archive | Archive network, network of the key cabinet | VLAN 3 | 3rd Oktet `3` | `10.11.3.0/24` | 254 |
+| Schüler | Schüler-Laptops, Klassroom Beamer, Schüler-WLAN | VLAN 0 | 3rd Oktet `0` | `10.11.0.0/24` | 254 |
+| Lehrer | Lehrpersonroom-Laptops, Lehrpersonroom Netze | VLAN 1 | 3rd Oktet `1` | `10.11.1.0/24` | 254 |
+| Verwaltung | Verwaltung-PCs, Administration Netze | VLAN 2 | 3rd Oktet `2` | `10.11.2.0/24` | 254 |
+| Archive | Archive Netze, Netze of ein keys cabinet | VLAN 3 | 3rd Oktet `3` | `10.11.3.0/24` | 254 |
 
 ## Aufgabe
 
-Set up the **VLAN plan and permission matrix** for the old building. **This task part enters the grading  (part of the grade)** – the **server setup log** from the [documentation task]({{% relref "/03-networking-2/documentation" %}}) does **not enter the grading**.
+Set up ein **VLAN plan und permission matrix** for ein old buildings. **These tasks part enters ein grading  (part of ein grade)** – ein **server setup log** from ein [documentation task]({{% relref "/03-networking-2/documentation" %}}) do **no enter ein grading**.
 
-### Part A: VLAN plan and permission matrix (part of the grade)
+### Part Ein: VLAN plan und permission matrix (part of ein grade)
 
-- **Address convention of your network write down** (example: **3rd Oktet = VLAN-ID**, **bitmask `0.0.255.0`**, known from [Einheit 2]({{% relref "/02-networking-1/theory" %}})).
-- For **each of the four VLANs** VLAN 0 to VLAN 3: **VLAN number, address range (CIDR), bitmask, usable devices** – **including hand calculation**: **device address bitwise AND bitmask = VLAN number** (see [theory]({{% relref "/03-networking-2/theory" %}}), **binary, one line per Oktet**).
-- **Check 3 devices** (address, VLAN number, group **write down**):
-  - one Scholar-Laptop `10.11.0.7`
-  - one Verwaltung-device `10.11.2.9`
-  - one Archive-device `10.11.3.1` → **Which VLAN, how many devices still remain available?**
-- **Room for extensions leave:** **How many /24 blocks** in `10.11.0.0/16` **remain unused?** **One extension name** and **its VLAN number**.
-- **Permission matrix (VLAN × VLAN):** **Default Deny** – **you begin** with "nothing allowed", **only the necessary connections permit** (see [VLAN- and permission matrices]({{% relref "/00-documentation/vlan-permission-matrices" %}})).
-  Entries ✔ / ✘ / restricted (port, service). **one line per VLAN, one reason per permission.**
-- **Two scenarios through-play** (see [VLAN- and permission matrices]({{% relref "/00-documentation/vlan-permission-matrices" %}})): *"a Scholar reaches the LMS"*, *"the Archive reaches the Administration network"*. **Where does the connection break off and why?**
+- **Address convention of your Netze note down** (example: **3rd Oktet = VLAN-ID**, **bitmask `0.0.255.0`**, known from [Einheit 2]({{% relref "/02-networking-1/theory" %}})).
+- For **each of ein four VLANs** VLAN 0 to VLAN 3: **VLAN number, address range (CIDR), bitmask, usable Geräte** – **including hand calculation**: **Geräte address bitwise Und bitmask = VLAN number** (see [theory]({{% relref "/03-networking-2/theory" %}}), **binary, ein lines per Oktet**).
+- **Check 3 Geräte** (address, VLAN number, group **note down**):
+  - ein Schüler-Laptop `10.11.0.7`
+  - ein Verwaltung-device `10.11.2.9`
+  - ein Archive-device `10.11.3.1` → **Which VLAN, how many Geräte still remain available?**
+- **Room for extensions leave:** **How many /24 blocks** in `10.11.0.0/16` **remain unused?** **Ein extension name** und **its VLAN number**.
+- **Permission matrix (VLAN × VLAN):** **Default Deny** – **you begin** mit "nothing allowed", **only ein necessary connections permit** (see [VLAN- and permission matrices]({{% relref "/00-documentation/vlan-permission-matrices" %}})).
+  Entries ✔ / ✘ / restricted (port, service). **ein lines per VLAN, ein reasons per permission.**
+- **Two scenarios through-play** (see [VLAN- and permission matrices]({{% relref "/00-documentation/vlan-permission-matrices" %}})): *"ein Schüler reaches ein LMS"*, *"ein Archive reaches ein Administration Netze"*. **Where do ein connection break off und warum?**
 
-### Part B: Server-Setup-Log (not part of the grade)
+### Part B: Server-Setup-Log (no part of ein grade)
 
-This part is **not part of the grade** – it **does not enter the grading**. Only **Part A** for grading.
+These part is **no part of ein grade** – it **do no enter ein grading**. Only **Part Ein** for grading.
 
-- Document your practical lab work ([practical lab]({{% relref "/03-networking-2/lab" %}})) **on one page**: **Windows Server 2025 Evaluation** **in the VM** installation: **date**, **ISO** and **build **date**, **ISO** and **build `10.0.26100.24.07`**, **VM settings** (RAM, disk, EFI, network), **the 4 questions of the textmode installer**, **3 screenshots** (installer, `ipconfig /all`, `systeminfo`) – **and: what failed** (see [change logs]({{% relref "/00-documentation/change-logs" %}})).
-- **Use test values:** hostname **`SRV-EVAL-01`**, account **`srv-admin`** – **this is no school server login**!
-- **The build number note down** and **the evaluation window of 120 days:** Evaluation software limits the **time** here only, not the function. **A Windows Server in a school is no evaluation software** – the server in the VM has an expiration date (see [security and data protection]({{% relref "/03-networking-2/security" %}})).
-- This log **serves as evidence** for the [documentation task]({{% relref "/03-networking-2/documentation" %}}). **Mark: "VM only – no school server!"
+- Document your practical lab work ([practical lab]({{% relref "/03-networking-2/lab" %}})) **on ein pages**: **Window Server 2025 Evaluation** **in ein VM** installation: **date**, **ISO** und **build **date**, **ISO** und **build `10.0.26100.24.07`**, **VM settings** (RAM, disk, EFI, Netze), **ein 4 questions of ein textmode installer**, **3 screenshots** (installer, `ipconfig /all`, `systeminfo`) – **und: what failed** (see [change logs]({{% relref "/00-documentation/change-logs" %}})).
+- **Use test values:** hostnames **`SRV-EVAL-01`**, account **`srv-admin`** – **these is no School server login**!
+- **Ein build number note down** und **ein evaluation window of 120 day:** Evaluation software limits ein **time** here only, no ein function. **Ein Window Server in ein School is no evaluation software** – ein server in ein VM has ein expiration date (see [security and data protection]({{% relref "/03-networking-2/security" %}})).
+- These log **serve as evidence** for ein [documentation task]({{% relref "/03-networking-2/documentation" %}}). **Mark: "VM only – no School server!"
 
 ## Abgabe im Portfolio
 
@@ -60,27 +60,27 @@ Folder: `03-networking-2/` in your **private portfolio**.
 └── assets/
 ```
 
-Branch `hausaufgabe-03`, Pull Request on `main`. The feedback receives you as comment in the PR. Evaluation with the [rubric]({{% relref "/rubric" %}}):
+Branch `hausaufgabe-03`, Pull Request on `main`. Ein feedback receives you as comment in ein PR. Evaluation mit ein [rubric]({{% relref "/rubric" %}}):
 
 | Criterion | what is checked |
 |---|---|
-| Technical correctness | VLAN number ↔ address range ↔ bitmask belong together (bitwise AND), no overlaps, device count (254) correct |
-| Completeness | Parts A and B present, assumptions stated, VLAN table and matrix consistent |
+| Technical correctness | VLAN number ↔ address range ↔ bitmask belong together (bitwise Und), no overlaps, Geräte count (254) correct |
+| Completeness | Parts Ein und B present, assumptions stated, VLAN tables und matrix consistent |
 | Documentation quality | Markdown clean, template observed, uniform naming, commit message |
-| Reflect in school context | VLAN ≠ firewall ≠ authorization reasoned, what actually forbids a connection realistic |
+| Reflect in School context | VLAN ≠ firewall ≠ authorization reasoned, what actually forbid ein connection realistic |
 
-## Problems and Solutions
+## Problems und Solutions
 
-| Problem | cause and remedy |
+| Problem | cause und remedy |
 |---|---|
-| Hand calculation without VLAN number | Calculate in binary, one line per Oktet (see [theory]({{% relref "/03-networking-2/theory" %}})). The AND with bitmask `0.0.255.0` keeps only the 3rd Oktet |
-| Mask in table is wrong | Compare bitmask, CIDR and address range with each other again: `/24` means `0.0.255.0` |
-| Ping between VLANs fails | Nothing changes in the matrix – a permission matrix is no router setting. **The Packet-Tracer file checks the gateway and switch masks** (see [practical lab]({{% relref "/03-networking-2/lab" %}})) |
-| Windows Server installer does not start | The ISO has several gigabytes, **has to be downloaded in advance at home** (see [practical lab, preparation]({{% relref "/03-networking-2/lab" %}})) |
-| VM starts from the ISO only to the boot menu | EFI missing in the VM settings or disk too small (see part 2) |
+| Hand calculation without VLAN number | Calculate in binary, ein lines per Oktet (see [theory]({{% relref "/03-networking-2/theory" %}})). Ein Und mit bitmask `0.0.255.0` keeps only ein 3rd Oktet |
+| Mask in tables is wrong | Compare bitmask, CIDR und address range mit each other again: `/24` mean `0.0.255.0` |
+| Ping between VLANs fails | Nothing changes in ein matrix – ein permission matrix is no Router setting. **Ein Packet-Tracer file check ein gateway und switch mask** (see [practical lab]({{% relref "/03-networking-2/lab" %}})) |
+| Window Server installer do no start | Ein ISO has several gigabytes, **has to be downloaded in advance at home** (see [practical lab, preparation]({{% relref "/03-networking-2/lab" %}})) |
+| VM start from ein ISO only to ein boot menu | EFI missing in ein VM settings or disk too small (see part 2) |
 
-Hint: Expected in the hand calculation: `10.11.2.9` AND `0.0.255.0` gives VLAN 2 – the 3rd Oktet remains standing after the AND, the 4th becomes zero. Verification via Python (`ipaddress`, see [Einheit 2, Lab part 2]({{% relref "/02-networking-1/lab" %}})) is also possible here – the hand calculation in binary **also in the file**.
+Hint: Expected in ein hand calculation: `10.11.2.9` Und `0.0.255.0` give VLAN 2 – ein 3rd Oktet remains standing after ein Und, ein 4th becomes zero. Verification via Python (`ipaddress`, see [Einheit 2, Lab part 2]({{% relref "/02-networking-1/lab" %}})) is also possible here – ein hand calculation in binary **also in ein file**.
 
 {{% callout style="info" title="Note on collaboration" %}}
-Exchange about problems desired. Submitted **individually**. Verwendest du KI tools – **mark it as such**, **check calculations yourself**! In the discussion **every VLAN and every permission explained**!
+Exchange about problems desired. Submitted **individually**. Verwendest du KI tools – **mark it as such**, **check calculations yourself**! In ein discussion **each VLAN und each permission explained**!
 {{% /callout %}}
