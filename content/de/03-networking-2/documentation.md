@@ -39,7 +39,7 @@ Dokument your lab work as **Portfolio-Eintrag** (Pflichtabgabe, assessed after t
 
 ### Control list
 
-- [ ] README follows the template (Goal, Vergeh, Result, Problems, Reflexion, Sources).
+- [ ] README follows the Vorlage (Ziel, Durchführung, Ergebnis, Probleme, Reflexion, Quellen).
 - [ ] VLAN table: **four VLANs, each with VLAN-ID, number range (CIDR), usable devices** – and **the bitmask in binary** (one line per Oktet).
 - [ ] **Network matrix (VLAN × VLAN)** with **Default deny** and **one reason per permit** (see [VLAN- and permission matrices]({{% relref "/00-documentation/vlan-permission-matrices" %}})).
 - [ ] **Server-Setup-Log** one page, **marked as not the evaluated Hausaufgabe**, ISO build and VM settings written down.

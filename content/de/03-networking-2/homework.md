@@ -23,9 +23,9 @@ Das *Muster Mittelschule* (400 pupils, 40 teachers, known from [Einheit 2]({{% r
 
 ## Aufgabe
 
-Set up the **VLAN plan and permission matrix** for the old building. **This task part enters the grading ("Graded")** – the **server setup log** from the [documentation task]({{% relref "/03-networking-2/documentation" %}}) does **not enter the grading**.
+Set up the **VLAN plan and permission matrix** for the old building. **This task part enters the grading  (part of the grade)** – the **server setup log** from the [documentation task]({{% relref "/03-networking-2/documentation" %}}) does **not enter the grading**.
 
-### Part A: VLAN plan and permission matrix (Graded)
+### Part A: VLAN plan and permission matrix (part of the grade)
 
 - **Address convention of your network write down** (example: **3rd Oktet = VLAN-ID**, **bitmask `0.0.255.0`**, known from [Einheit 2]({{% relref "/02-networking-1/theory" %}})).
 - For **each of the four VLANs** VLAN 0 to VLAN 3: **VLAN number, address range (CIDR), bitmask, usable devices** – **including hand calculation**: **device address bitwise AND bitmask = VLAN number** (see [theory]({{% relref "/03-networking-2/theory" %}}), **binary, one line per Oktet**).
@@ -38,9 +38,9 @@ Set up the **VLAN plan and permission matrix** for the old building. **This task
   Entries ✔ / ✘ / restricted (port, service). **one line per VLAN, one reason per permission.**
 - **Two scenarios through-play** (see [VLAN- and permission matrices]({{% relref "/00-documentation/vlan-permission-matrices" %}})): *"a Scholar reaches the LMS"*, *"the Archive reaches the Administration network"*. **Where does the connection break off and why?**
 
-### Part B: Server-Setup-Log (not graded)
+### Part B: Server-Setup-Log (not part of the grade)
 
-This part is **not graded** – it **does not enter the grading**. Only **Part A** for grading.
+This part is **not part of the grade** – it **does not enter the grading**. Only **Part A** for grading.
 
 - Document your practical lab work ([practical lab]({{% relref "/03-networking-2/lab" %}})) **on one page**: **Windows Server 2025 Evaluation** **in the VM** installation: **date**, **ISO** and **build **date**, **ISO** and **build `10.0.26100.24.07`**, **VM settings** (RAM, disk, EFI, network), **the 4 questions of the textmode installer**, **3 screenshots** (installer, `ipconfig /all`, `systeminfo`) – **and: what failed** (see [change logs]({{% relref "/00-documentation/change-logs" %}})).
 - **Use test values:** hostname **`SRV-EVAL-01`**, account **`srv-admin`** – **this is no school server login**!
@@ -56,7 +56,7 @@ Folder: `03-networking-2/` in your **private portfolio**.
 ├── homework.md            # Scenario, assumptions, reflection
 ├── vlan-plan.md           # Part A: VLAN table, address ranges, bitmask, device checks
 ├── netzmatrix.md          # Part A: Permission matrix (VLAN × VLAN), reasons, scenarios
-├── server-setup.md        # Part B: server setup log (not graded)
+├── server-setup.md        # Part B: server setup log (not part of the grade)
 └── assets/
 ```
 
@@ -82,5 +82,5 @@ Branch `hausaufgabe-03`, Pull Request on `main`. The feedback receives you as co
 Hint: Expected in the hand calculation: `10.11.2.9` AND `0.0.255.0` gives VLAN 2 – the 3rd Oktet remains standing after the AND, the 4th becomes zero. Verification via Python (`ipaddress`, see [Einheit 2, Lab part 2]({{% relref "/02-networking-1/lab" %}})) is also possible here – the hand calculation in binary **also in the file**.
 
 {{% callout style="info" title="Note on collaboration" %}}
-Exchange about problems desired. Submitted **individually**. **You use** KI tools – **mark it as such**, **check calculations yourself**! In the discussion **every VLAN and every permission explained**!
+Exchange about problems desired. Submitted **individually**. Verwendest du KI tools – **mark it as such**, **check calculations yourself**! In the discussion **every VLAN and every permission explained**!
 {{% /callout %}}

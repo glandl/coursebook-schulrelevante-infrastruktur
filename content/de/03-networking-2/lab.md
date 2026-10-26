@@ -54,7 +54,7 @@ Packet Tracer **needs a Cisco account** — **registered with the course alias**
 
 ## Teil 1: VLANs in the Packet Tracer file of unit 2 (70 min)
 
-**Goal:** Both VLAN models in Packet Tracer can be **named**, the VLAN number can be **read off from an address** — and it becomes visible: **VLAN 3 is not reachable everywhere**. **In the file:** the Packet Tracer file from unit 2, part 3 ([Netz from scratch]({{% relref "/02-networking-1/lab" %}})). **The network does not get rewired — it gets labeled!**
+**Ziel:** Both VLAN models in Packet Tracer can be **named**, the VLAN number can be **read off from an address** — and it becomes visible: **VLAN 3 is not reachable everywhere**. **In the file:** the Packet Tracer file from unit 2, part 3 ([Netz from scratch]({{% relref "/02-networking-1/lab" %}})). **The network does not get rewired — it gets labeled!**
 
 > **About the two number conventions:** In the file from unit 2 `10.10.x.x` is used. In this unit **the convention of the class list gets used: `10.11.<VLAN>.0/24`** — **third octet = VLAN-Id**. In the documentation task **both number ranges get written down** (see [VLAN- and permission matrices]({{% relref "/00-documentation/vlan-permission-matrices" %}})).
 
@@ -138,7 +138,7 @@ ping -c 3 10.11.3.1
 
 ## Teil 2: Network configuration of the Debian VM, DNS and DHCP (60 min)
 
-**Goal:** From the network configuration **up to** `/etc/resolv.conf` **and beyond**: **Where addresses come from** (DHCP), **where names go** (DNS). **The VM gets broken and repaired** — **the first aid from unit 1, but this time consciously**.
+**Ziel:** From the network configuration **up to** `/etc/resolv.conf` **and beyond**: **Where addresses come from** (DHCP), **where names go** (DNS). **The VM gets broken and repaired** — **the first aid from unit 1, but this time consciously**.
 
 ### 2.1 Network first aid — read the state (20 min)
 
@@ -213,7 +213,7 @@ getent hosts lms.muster-city.bmb   # still resolves?
 
 ## Teil 3: Windows Server 2025 Evaluation in the VM — textmode, 45 min
 
-**Goal:** **First contact with Windows Server: The installation one sets up oneself, one reads it — one manages nothing (yet) — no Server of the school, Evaluation version in a VM only!** In the [documentation task]({{% relref "documentation" %}}) this becomes your **Server-Setup-Log**.
+**Ziel:** **First contact with Windows Server: The installation one sets up oneself, one reads it — one manages nothing (yet) — no Server of the school, Evaluation version in a VM only!** In the [documentation task]({{% relref "documentation" %}}) this becomes your **Server-Setup-Log**.
 
 **What is needed in the VM:** 4 GB RAM, 32 GB disk, **EFI**, network **none** — **as long as the installer works one needs no network at all** — **the first steps in the console need none either.**
 

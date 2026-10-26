@@ -11,7 +11,7 @@ explainst you now **warum one splits the Schulnet into VLANs**, how the VLAN num
 
 In [Einheit 2]({{% relref "/02-networking-1/theory" %}}) baust du **a Schulnet out of a few Networks** (Administration, Lehrende, Server, WLANs) — **separated by address area**. VLANs solve the **other half**: **one network can serve the whole School**, but **not without one says who is where**. Three short scenarios make **the need** clear:
 
-1. **one network serves too many.** The whole School sits in **one single Network** `10.11.0.0/16`: 400 Schuler devices, 40 Lehrenden, Administration und Storage. In one Network sit **all** **next to each other**: **one network event** (one flood, one fire alarm, one bad device) **reaches** everything. You **one group can not switch off** without the other, und you **from a frame not say** to which group it belongs.
+1. **one network serves too many.** The whole School sits in **one single Network** `10.11.0.0/16`: 400 Schuler devices, 40 Lehrenden, Administration und Storage. In one Network sit **all** **next to each other**: **one network event** (one flood, one fire alarm, one bad device) **reaches** everything. One can **not switch off one group** without the other, und one **from a frame not can say** to which group it belongs.
 2. **groups that are not equal sit next to each other.** **Administration** (Grades, Schüler-Acts, invoices) und **Storage** (key cabinet, room bookings, supplier orders) sit **next to each other**. A Schuler device **can in principle** address the Administration network: **an address area is no lock** — the **border is only a convention** (see [Security and Data Protection]({{% relref "security" %}})).
 3. **one device type, switched at once.** The Klassroom beamer und the Klassroom network devices **on Monday morning** **per wing, per floor** get **switched on** — **not** whole School. The **groups** (Schüler, Lehrenden, Administration, Storage) **must not be** one wire network each — **they shall be numbers**.
 
@@ -93,7 +93,7 @@ The VLAN number is **part of the frame**: In the **Ether-type field** of the Eth
 1. **the name → an address (DNS lookup):** A name like `lms.muster-city.bmb` → **a number**: DNS lookup, **in a table**.
 2. **the device → an address in the network (DHCP):** DHCP **assigns an address** in the network. **It names nothing** — it **does not find a name, it gives an address**.
 
-**You distinguish: The IP is not typed in, but found via name (DNS) or assigned in the network (DHCP).**
+**One distinguishes: The IP is not typed in, but found via name (DNS) or assigned in the network (DHCP).**
 
 | What | What exactly happens | What it is **not** |
 |---|---|---|
@@ -108,7 +108,7 @@ The VLAN number is **part of the frame**: In the **Ether-type field** of the Eth
 | 2 | DNS lookup | name → number | **DNS** (name → number) |
 | 3 | Address in the network | device → IP in the network (Schüler) | **DHCP** (**network device**) |
 
-**DHCP-Server:** **The network device** (one managed Switch, one Server, in the VM the network device of the VM frontend, see [VM-Container]({{% relref "/01-virtualization-containerization/lab" %}})) **assigns the address**. **You don't need to know the address.** The device **gets one**.
+**DHCP-Server:** **The network device** (one managed Switch, one Server, in the VM the network device of the VM frontend, see [VM-Container]({{% relref "/01-virtualization-containerization/lab" %}})) **assigns the address**. **One does not need to know the address.** The device **gets one**.
 
 **DNS forwarding:** DNS lookup **works only then**, **when a DNS server is named** (`/etc/resolv.conf`, see [VM-Container]({{% relref "/01-virtualization-containerization/lab" %}})). **networks know no names** — **frames carry numbers only**. The **name is a help for the humans** (see [Einheit 2]({{% relref "/02-networking-1/theory" %}})).
 

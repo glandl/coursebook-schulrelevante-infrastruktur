@@ -19,7 +19,7 @@ This exercise is **freely chosen** (not part of the grade) — it is **not part 
 
 ## a. Warm-up: VLAN 2 Administration
 
-**Goal:** You **repeat the pattern from the [Exercise unit 2]({{% relref "/02-networking-1/exercise" %}}) for one VLAN of the School**: VLAN-ID → number range.
+**Ziel:** **repeat the pattern from the [Exercise unit 2]({{% relref "/02-networking-1/exercise" %}}) for one VLAN of the School**: VLAN-ID → number range.
 
 **Task:** Administration VLAN of the School **has VLAN-ID 2**. School convention (see [unit 2]({{% relref "/02-networking-1/lab" %}})): The **relevant Oktet carries the VLAN-ID**, bitmask `0.0.255.0`.
 
@@ -30,7 +30,7 @@ This exercise is **freely chosen** (not part of the grade) — it is **not part 
 
 ## b. VLAN-ID to number range (on paper, in binary)
 
-**Goal:** You can **check a Bitmask by hand** — **on paper, in binary** — **and say: Which device is in which VLAN?**
+**Ziel:** one can **check a Bitmask by hand** — **on paper, in binary** — **and say: Which device is in which VLAN?**
 
 **Task:** One network **is split into four VLANs** — the four groups from the class list (see [Theory]({{% relref "theory" %}})): `10.11.0.0/24` (**Scholars**), `10.11.1.0/24` (**Teachers**), `10.11.2.0/24` (**Administration**), `10.11.3.0/24` (**Storage**). **Complete this table — on paper, in binary, one column per Oktet:**
 
@@ -56,7 +56,7 @@ This exercise is **freely chosen** (not part of the grade) — it is **not part 
 
 ## c. VLAN permission matrix
 
-**Goal:** You can **complete the VLAN permission matrix** — **groups as rows, groups as columns** — **and give reason for each permit** (see [VLAN- and Permission Matrices]({{% relref "/00-documentation/vlan-permission-matrices" %}})).
+**Ziel:** one can **complete the VLAN permission matrix** — **groups as rows, groups as columns** — **and give reason for each permit** (see [VLAN- and Permission Matrices]({{% relref "/00-documentation/vlan-permission-matrices" %}})).
 
 **Task:** The four groups from the class list as **network matrix (VLAN × VLAN)** — **each group once as row (from), once as column (to)**. Entries: **✔** (permit), **✘** (no permit), **restricted** (only Port/service). **default: deny** — **what is not marked is denied**.
 
@@ -77,7 +77,7 @@ This exercise is **freely chosen** (not part of the grade) — it is **not part 
 
 ## d. VLANs in the Packet Tracer file
 
-**Goal:** You **put the VLANs of the School in reality onto the managed Switch** — **VLAN-ID + Bitmask** — **and switch off one device group** (Packet Tracer: **managed Switch, `vlan insert`/`vlan permit`**, see [Lab part 1.2]({{% relref "lab" %}})).
+**Ziel:** **put the VLANs of the School in reality onto the managed Switch** — **VLAN-ID + Bitmask** — **and switch off one device group** (Packet Tracer: **managed Switch, `vlan insert`/`vlan permit`**, see [Lab part 1.2]({{% relref "lab" %}})).
 
 **Task:**
 
@@ -103,7 +103,7 @@ VLAN 2 — Administration Number range 10.11.2.0/24   Mask 0.0.255.0
 
 ## e. DNS and DHCP — the Schoolbus with a name
 
-**Goal:** You can **tell DNS and DHCP apart** in a scenario **outside the class list** — **and draw the resolution order** ([Theory]({{% relref "theory" %}})).
+**Ziel:** one can **tell DNS and DHCP apart** in a scenario **outside the class list** — **and draw the resolution order** ([Theory]({{% relref "theory" %}})).
 
 **Task:**
 
