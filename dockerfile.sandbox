@@ -57,6 +57,52 @@ RUN arch="$(dpkg --print-architecture)" \
 # user; kept explicit here per sandbox.md "Runtime user".
 USER node
 
+# --- Pi coding agent (mirrors the host setup so pi works identically inside the sandbox) ---
+
+# Official managed installer (https://pi.dev/install.sh) — same install method used on the host,
+# so it gets the same pinned-dependency managed layout and `pi update` semantics. Runs
+# non-interactive in a build (no tty -> "continuing without confirmation"), executed as the
+# `node` user so all state lands under /home/node/.pi, which devcontainer.json mounts as a
+# named volume (same pattern as the claude-code/codex config mounts).
+RUN curl -fsSL https://pi.dev/install.sh | sh
+
+# The managed installer drops its launcher entrypoint at ~/.pi/agent/bin; make it resolvable
+# from non-login shells (Docker exec PATH), same effect as the PATH entry the host installer
+# leaves in the user's login shell.
+ENV PATH=/home/node/.pi/agent/bin:$PATH
+
+# Seed the host's Pi configuration so inside-the-sandbox pi resolves and defaults to the
+# same provider/model: the pi-strata-provider package plus the "local" provider settings.
+# NOT baked into the image: the API key. The provider config references apiKeyEnv=STRATA_API_KEY,
+# supplied at runtime via the existing --env-file (.devcontainer/.env).
+RUN sh <<'PISEED'
+mkdir -p /home/node/.pi/agent
+cat > /home/node/.pi/agent/settings.json <<'EOF'
+{
+  "packages": ["npm:pi-strata-provider"],
+  "defaultProvider": "local",
+  "defaultModel": "local/qwen3.8-flash-next-coder-iq1_m",
+  "enabledModels": ["local/*", "openai-codex/*"],
+  "modelThinkingLevels": {
+    "local/strata-auto": "low"
+  },
+  "compaction": {
+    "modelOverrides": {
+      "local/strata-auto": { "reserveTokens": 20480, "keepRecentTokens": 16384 },
+      "local/qwen3.8-flash-next-coder-iq1_m": { "reserveTokens": 20480, "keepRecentTokens": 16384 }
+    }
+  }
+}
+EOF
+cat > /home/node/.pi/agent/strata-provider.json <<'EOF'
+{
+  "provider": "local",
+  "baseUrl": "http://10.60.13.51:8080/v1",
+  "apiKeyEnv": "STRATA_API_KEY"
+}
+EOF
+PISEED
+
 WORKDIR /workspaces/classroom-github-kanban
 
 # Keeps the container alive for the Dev Containers extension to attach to;
