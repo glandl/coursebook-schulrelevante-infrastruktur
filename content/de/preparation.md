@@ -48,6 +48,18 @@ Vorher wissen:
 - [ ] **Optional:** [Wireshark](https://www.wireshark.org/download.html) am Host. Unter Windows die Npcap-Installation zulassen.
 - [ ] **Abgabe aus Einheit 1 im Portfolio** ist gepusht (Branch `session-01`, Pull Request geöffnet), damit der neue Branch `session-02` sauber startet.
 
+## Kapitel 3: Netzwerktechnik II (Selbststudium)
+
+- [ ] **Theorie gelesen**, mindestens die Abschnitte DHCP und DNS ([Kapitel 3]({{% relref "/03-networking-2/theory" %}})). Das ist die Grundlage für die Teams DHCP, DNS und Verzeichnisdienst in Kapitel 4.
+- [ ] Optional: [Lab mit Lösungen]({{% relref "/03-networking-2/lab" %}}) mit `schulnetz.pkt` aus Einheit 2.
+
+## Einheiten 3 und 4: Serverrollen (16.11. und 23.11.2026)
+
+- [ ] **Browser** am Laptop (aktuelles Firefox, Chrome oder Edge). Alle Maschinen laufen im Proxmox-Labor der Lehrperson, eine eigene VM ist **nicht** nötig.
+- [ ] **Zugangsdaten** für die Proxmox-Weboberfläche bereit (bekommst du von der Lehrperson). Siehe [Zugang zum Proxmox-Labor]({{% relref "/04-server-administration/proxmox-access" %}}).
+- [ ] **Rollenkarten** überflogen ([Kapitel 4]({{% relref "/04-server-administration" %}})), damit du weißt, welche Rolle dich interessiert.
+- [ ] **Portfolio:** Branch `einheit-04` angelegt.
+
 ## Weitere Einheiten
 
 Die Vorbereitung für die weiteren Einheiten wird hier ergänzt, sobald die Kapitel freigegeben sind.
