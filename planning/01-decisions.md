@@ -100,5 +100,5 @@ Replaces the chapter 3 parts of "Structural rework (agreed 2026-10-26)" above. C
 - **Chapter 3 (Networking II) is self-study theory only.** The theory pages stay; students work through them on their own.
 - **No homework and nothing graded.** The chapter 3 homework (VLAN/permission matrix, due 22.11.) is dropped. The documentation task (VLAN/permission matrix + Server-Setup-Log) is no longer required and does not count toward the portfolio.
 - **Lab optional:** there may be a lab part, published **with solutions** and marked as not mandatory. No exercise or doc-task pages are required.
-- **English only.** Chapter 3 has no German version, and English is the master for this chapter. This is an exception to "Fully parallel DE and EN" and "German is the master" under Languages. The German chapter 3 pages are not maintained (they are machine-garbled drafts anyway).
+- **Languages (corrected 2026-11-15):** chapter 3 follows the normal rule: German is the master, English is a mirror. The current German chapter 3 pages are machine-garbled and must be rewritten.
 - **Consequences to resolve** (see `02-tasks.md`): the Windows Server 2025 install planned for the end of session 3 is what chapter 4 builds on; the rubric's "one documentation task per session" now covers sessions 1, 2, 4, 5 and 6 only; what happens to the 16.11. session slot itself.

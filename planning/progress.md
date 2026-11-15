@@ -24,7 +24,7 @@ Legend for status:
 | 00 Documentation: Processing register, ADR | Draft (legal review open) | Draft (machine-translated) |
 | 01 Virtualization & Containerization | Draft | Draft (machine-translated) |
 | 02 Networking I | Draft (lab untested) | Skeleton, homework translated (draft) |
-| 03 Networking II | Not maintained (EN only since 2026-11-15) | Skeleton; self-study theory, optional lab with solutions, nothing graded |
+| 03 Networking II | Garbled draft, to rewrite (self-study theory, optional lab with solutions, nothing graded) | Skeleton (mirror of DE) |
 | 04 Server administration | Skeleton | Skeleton |
 | 05 Client & mobile device management | Skeleton | Skeleton |
 | 06 IT security & data protection (capstone) | Skeleton | Skeleton |
@@ -124,5 +124,5 @@ Carried over from before the 05.10.2026 session; not re-checked since.
 1. Before the 19.10.2026 session: tell students to create the NetAcad account and install Packet Tracer 9.0.1 (preparation checklist), run lab Part 3 once in 9.0.1 and fix menu names.
 2. Author review of the chapter 02 DE pages, then EN translation of the remaining chapter 02 pages.
 3. Decide the chapter 02 homework deadline (see open items).
-4. Chapter 03 (Networking II): self-study theory in English only, optional lab with solutions, no homework or graded parts (decision 2026-11-15, see `01-decisions.md`).
+4. Chapter 03 (Networking II): self-study theory (DE master, EN mirror), optional lab with solutions, no homework or graded parts (decision 2026-11-15, see `01-decisions.md`).
 5. Update this file whenever a page changes status.

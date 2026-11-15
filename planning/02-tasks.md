@@ -38,11 +38,10 @@ One chapter per about two weeks, each ready a few days before its session. Each 
 - [x] Ch. 1 English draft of chapter 1 and `00-documentation` (author review open)
 - [ ] Ch. 2 Netzwerktechnik I (19.10): German draft done 2026-10-05, lab Part 3 moved to Packet Tracer 9.0.1 and homework revised 2026-10-18, EN homework translated 2026-10-18. Open: test the lab in 9.0.1, author review, EN for the other pages
 - [ ] Ch. 2: students need a NetAcad account and Packet Tracer 9.0.1 before 19.10 (preparation checklist updated)
-- [ ] Ch. 3 Networking II (16.11): **self-study, English only, nothing graded** (decision 2026-11-15)
-  - [ ] Write the EN theory pages (English is the master for this chapter)
+- [ ] Ch. 3 Networking II (16.11): **self-study, nothing graded, DE master + EN mirror** (decision 2026-11-15)
+  - [ ] Rewrite the garbled DE theory pages, then mirror to EN
   - [ ] Optional lab with solutions, marked "not mandatory"
   - [ ] Remove or hide homework, documentation task and exercise pages (EN and DE); drop the "Homework due 22.11." line in `_index.md`
-  - [ ] Decide what to do with `content/de/03-networking-2` (delete, hide, or link to the EN pages)
   - [ ] Decide where the Windows Server 2025 install moves (start of chapter 4, or part of the optional lab) — chapter 4 depends on it
   - [ ] Decide what happens in the 16.11. session slot
   - [ ] Update the rubric/portfolio requirements: no chapter 3 doc task or homework
