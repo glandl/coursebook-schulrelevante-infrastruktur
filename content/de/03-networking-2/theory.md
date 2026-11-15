@@ -3,147 +3,205 @@ title = "Theorie"
 weight = 20
 +++
 
-## Ziel
+## VLANs: mehrere Netze auf denselben Switches
 
-Here you learn **why Schulnet splits in VLANs**, how VLAN number **lands in an address**, und how DNS und DHCP make network **usable** – nobody **has to enter IP addresses**. Therewith **first Server** comes (Windows Server, hostname `SRV-EVAL-01`, account `srv-admin`) – **managed never**.
+### Das Problem eines flachen Netzes
 
-## Why VLANs exist — Problem single Network
+Im Packet-Tracer-Netz aus [Einheit 2]({{% relref "/02-networking-1/lab" %}}) hatte jede Gruppe einen **eigenen Switch**: `sw-verw`, `sw-lehr`, `sw-srv`. Das funktioniert für drei Gruppen in einem Raum. Eine echte Schule hat aber acht oder mehr Gruppen (siehe IP-Plan der *Mittelschule Musterstadt*: Verwaltung, Lehrende, Schüler-WLAN, Server, EDV-Raum, Gäste-WLAN, Drucker, Netzwerkmanagement), und in **jedem Stockwerk** stehen Geräte aus fast allen Gruppen.
 
-In [Einheit 2]({{% relref "/02-networking-1/theory" %}}) **Schulnet** built separate Networks (Administration, Lehrende, Server, WLANs) — **separated by address area**. VLANs answer **other half**: **a single network serves whole school** – **nobody writes down who is where**. Three short scenarios make **need** clear:
+Ohne Trennung hängen alle Geräte in **einem** Netz:
 
-1. **Network, too many.** Whole school sits **in a network** `10.11.0.0/16`: 400 Schuler devices, 40 Lehrenden, Administration und Storage. Im Netzwerk **everything lies next to each other**: **network events** (flood, fire alarm, bad device) **reach everything**. **Single groups never switchable** – **others likewise** –, **group at frame unclear**.
-2. **groups differing in purpose lie next to each other.** **Administration** (Grades, Schüler-Acts, invoices) und **Storage** (key cabinet, room bookings, supplier orders) sit **next to each other**. Schuler device **can in principle** still **reach Administration network**: **address area locks nothing** – **border only convention** (see [Security und Data Protection]({{% relref "security" %}})).
-3. **per classroom switched on, whole School never needed.** Klassroom beamers und Klassroom network devices **per wing, per floor on Monday morning** **switched on** – **whole School likewise never needed**. **Groups** (Schüler, Lehrenden, Administration, Storage) **need no own wire Network** – **become numbers**.
+- Jedes Gerät erreicht jedes andere: Der Laptop eines Schülers kann den Verwaltungsrechner mit den Notenlisten direkt ansprechen.
+- Jeder **Broadcast** (z. B. jede DHCP- oder ARP-Anfrage) erreicht alle Geräte. Bei 500 Geräten ist das spürbar.
+- Ein Fehler oder ein Schadprogramm auf einem Gerät betrifft sofort das ganze Netz.
 
-**What VLANs do:** In **a single wire Network** **groups become numbers** – **no separate wire Network**.
-**What VLANs never do:** VLAN numbers **sit in frame, like a label** – **changeable at any time**. **A VLAN is neither Firewall nor rights** (see [Security und Data Protection]({{% relref "security" %}})).
+Eigene Switches und Kabel pro Gruppe und Stockwerk wären teuer und unflexibel: Zieht die Verwaltung in einen anderen Raum, müsste man umverkabeln.
 
-## VLAN und mask
+### Die Lösung: virtuelle Netze
 
-A VLAN **is bitmask und number**. **Bitmask** decides **who address bits belong to VLAN** – rest **reads as 0**.
+Ein **VLAN** (*Virtual Local Area Network*) teilt einen Switch logisch in mehrere getrennte Switches. Jeder Anschluss (*Port*) gehört zu einem VLAN. Geräte in **verschiedenen** VLANs können einander **nicht** direkt erreichen, auch wenn sie am selben Switch hängen. Für sie ist es, als stünden zwei getrennte Switches im Raum.
 
-**Bitwise rule:** **Device address** bitwise **und bitmask** → **result = VLAN number**. Bit columns **mask bit 1 stay**, columns **mask bit 0 become zero**.
+Jedes VLAN hat eine Nummer, die **VLAN-ID** (1 bis 4094). Im IP-Plan der *Mittelschule Musterstadt* gilt die Konvention: **drittes Oktett = VLAN-ID**. Ein Blick auf die Adresse verrät also das VLAN:
 
-### Worked example: VLAN-ID → number range
+| VLAN-ID | Name | Netz | Gateway |
+|---|---|---|---|
+| 10 | Verwaltung | `10.10.10.0/27` | `10.10.10.1` |
+| 20 | Lehrende | `10.10.20.0/25` | `10.10.20.1` |
+| 30 | Schüler-WLAN | `10.10.30.0/23` | `10.10.30.1` |
+| 40 | Server | `10.10.40.0/27` | `10.10.40.1` |
+| 60 | Gäste-WLAN | `10.10.60.0/25` | `10.10.60.1` |
+| 99 | Netzwerkmanagement | `10.10.99.0/26` | `10.10.99.1` |
 
-School convention (as in [Einheit 2]({{% relref "/02-networking-1/lab" %}})): **dritter Oktet = VLAN-ID**, **fourth Oktet free for devices** – VLAN-ID **gives an address range**:
+**Faustregel:** ein VLAN = ein IP-Netz = ein Broadcast-Bereich.
 
-| Step | What | Result |
-|---|---|---|
-| 1. Base address | whole School network | `10.11.0.0/16` |
-| 2. Bitmask | third Oktet = VLAN-relevant | `0.0.255.0` |
-| 3. VLAN-ID in the masked Oktet | VLAN-ID 2 → third Oktet **2** | `10.11.**2**.0` |
-| 4. Number range | base + bitmask | **`10.11.2.0/24`** |
-| 5. Usable devices | `2⁸ − 2` | **254** |
+### Access-Ports und Trunk-Ports
 
-**Check by hand** (binary, third Oktet alone matters):
+| Port-Art | Wofür | Wie viele VLANs | Rahmen auf dem Kabel |
+|---|---|---|---|
+| **Access-Port** | Endgerät (PC, Drucker, Access Point für ein einziges Netz) | genau eines | **ohne** Markierung, das Endgerät weiß nichts vom VLAN |
+| **Trunk-Port** | Verbindung Switch–Switch, Switch–Router, Switch–Access-Point mit mehreren WLANs | mehrere | **mit** Markierung (*Tag*), damit der Empfänger weiß, zu welchem VLAN der Rahmen gehört |
+
+Die Markierung ist im Standard **IEEE 802.1Q** festgelegt. Der Switch fügt in den Ethernet-Rahmen nach der Absender-MAC-Adresse **4 Byte** ein:
 
 ```text
-Device  Administration-PC      10.11.2.17
-bitmask                          0.0.255.0   third Oktet: 0000 0010 AND 1111 1111
-10.11.2.17 AND 0.0.255.0     →  10.11.2.0   → VLAN-ID 2 → Administration-VLAN ✔
+| Ziel-MAC | Absender-MAC | 802.1Q-Tag (4 Byte)              | Typ  | Nutzdaten | Prüfsumme |
+                          | TPID 0x8100 | PCP | DEI | VLAN-ID |
+                          |   16 Bit    | 3   |  1  | 12 Bit  |
 ```
 
-**Read:** VLAN-ID **masked Oktet result** – **address range = bitmask result**, never wire.
+- **TPID** `0x8100` kennzeichnet einen Rahmen mit VLAN-Tag.
+- **PCP** ist eine Priorität (z. B. für Telefonie).
+- **VLAN-ID** hat 12 Bit, daher die Grenze von 4094 nutzbaren VLANs (0 und 4095 sind reserviert).
 
-## Class list in reality
+Auf einem Trunk darf ein VLAN **ohne** Tag übertragen werden, das *Native VLAN* (bei Cisco ab Werk VLAN 1). Das ist eine bekannte Schwachstelle, siehe [Sicherheit]({{% relref "security" %}}).
 
-Four groups – **class lists in reality** (same class list as in Unit 1, [VM-Container]({{% relref "/01-virtualization-containerization/exercise" %}})). All four VLANs, their Adressrange:
+### Zwischen VLANs: Routing und Zugriffsregeln
 
-| Group | What | VLAN | VLAN-ID as 4th Oktet | Number range | Usable devices |
-|---|---|---|---|---|---|
-| Schüler | Schüler-Laptops, Klass projectors, Schüler-WLAN | VLAN 0 | third Oktet `0` | `10.11.0.0/24` | 254 |
-| Lehrenden | Lehrerroom-Laptops, Lehrerroom network | VLAN 1 | third Oktet `1` | `10.11.1.0/24` | 254 |
-| Administration | Administration PCs, Administration network | VLAN 2 | third Oktet `2` | `10.11.2.0/24` | 254 |
-| Storage | Storage network, key cabinet network | VLAN 3 | third Oktet `3` | `10.11.3.0/24` | 254 |
+Die Lehrerin im VLAN 20 soll trotzdem auf den Server im VLAN 40 zugreifen. Zwischen VLANs vermittelt, wie zwischen allen IP-Netzen, ein **Router** (oder ein **Layer-3-Switch**, der routen kann). Zwei übliche Bauformen:
 
-**Why four VLANs instead four Networks?** **A single wire Network serves whole school for all four groups** (Router single, managed Switch system single, Uplink single) – **groups become numbers**. **Where VLANs land:** **network serves school, Adressrange belongs** – **single network serves whole school** (see "Problem single Network"). Whole `10.11.0.0/16` **leaves space for 252 further /24 Blocks** – **space for extensions** (school convention, as in [Einheit 2]({{% relref "/02-networking-1/theory" %}})).
+- **Router on a stick:** Ein einziges Kabel (Trunk) vom Switch zum Router. Der Router hat pro VLAN eine **Unterschnittstelle** (z. B. `Gi0/0.20` für VLAN 20) mit der Gateway-Adresse dieses Netzes.
+- **Layer-3-Switch:** Der zentrale Switch hat pro VLAN eine virtuelle Schnittstelle (*SVI*, z. B. `interface vlan 20`) und routet selbst. Üblich in größeren Schulen.
 
-**Attention — VLAN number no IP prefix!** VLAN-ID ≠ IP prefix: VLANs **are numbers in payload**, IP prefixes **are Adressranges** (see [Einheit 2]({{% relref "/02-networking-1/theory" %}})). **No Firewall via VLANs** – Firewall **per connection** (see [Security und Data Protection]({{% relref "security" %}})). **Permission matrix** (see [VLAN- und Permission matrices]({{% relref "/00-documentation/vlan-permission-matrices" %}})) **fill out per VLAN — per Network no**.
+Wichtig: Sobald geroutet wird, können **alle** VLANs einander wieder erreichen. Ein VLAN **trennt**, aber es **verbietet** nichts. Was erlaubt ist, entscheiden **Zugriffsregeln** am Router oder an einer Firewall (bei Cisco: *Access Control Lists*, ACL):
 
-## VLANs in Packet Tracer: both models
+```text
+Schüler-WLAN (VLAN 30) ──► Router/Firewall ──► Server (VLAN 40)
+                             │
+                             └─ Regel: Schüler dürfen nur HTTP/HTTPS und DNS
+                                zum Server, nichts in die Verwaltung
+```
 
-**Cannot be told apart at screenshot – precisely point.** Packet Tracer **offers two different things**, both **go by name "VLAN"**. **Neither real Etherfield** – **model 2 comes closer**.
+**Merksatz:** Ein VLAN ist keine Firewall. Es sorgt dafür, dass Verkehr **durch** den Router muss. Erst dort wird entschieden, ob er durchdarf.
 
-### Model 1: VLAN field (device-internal)
+### Die Berechtigungsmatrix
 
-In simulation **every device, every link carries internal VLAN fields** ('VLAN-Insert' at simulator): device **`VLAN = 2` itself**. Frame **crossing managed Switch or Router** simulator **whether link allows checks**.
+Welche Gruppe welchen Dienst in welchem Netz erreichen darf, hält man in einer **Berechtigungsmatrix** fest, bevor man eine einzige Regel schreibt. Die Zeilen sind die Quellen, die Spalten die Ziele:
 
-- **Property:** **device carries VLAN number**, frame outside – device **cannot lie about itself**.
-- **Reality:** Ethernet frames **carry VLAN tags**, devices **no labels**. **Model 1 models decision per connection** – **decision per connection** (see [Security und Data Protection]({{% relref "security" %}})).
+| von ↓ / nach → | Verwaltung (10) | Lehrende (20) | Server (40) | Internet |
+|---|---|---|---|---|
+| **Verwaltung (10)** | ja | nein | Datei, Druck, DNS | ja |
+| **Lehrende (20)** | nein | ja | Datei, Druck, Web, DNS | ja |
+| **Schüler-WLAN (30)** | **nein** | **nein** | nur Web, DNS | ja (gefiltert) |
+| **Gäste-WLAN (60)** | nein | nein | nein | ja |
 
-### Model 2: VLAN-ID leg — Ether-type field
+Wie man eine solche Matrix sauber dokumentiert und daraus Regeln ableitet, beschreibt das Dokumentationsskript: [VLAN- und Berechtigungsmatrizen]({{% relref "/00-documentation/vlan-permission-matrices" %}}).
 
-VLAN number **in frame**: VLAN-ID **lies in Ether-type field** – Ethernet header (in reality **before payload**, data field): **sending device `vlan 2` writes** → **frame VLAN 2 carries**.
+### VLANs im WLAN
 
-- **Property:** Number **sits in frame** – **sending device can write what it wants**. **Simulator cannot forbid it, only observe**.
-- **Reality:** VLAN tag in Ethernet frames, real managed Switches und Etherbridge hardware **read** it und **decide per VLAN**.
+Ein Access Point kann mehrere WLAN-Namen (**SSIDs**) gleichzeitig ausstrahlen, z. B. `Schule-Lehrende`, `Schule-Schueler`, `Schule-Gast`. Jede SSID wird einem VLAN zugeordnet, der Access Point hängt deshalb an einem **Trunk-Port**. Mit **802.1X** (Anmeldung mit eigenem Konto oder Zertifikat statt gemeinsamem WLAN-Passwort) kann der Anmeldeserver ein Gerät sogar **automatisch** dem richtigen VLAN zuweisen: Dieselbe SSID, aber Lehrende landen in VLAN 20 und Schülerinnen und Schüler in VLAN 30.
 
-| Model | The VLAN number lies … | that corresponds to … | in the Lab you … |
-|---|---|---|---|
-| **Model 1 — internal VLAN field** | in the device/link fields | the **Firewall rule per connection** | Lab part 1.2 |
-| **Model 2 — VLAN-ID leg (Ether-type field)** | in the Etherfield of the frame | the real **VLAN tag in the payload** | Lab part 1.3 |
+## DHCP
 
-**What stays constant across both models:** VLAN **is number belonging to group**. It **labels**. **Protects nothing** – border effect **network devices bring**, never number.
+### Wozu DHCP?
 
-## DNS und DHCP: resolution order
+Jedes Gerät braucht vier Angaben, um im Netz zu arbeiten: **IP-Adresse**, **Netzmaske**, **Gateway** und **DNS-Server**. Bei 500 Geräten, von denen täglich andere kommen und gehen, kann das niemand von Hand eintragen. Das **Dynamic Host Configuration Protocol** (DHCP) verteilt diese Angaben automatisch. Der DHCP-Server **verleiht** eine Adresse für eine bestimmte Zeit (**Lease**). Das Gerät verlängert die Leihe regelmäßig, ein Gerät, das nicht mehr kommt, gibt seine Adresse nach Ablauf frei.
 
-**between typing name, first packet lies resolution order.** Every step **has its role**:
+### Der Ablauf: DORA
 
-1. **name → address (DNS lookup):** Names like `lms.muster-city.bmb` → **number**: DNS lookup, **in table**.
-2. **device → address in network (DHCP):** DHCP **assigns address** in network. **It names nothing** – **finds no name, gives address**.
+```mermaid
+sequenceDiagram
+    participant C as Laptop (noch ohne Adresse)
+    participant S as DHCP-Server
+    C->>S: DISCOVER (Broadcast: "Gibt es hier einen DHCP-Server?")
+    S->>C: OFFER ("Du kannst 10.10.30.57 haben")
+    C->>S: REQUEST (Broadcast: "Ich nehme 10.10.30.57")
+    S->>C: ACK ("Bestätigt, für 8 Stunden")
+```
 
-**Distinguish: IP never typed in, found via name (DNS) or assigned in network (DHCP)**.
+Der Laptop hat zu Beginn keine Adresse und kennt den Server nicht. Deshalb sind DISCOVER und REQUEST **Broadcasts** an alle im eigenen Netz. Das REQUEST geht ebenfalls als Broadcast, damit andere DHCP-Server mitbekommen, dass ihr Angebot abgelehnt wurde.
 
-| What | What exactly happens | What it is **not** |
+### DHCP-Optionen
+
+Neben Adresse und Netzmaske verteilt der Server **Optionen**. Die wichtigsten:
+
+| Option | Inhalt | Beispiel |
 |---|---|---|
-| **DNS** | name → number (`dig`, `/etc/resolv.conf`) | doesn't know the device, **doesn't assign an address** |
-| **DHCP** | device → address in the network (**one network device**, **not** DNS) | **names nothing** |
+| 3 | Gateway (*Router*) | `10.10.30.1` |
+| 6 | DNS-Server | `10.10.40.10` |
+| 15 | Domänenname | `schule.lan` |
+| 51 | Lease-Dauer | 8 Stunden |
+| 66, 67 | Server und Datei für den **Netzwerkstart** (PXE) | Rechner im EDV-Raum über das Netz neu installieren |
 
-### Worked example: resolution order
+Für Geräte, die immer dieselbe Adresse brauchen (Drucker, Access Points), legt man **Reservierungen** an: Der Server gibt einer bestimmten MAC-Adresse immer dieselbe Adresse.
 
-| # | Who | What | What realizes it |
-|---|---|---|---|
-| 1 | Schüler | types a **name** | — |
-| 2 | DNS lookup | name → number | **DNS** (name → number) |
-| 3 | Address in the network | device → IP in the network (Schüler) | **DHCP** (**network device**) |
+### DHCP über VLAN-Grenzen: Relay
 
-**DHCP-Server:** **Network device** (managed Switch, Server, VM frontend network device, see [VM-Container]({{% relref "/01-virtualization-containerization/lab" %}})) **assigns address**. **Address needs nobody.** Device **gets address**.
+Broadcasts bleiben im eigenen VLAN. Ein zentraler DHCP-Server im Server-VLAN hört die DISCOVER-Anfrage aus dem Schüler-WLAN also gar nicht. Die Lösung kennst du aus Einheit 2: Der Router arbeitet als **DHCP-Relay** (`ip helper-address 10.10.40.10`). Er nimmt den Broadcast an, schickt ihn gezielt an den Server und trägt dabei seine eigene Adresse im Schüler-VLAN ein (`giaddr`). Daran erkennt der Server, aus **welchem** Netz die Anfrage kommt, und wählt den passenden Adressbereich. So reicht **ein** DHCP-Server für alle VLANs, mit einem Bereich (*Scope*, *Pool*) pro VLAN.
 
-**DNS lookup:** DNS lookup **works only then**, **when DNS server named** (`/etc/resolv.conf`, see [VM-Container]({{% relref "/01-virtualization-containerization/lab" %}})). **networks know no names** – **frames carry numbers only**. **Name is help for humans** (see [Einheit 2]({{% relref "/02-networking-1/theory" %}})).
+### Fremde DHCP-Server
 
-## VLANs on a Windows Server
+Jedes Gerät kann sich als DHCP-Server ausgeben, z. B. ein mitgebrachter Heimrouter, der falsch angesteckt wird. Dann bekommen Geräte falsche Adressen oder einen falschen DNS-Server. Switches verhindern das mit **DHCP Snooping**: Nur an bestimmten Ports (zum Router oder Server) dürfen DHCP-Antworten ankommen.
 
-**School VLANs never come about in Packet-Tracer world – but in school network** – und **Windows Server sits in middle**: network devices, **Server** und **captive portal**. **Still no server management** – follows in [Einheit 4]({{% relref "/04-server-administration" %}}).
-**Evaluation edition:** Windows Server 2025 Evaluation **has 120 days time limit** – build `10.0.26100.24.07` **write down** – **in VM only** – School-Server never.
+## DNS
 
-### Captive portal — network login Windows / Apple devices
+### Wozu DNS?
 
-**For what:** **Windows or Apple device** on network shall reach **login site** – **family typing no address first**. Device **asks network**: **login site for network** – **network device answers**.
+Menschen merken sich Namen, Geräte brauchen Adressen. Das **Domain Name System** (DNS) übersetzt `moodle.schule.lan` in `10.10.40.15` und `debian.org` in eine Adresse im Internet. Ohne funktionierendes DNS scheint „das Internet“ kaputt, obwohl die Verbindung besteht: `ping 1.1.1.1` geht, `ping debian.org` nicht.
 
-**What it does:** **Redirect to login site.** **No security boundary** – captive portal **no lock on network** und **no login**: **Login on login site** (see [Security und Data Protection]({{% relref "security" %}})).
-**Where visible:** Windows: `ipconfig /all` – **who assigned address** – und `Get-NetworkManager` – **login site for network**. Apple devices: network **signals login site directly**.
+### Der Weg einer Anfrage
 
-| On | How |
-|---|---|
-| Windows | on first network use the device **probes** the network → **redirect to the login site** |
-| Apple devices | the network **signals** the login site, the device **shows it** |
+```mermaid
+sequenceDiagram
+    participant C as Laptop
+    participant R as Resolver der Schule
+    participant Root as Root-Server
+    participant TLD as Server für .org
+    participant A as Server für debian.org
+    C->>R: Wie lautet die Adresse von www.debian.org?
+    R->>Root: www.debian.org?
+    Root->>R: Frag die .org-Server
+    R->>TLD: www.debian.org?
+    TLD->>R: Frag die Server von debian.org
+    R->>A: www.debian.org?
+    A->>R: 2001:db8::… / 203.0.113.…
+    R->>C: Antwort (und Resolver merkt sie sich)
+```
 
-**Name login site:** **found via name** – **DNS lookup**, never typed in. **Address device:** **assigned in network** – **DHCP** (see next section).
+Es gibt zwei Arten von DNS-Servern:
 
-### Name/DNS und DHCP distribution
+- Ein **Resolver** (*rekursiver* Server) nimmt Fragen der Geräte an und sucht die Antwort für sie zusammen. Er merkt sich Antworten für eine bestimmte Zeit (**TTL**, *Time to Live*). In der Schule ist das meist der Schulserver oder der Router.
+- Ein **autoritativer** Server ist für eine Zone zuständig und kennt deren Einträge verbindlich, z. B. der Server für `schule.lan`.
 
-A Windows Server **in middle** can **do two things** for network: **answers name questions** – **name/DNS** (name → number) – und **can be DHCP server** – **DHCP distribution** – for device groups **per VLAN**.
+Statt die ganze Kette selbst zu durchlaufen, kann ein Resolver Anfragen an einen anderen Resolver **weiterleiten** (*Forwarder*), z. B. an den des Internetanbieters. Eine **bedingte Weiterleitung** leitet nur Anfragen für eine bestimmte Domäne an einen bestimmten Server weiter, z. B. alles zu `verwaltung.schule.lan` an den Server der Verwaltung.
 
-| It can | It does **not** |
-|---|---|
-| **assign** an address in the network (DHCP distribution) | doesn't name anything — **that is DNS** |
-| **answer name questions** (name/DNS) | doesn't assign an address |
-| **host the login site** (captive portal, see above) | is **no Firewall** und **no VLAN border** — see below |
-**Checks:** `nslookup lms.muster-city.bmb` – **name lookup visible** – und `ipconfig /all` – **address assigned by DHCP**, chosen by nobody.
+### Eintragstypen
 
-## VLANs end
+| Typ | Bedeutung | Beispiel |
+|---|---|---|
+| **A** | Name → IPv4-Adresse | `moodle.schule.lan → 10.10.40.15` |
+| **AAAA** | Name → IPv6-Adresse | `moodle.schule.lan → fd00::15` |
+| **PTR** | Adresse → Name (Rückwärtsauflösung) | `15.40.10.10.in-addr.arpa → moodle.schule.lan` |
+| **CNAME** | Alias auf einen anderen Namen | `lernplattform.schule.lan → moodle.schule.lan` |
+| **MX** | Mailserver einer Domäne | `schule.at → mail.schule.at` |
+| **SRV** | Dienst und Port, z. B. für die Anmeldung am Verzeichnisdienst | `_ldap._tcp.schule.lan → dc.schule.lan:389` |
 
-**VLANs end where VLAN numbers end** – **never where rights end.** VLANs **numbers in payload**: **Managed Switch can decide per VLAN** whether frame passes. **No Firewall rule** (**per connection**) **und no authorization** (see [Security und Data Protection]({{% relref "security" %}}) und [VLAN- und Permission matrices]({{% relref "/00-documentation/vlan-permission-matrices" %}})). **Network device can implement VLANs** – **VLAN number can be key for rule. VLAN never is rule.**
+Die SRV-Einträge sind der Grund, warum eine Windows-Domäne ohne DNS nicht funktioniert: Ein Rechner findet seinen Domänencontroller über `_ldap._tcp.<domäne>` (siehe [Kapitel 4, Verzeichnisdienst]({{% relref "/04-server-administration/roles/directory" %}})).
 
-**Why matters for class:** Herein **see VLANs** und **first Server** – **managed never**. [Einheit 4]({{% relref "/04-server-administration" %}}) **manages Server**, und **VLAN numbers at school stay same numbers**.
+### Interne Namen
+
+Für Namen, die nur im Schulnetz gelten, verwendet man am besten eine **Subdomain der eigenen, registrierten Domäne**, z. B. `intern.ms-musterstadt.at`. Erfundene Endungen sind riskant: `.local` ist für Multicast-DNS (Apple-Geräte, Drucker) reserviert und führt zu schwer erklärbaren Fehlern. `.test` ist für Übungen reserviert und wird in diesem Kurs verwendet.
+
+### Welchen DNS-Server verwendet mein Gerät?
+
+| System | Befehl | Was du siehst |
+|---|---|---|
+| Linux (Debian) | `cat /etc/resolv.conf` | Zeilen `nameserver …` und `search …` |
+| Linux | `dig debian.org` | Antwort, TTL und in der Zeile `SERVER:` den befragten Resolver |
+| Linux | `getent hosts debian.org` | Auflösung so, wie Programme sie sehen (inkl. `/etc/hosts`) |
+| Windows | `ipconfig /all` | *DNS-Server* je Netzwerkkarte |
+| Windows | `Resolve-DnsName debian.org` bzw. `nslookup debian.org` | Antwort und befragter Server |
+
+## Captive Portal
+
+Im Gäste-WLAN soll sich jemand erst anmelden oder die Nutzungsbedingungen bestätigen, bevor er ins Internet darf. Dafür gibt es das **Captive Portal**:
+
+1. Das Gerät verbindet sich mit dem offenen Gäste-WLAN und bekommt per DHCP eine Adresse.
+2. Betriebssysteme prüfen nach dem Verbinden automatisch, ob sie wirklich im Internet sind, indem sie eine bekannte Testadresse ihres Herstellers aufrufen.
+3. Das Netz fängt diese Anfrage ab und leitet sie auf die **Anmeldeseite** um. Das Gerät erkennt die Umleitung und öffnet die Anmeldeseite von selbst.
+4. Nach der Anmeldung lässt die Firewall das Gerät (meist anhand seiner MAC-Adresse) für eine bestimmte Zeit ins Internet.
+
+Ein Captive Portal ist bequem, aber **keine Verschlüsselung**: In einem offenen WLAN kann jeder mitlesen. Für Lehrende und Schülerinnen und Schüler ist 802.1X die bessere Wahl (siehe [Einheit 2, Sicherheit]({{% relref "/02-networking-1/security" %}})).
+
+## Ausblick
+
+In [Kapitel 4]({{% relref "/04-server-administration" %}}) baut ihr DHCP und DNS als **Serverrollen** selbst auf, einmal mit Windows Server und einmal mit freier Software unter Linux, und verbindet sie mit einem Verzeichnisdienst, Dateifreigaben und weiteren Rollen zu einem Schulnetz.

@@ -39,13 +39,20 @@ One chapter per about two weeks, each ready a few days before its session. Each 
 - [ ] Ch. 2 Netzwerktechnik I (19.10): German draft done 2026-10-05, lab Part 3 moved to Packet Tracer 9.0.1 and homework revised 2026-10-18, EN homework translated 2026-10-18. Open: test the lab in 9.0.1, author review, EN for the other pages
 - [ ] Ch. 2: students need a NetAcad account and Packet Tracer 9.0.1 before 19.10 (preparation checklist updated)
 - [ ] Ch. 3 Networking II (16.11): **self-study, nothing graded, DE master + EN mirror** (decision 2026-11-15)
-  - [ ] Rewrite the garbled DE theory pages, then mirror to EN
-  - [ ] Optional lab with solutions, marked "not mandatory"
-  - [ ] Remove or hide homework, documentation task and exercise pages (EN and DE); drop the "Homework due 22.11." line in `_index.md`
-  - [ ] Decide where the Windows Server 2025 install moves (start of chapter 4, or part of the optional lab) — chapter 4 depends on it
-  - [ ] Decide what happens in the 16.11. session slot
+  - [x] Rewrite the garbled DE pages (2026-11-15)
+  - [x] Optional lab with solutions, marked "freiwillig"
+  - [x] DE homework, documentation task and exercise pages removed
+  - [ ] EN mirror (and remove EN homework/exercise/documentation pages)
+  - [ ] Test the VLAN/ACL lab in Packet Tracer 9.0.1
+  - [x] Windows Server install and the 16.11. slot: resolved by the server-roles block (servers run on Proxmox)
   - [ ] Update the rubric/portfolio requirements: no chapter 3 doc task or homework
-- [ ] Ch. 4 Server-Administration (23.11)
+  - [ ] Confirm the peer check of the role runbook by another team until 30.11. (added to the ch4 documentation page, not yet agreed)
+- [ ] Ch. 4 Serverrollen: Windows und Linux (16.11. + 23.11., decision 2026-11-15)
+  - [x] DE for 16.11.: `_index`, learning goals, Proxmox access, 8 role cards, documentation (role runbook), presentation, security, sources
+  - [ ] DE by 23.11.: `integration.md`, `ad-cs-demo.md`
+  - [ ] EN mirror of chapter 4
+  - [ ] Lecturer: run `planning/proxmox/setup-permissions.sh`, remove the broad student ACLs, create the VM shells for `.23` (Samba AD) and `.27` (FOG) plus two deploy targets, snapshot `clean-start`
+  - [ ] Lecturer: test clients (Windows 11 Enterprise Eval, Debian 13 Xfce VM) as templates, note their MACs for the DHCP team
 - [ ] Ch. 5 Client- & MDM (07.12)
 - [ ] Ch. 6 IT-Sicherheit & Datenschutz plus capstone (14.12)
 

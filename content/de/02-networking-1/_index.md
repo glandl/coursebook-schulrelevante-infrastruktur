@@ -8,7 +8,7 @@ weight = 2
 
 Ohne Netzwerk läuft an einer Schule heute fast nichts: Lernplattform, Verwaltung, Drucken, Beamer, Tablets und Smartphones der Schülerinnen und Schüler. Wenn das Netz ausfällt, fällt der Unterricht aus. Netzwerke sind außerdem die Basis für alles Weitere im Kurs: Server (Einheit 4), Geräteverwaltung (Einheit 5) und Sicherheitskonzepte (Einheit 6).
 
-In dieser Einheit lernst du, wie ein Schulnetz **geplant** wird: Adressen und Teilnetze, kabelgebundene Infrastruktur und WLAN. Du lernst die wichtigsten Diagnosewerkzeuge kennen, rechnest einen IP-Plan und baust ein kleines Schulnetz in einer Simulation auf. Die Aufteilung in Teilnetze mit VLANs, Berechtigungen und Analysewerkzeuge folgen in [Einheit 3]({{% relref "/03-networking-2" %}}).
+In dieser Einheit lernst du, wie ein Schulnetz **geplant** wird: Adressen und Teilnetze, kabelgebundene Infrastruktur und WLAN. Du lernst die wichtigsten Diagnosewerkzeuge kennen, rechnest einen IP-Plan und baust ein kleines Schulnetz in einer Simulation auf. Die Aufteilung in VLANs mit Zugriffsregeln sowie DHCP und DNS im Detail folgen in [Kapitel 3 (Selbststudium)]({{% relref "/03-networking-2" %}}), die Server dazu baut ihr in [Kapitel 4]({{% relref "/04-server-administration" %}}).
 
 **Ablauf der Einheit (08:45–13:00, netto ca. 3 h 45 min ohne Pausen):**
 

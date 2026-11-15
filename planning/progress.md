@@ -24,8 +24,8 @@ Legend for status:
 | 00 Documentation: Processing register, ADR | Draft (legal review open) | Draft (machine-translated) |
 | 01 Virtualization & Containerization | Draft | Draft (machine-translated) |
 | 02 Networking I | Draft (lab untested) | Skeleton, homework translated (draft) |
-| 03 Networking II | Garbled draft, to rewrite (self-study theory, optional lab with solutions, nothing graded) | Skeleton (mirror of DE) |
-| 04 Server administration | Skeleton | Skeleton |
+| 03 Networking II (self-study) | Draft 2026-11-15 (theory, optional lab with solutions, security, sources; homework/exercise/doc task removed) | Skeleton (mirror pending) |
+| 04 Server roles: Windows and Linux | Draft 2026-11-15 (index, learning goals, Proxmox access, 8 role cards, role runbook, presentation, security, sources; untested) | Skeleton (mirror pending) |
 | 05 Client & mobile device management | Skeleton | Skeleton |
 | 06 IT security & data protection (capstone) | Skeleton | Skeleton |
 
@@ -112,6 +112,10 @@ Carried over from before the 05.10.2026 session; not re-checked since.
 - [ ] Check whether Debian 13 standard install includes `python3`, `iputils-tracepath`, and which services `ss -tuln` shows
 - [ ] Check the QEMU command in the "für Neugierige" box
 - [ ] Chapter 01 already took place (05.10.2026) with Ubuntu: students' existing VMs are `ubuntu-lab`; decide whether they reinstall or keep Ubuntu for chapter 02. The ch02 lab has a fallback row for an Ubuntu VM (`resolvectl status` instead of `/etc/resolv.conf`, Netplan instead of `/etc/network/interfaces`)
+
+## Chapters 03 and 04 (2026-11-15)
+
+Rewritten after the grilling session (see `01-decisions.md`, "Server-roles block"). Chapter 3 DE was machine-garbled and is now a fresh self-study draft. Chapter 4 DE has role cards (goals, acceptance tests, pitfalls, primary sources), not step-by-step guides. Everything is marked "ungeprüft". Open: `integration.md` and `ad-cs-demo.md` for 23.11., EN mirror of both chapters, Packet Tracer test of the ch3 VLAN/ACL lab.
 
 ## Known issues
 

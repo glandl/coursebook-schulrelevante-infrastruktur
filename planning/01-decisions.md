@@ -17,9 +17,9 @@ Status: agreed with the author. Change a decision here first, then adapt the wor
 |---|------|---------|
 | 1 | 05.10.2026 | Virtualisierung & Containerisierung |
 | 2 | 19.10.2026 | Netzwerktechnik I (planning, wired and WLAN) |
-| 3 | 16.11.2026 | Netzwerktechnik II: VLANs, DNS, DHCP + Windows Server install (last 45-60 min) |
-| 4 | 23.11.2026 | Windows Server Administration (Linux as comparison surface, no second install) |
-| 5 | 07.12.2026 | Client- & Mobile Device Management: Design and Policy (trial tenant live in class) |
+| – | (self-study) | Netzwerktechnik II: VLANs, DNS, DHCP — theory for self-study, no session (since 2026-11-15) |
+| 3+4 | 16.11. + 23.11.2026 | Serverrollen: Windows und Linux — role teams on the lecturer's Proxmox lab (chapter 4, since 2026-11-15) |
+| 5 | 07.12.2026 | Client- & Mobile Device Management: managing the test clients (GPO, Intune trial live, Linux counterpart) |
 | 6 | 14.12.2026 | IT-Security & Datenschutz: Capstone-Session (ADRs introduced here) |
 
 Each earlier chapter ends with a short "Security and data protection" box.
@@ -102,3 +102,34 @@ Replaces the chapter 3 parts of "Structural rework (agreed 2026-10-26)" above. C
 - **Lab optional:** there may be a lab part, published **with solutions** and marked as not mandatory. No exercise or doc-task pages are required.
 - **Languages (corrected 2026-11-15):** chapter 3 follows the normal rule: German is the master, English is a mirror. The current German chapter 3 pages are machine-garbled and must be rewritten.
 - **Consequences to resolve** (see `02-tasks.md`): the Windows Server 2025 install planned for the end of session 3 is what chapter 4 builds on; the rubric's "one documentation task per session" now covers sessions 1, 2, 4, 5 and 6 only; what happens to the 16.11. session slot itself.
+
+## Server-roles block (agreed 2026-11-15)
+
+Replaces the chapter 3/4 parts of "Structural rework (agreed 2026-10-26)" and the Windows-Server-on-the-laptop rule under "Labs and hardware". Terms are defined in `CONTEXT.md`.
+
+- **Sessions 16.11. and 23.11. are one block, chapter 4 "Serverrollen: Windows und Linux"** (folder `04-server-administration`, weight unchanged, only the title changes). Chapter 3 stays self-study with no session (see section above).
+- **Goal:** walk through the classic Windows Server roles, build each one step by step, and compare it with the open-source Linux way. The open-source option is stressed on purpose.
+- **Lab = the lecturer's private Proxmox server**, not the students' laptops. One flat **lab VLAN 50, `10.50.13.0/24`**, separated from the lecturer's production network, internet via the **lab router `.254`**, which also forwards DNS and does **no DHCP**. The lab VLAN is not reachable from the university network: students work only through the **Proxmox web console**, all tests run inside Proxmox.
+- **8 role teams** (17 students = 7 pairs + 1 trio). Each team owns one server role and builds it in **both worlds**; how the team splits the work is up to the team.
+
+  | Team | Role | Windows world | Linux world |
+  |---|---|---|---|
+  | 1 | DHCP | `.10` Windows DHCP, scope `.100–.119`, allow list = Windows test client MAC | `.21` Kea, `.120–.139`, client class = Linux test client MAC |
+  | 2 | DNS | `.11` Windows DNS `win.schule.lan` | `.22` BIND |
+  | 3 (trio) | Directory | `.12` AD DS | `.23` Samba AD on a **Debian VM** (not LXC: sysvol ACLs/xattrs) `linux.schule.lan` |
+  | 4 | File shares | `.13` SMB / NTFS | `.24` Samba |
+  | 5 | Print | `.14` Print Server | `.25` CUPS |
+  | 6 | Web | `.15` IIS | `.26` nginx/Apache |
+  | 7 | Client deployment | `.16` Windows reference machine to capture | `.27` **FOG Project on a Debian VM**, plus two empty deploy targets; **no WSUS, no WDS** (both no longer developed) |
+  | 8 | Remote access | `.17` RDP | `.28` SSH + xrdp |
+  | lecturer | AD CS demo, spare | `.18`, `.19` | `.29`, `.30` |
+
+  Windows VMs `.10–.19`, Linux machines `.21–.30`, all static. Servers use `.254` as DNS until the DNS/directory roles run.
+- **Test clients** (lecturer-provided, from templates, ready at the end of 16.11.): Windows 11 Enterprise Evaluation and Debian 13 Xfce as a VM. Teams may use and restart them, only the lecturer resets them.
+- **Proxmox permissions:** one pool per team with role `TeamVM` (console, power, snapshot/rollback, CD-ROM), test clients with `TestClientUser` (console, power). Snapshot `clean-start` before the block. Script: `planning/proxmox/setup-permissions.sh`.
+- **Timetable:** 16.11. = intro to server roles (30) · Proxmox access and rules (15) · team work block "standalone role in both worlds" (2 × 75 with a break) · status round (30). 23.11. = DNS forwarders + domain join (15) · integration (75) · combinations Windows ↔ Linux incl. PXE with the DHCP team and the AD CS demo (45) · role presentations 8 × 6 min (60) · wrap-up / bridge to MDM (30).
+- **AD CS** is a lecturer demo (Windows AD CS vs `step-ca`), not a team role.
+- **Book pages are role cards, not step-by-step guides:** school use, goal per world, acceptance tests, pitfalls, entry points (primary sources), comparison questions. Reason: the runbook is graded and must not be copied from the book.
+- **Assessment:** the **role runbook** (one per team, in both partners' portfolios, each with a personal reflection) is the graded portfolio entry, due **06.12.2026**. The **role presentation** is required but not graded. Chapter 4 has **no separate homework**.
+- **MDM stays on 07.12.**, built on the block: managing the test clients (GPO on the domain-joined client, Intune trial live, Linux counterpart).
+- **Languages:** German is the master and English the mirror, also for chapters 3 and 4.

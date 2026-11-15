@@ -1,0 +1,22 @@
+# Copy to teams.conf (gitignored - student names are personal data, the repo is public)
+# and fill in. Format, one line per role team:
+#
+#   team<N>  <windows-ids>  <linux-ids>  <user1@realm>,<user2@realm>[,<user3@realm>]
+#
+# VMIDs are the Proxmox IDs, not the IPs. The VM and CT columns may hold comma lists
+# (team 7: Windows reference VM + empty deploy targets; FOG runs on a Debian VM, not a CT;
+# team 3: Samba AD runs on a Debian VM, not a CT). Team table (01-decisions.md):
+#   1 DHCP .10/.21   2 DNS .11/.22   3 Directory .12/.23 VM (trio)   4 File .13/.24
+#   5 Print .14/.25  6 Web .15/.26   7 Deployment (FOG) .16 ref/.27 FOG            8 Remote access .17/.28
+
+team1  110  121  student01@pve,student02@pve
+team2  111  122  student03@pve,student04@pve
+team3  112  133  student05@pve,student06@pve,student07@pve
+team4  113  124  student08@pve,student09@pve
+team5  114  125  student10@pve,student11@pve
+team6  115  126  student12@pve,student13@pve
+team7  116,150,151  127  student14@pve,student15@pve
+team8  117  128  student16@pve,student17@pve
+
+# Test clients (Windows 11 + Debian Xfce VM): usable by every student, resettable only by you.
+TESTCLIENTS=140,141
