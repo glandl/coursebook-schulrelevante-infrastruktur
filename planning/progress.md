@@ -24,8 +24,8 @@ Legend for status:
 | 00 Documentation: Processing register, ADR | Draft (legal review open) | Draft (machine-translated) |
 | 01 Virtualization & Containerization | Draft | Draft (machine-translated) |
 | 02 Networking I | Draft (lab untested) | Skeleton, homework translated (draft) |
-| 03 Networking II (self-study) | Draft 2026-11-15 (theory, optional lab with solutions, security, sources; homework/exercise/doc task removed) | Skeleton (mirror pending) |
-| 04 Server roles: Windows and Linux | Draft 2026-11-15 (index, learning goals, Proxmox access, 8 role cards, role runbook, presentation, security, sources; untested) | Skeleton (mirror pending) |
+| 03 Networking II (self-study) | Draft 2026-11-15 (theory, optional lab with solutions, security, sources; homework/exercise/doc task removed) | Draft (machine-translated mirror, 2026-11-15) |
+| 04 Server roles: Windows and Linux | Draft 2026-11-15 (index, learning goals, Proxmox access, 8 role cards, role runbook, presentation, security, sources; untested) | Draft (machine-translated mirror, 2026-11-15) |
 | 05 Client & mobile device management | Skeleton | Skeleton |
 | 06 IT security & data protection (capstone) | Skeleton | Skeleton |
 
@@ -115,7 +115,7 @@ Carried over from before the 05.10.2026 session; not re-checked since.
 
 ## Chapters 03 and 04 (2026-11-15)
 
-Rewritten after the grilling session (see `01-decisions.md`, "Server-roles block"). Chapter 3 DE was machine-garbled and is now a fresh self-study draft. Chapter 4 DE has role cards (goals, acceptance tests, pitfalls, primary sources), not step-by-step guides. Everything is marked "ungeprüft". `integration.md` and `ad-cs-demo.md` drafted the same day. Open: EN mirror of both chapters, Packet Tracer test of the ch3 VLAN/ACL lab.
+Rewritten after the grilling session (see `01-decisions.md`, "Server-roles block"). Chapter 3 DE was machine-garbled and is now a fresh self-study draft. Chapter 4 DE has role cards (goals, acceptance tests, pitfalls, primary sources), not step-by-step guides. Everything is marked "ungeprüft". `integration.md` and `ad-cs-demo.md` drafted the same day. EN mirror of both chapters done the same day (machine-translated, author review open). Open: Packet Tracer test of the ch3 VLAN/ACL lab.
 
 ## Known issues
 

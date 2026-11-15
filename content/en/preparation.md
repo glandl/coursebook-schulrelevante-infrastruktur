@@ -48,6 +48,18 @@ Know before you start:
 - [ ] **Optional:** [Wireshark](https://www.wireshark.org/download.html) on the host. On Windows, allow the Npcap installation.
 - [ ] **Session 1 submission in the portfolio** is pushed (branch `session-01`, pull request opened), so the new branch `session-02` starts from a clean state.
 
+## Chapter 3: Networking II (self-study)
+
+- [ ] **Theory read**, at least the sections on DHCP and DNS ([chapter 3]({{% relref "/03-networking-2/theory" %}})). This is the basis for the DHCP, DNS and directory service teams in chapter 4.
+- [ ] Optional: [lab with solutions]({{% relref "/03-networking-2/lab" %}}) with `schulnetz.pkt` from session 2.
+
+## Sessions 3 and 4: Server roles (16.11. and 23.11.2026)
+
+- [ ] **Browser** on the laptop (current Firefox, Chrome or Edge). All machines run in the lecturer's Proxmox lab; your own VM is **not** needed.
+- [ ] **Credentials** for the Proxmox web interface ready (you get them from the lecturer). See [Access to the Proxmox lab]({{% relref "/04-server-administration/proxmox-access" %}}).
+- [ ] **Role cards** skimmed ([chapter 4]({{% relref "/04-server-administration" %}})) so you know which role interests you.
+- [ ] **Portfolio:** branch `session-04` created.
+
 ## Further sessions
 
 Preparation for the following sessions is added to this page when the chapters are released.

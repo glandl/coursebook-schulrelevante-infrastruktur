@@ -42,7 +42,7 @@ One chapter per about two weeks, each ready a few days before its session. Each 
   - [x] Rewrite the garbled DE pages (2026-11-15)
   - [x] Optional lab with solutions, marked "freiwillig"
   - [x] DE homework, documentation task and exercise pages removed
-  - [ ] EN mirror (and remove EN homework/exercise/documentation pages)
+  - [x] EN mirror, EN homework/exercise/documentation pages removed (2026-11-15)
   - [ ] Test the VLAN/ACL lab in Packet Tracer 9.0.1
   - [x] Windows Server install and the 16.11. slot: resolved by the server-roles block (servers run on Proxmox)
   - [ ] Update the rubric/portfolio requirements: no chapter 3 doc task or homework
@@ -51,7 +51,7 @@ One chapter per about two weeks, each ready a few days before its session. Each 
   - [x] DE for 16.11.: `_index`, learning goals, Proxmox access, 8 role cards, documentation (role runbook), presentation, security, sources
   - [x] DE by 23.11.: `integration.md`, `ad-cs-demo.md` (2026-11-15, untested)
   - [ ] Lecturer: prepare `.18` (domain member, AD CS) and `.29` (step-ca installed) before 23.11.
-  - [ ] EN mirror of chapter 4
+  - [x] EN mirror of chapter 4 (2026-11-15, author review open)
   - [ ] Lecturer: run `planning/proxmox/setup-permissions.sh`, remove the broad student ACLs, create the VM shells for `.23` (Samba AD) and `.27` (FOG) plus two deploy targets, snapshot `clean-start`
   - [ ] Lecturer: test clients (Windows 11 Enterprise Eval, Debian 13 Xfce VM) as templates, note their MACs for the DHCP team
 - [ ] Ch. 5 Client- & MDM (07.12)
