@@ -49,7 +49,8 @@ One chapter per about two weeks, each ready a few days before its session. Each 
   - [ ] Confirm the peer check of the role runbook by another team until 30.11. (added to the ch4 documentation page, not yet agreed)
 - [ ] Ch. 4 Serverrollen: Windows und Linux (16.11. + 23.11., decision 2026-11-15)
   - [x] DE for 16.11.: `_index`, learning goals, Proxmox access, 8 role cards, documentation (role runbook), presentation, security, sources
-  - [ ] DE by 23.11.: `integration.md`, `ad-cs-demo.md`
+  - [x] DE by 23.11.: `integration.md`, `ad-cs-demo.md` (2026-11-15, untested)
+  - [ ] Lecturer: prepare `.18` (domain member, AD CS) and `.29` (step-ca installed) before 23.11.
   - [ ] EN mirror of chapter 4
   - [ ] Lecturer: run `planning/proxmox/setup-permissions.sh`, remove the broad student ACLs, create the VM shells for `.23` (Samba AD) and `.27` (FOG) plus two deploy targets, snapshot `clean-start`
   - [ ] Lecturer: test clients (Windows 11 Enterprise Eval, Debian 13 Xfce VM) as templates, note their MACs for the DHCP team

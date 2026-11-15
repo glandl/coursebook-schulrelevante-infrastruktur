@@ -85,10 +85,10 @@ Alle Teams dürfen die Testclients verwenden und neu starten. Zurücksetzen kann
 
 | Uhrzeit | Dauer | Inhalt |
 |---|---|---|
-| 08:45–09:00 | 15 min | DNS-Weiterleitungen zwischen den Welten, Testclients treten ihrer Domäne bei |
-| 09:00–10:15 | 75 min | Integration: Freigaben, Drucker und Fernzugriff mit Domänenkonten, DHCP verteilt den richtigen DNS-Server, Tests vom Testclient |
+| 08:45–09:00 | 15 min | [Integration]({{% relref "integration" %}}): Startcheck, DNS-Weiterleitungen zwischen den Welten |
+| 09:00–10:15 | 75 min | Integration: Domänenbeitritt der Testclients und Server, Freigaben, Drucker und Fernzugriff mit Domänenkonten, DHCP verteilt den richtigen DNS-Server, Tests vom Testclient |
 | 10:15–10:30 | 15 min | Pause |
-| 10:30–11:15 | 45 min | Kombinationen Windows und Linux (Linux-Client an Windows-AD, Windows-Client an Samba-Freigabe, PXE-Start mit FOG), Demo der Lehrperson: Zertifikatsdienste |
+| 10:30–11:15 | 45 min | Kombinationen Windows und Linux (Linux-Client an Windows-AD, Windows-Client an Samba-Freigabe, PXE-Start mit FOG), [Demo der Lehrperson: Zertifikatsdienste]({{% relref "ad-cs-demo" %}}) |
 | 11:15–11:30 | 15 min | Pause |
 | 11:30–12:30 | 60 min | [Rollenpräsentationen]({{% relref "presentation" %}}): 8 Teams × 6 min, mit Wechselzeit |
 | 12:30–13:00 | 30 min | Abschluss, Überleitung zu Einheit 5 (Geräteverwaltung baut auf diesen Rollen auf) |

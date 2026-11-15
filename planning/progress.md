@@ -115,7 +115,7 @@ Carried over from before the 05.10.2026 session; not re-checked since.
 
 ## Chapters 03 and 04 (2026-11-15)
 
-Rewritten after the grilling session (see `01-decisions.md`, "Server-roles block"). Chapter 3 DE was machine-garbled and is now a fresh self-study draft. Chapter 4 DE has role cards (goals, acceptance tests, pitfalls, primary sources), not step-by-step guides. Everything is marked "ungeprüft". Open: `integration.md` and `ad-cs-demo.md` for 23.11., EN mirror of both chapters, Packet Tracer test of the ch3 VLAN/ACL lab.
+Rewritten after the grilling session (see `01-decisions.md`, "Server-roles block"). Chapter 3 DE was machine-garbled and is now a fresh self-study draft. Chapter 4 DE has role cards (goals, acceptance tests, pitfalls, primary sources), not step-by-step guides. Everything is marked "ungeprüft". `integration.md` and `ad-cs-demo.md` drafted the same day. Open: EN mirror of both chapters, Packet Tracer test of the ch3 VLAN/ACL lab.
 
 ## Known issues
 
